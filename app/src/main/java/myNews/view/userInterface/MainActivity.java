@@ -12,24 +12,24 @@ import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import myNews.devexchanges.myNews.R;
 import myNews.view.adaptater.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    private ViewPager viewPager;
-    private DrawerLayout drawer;
-    private TabLayout tabLayout;
+    @BindView(R.id.view_pager) public ViewPager viewPager;
+    @BindView(R.id.drawerLayout) public DrawerLayout drawer;
+    @BindView(R.id.tab_layout) public TabLayout tabLayout;
+    @BindView(R.id.toolbar) public Toolbar toolbar;
+
     private String[] pageTitle = {"Top Stories", "Fragment 2", "Fragment 3"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        viewPager = (ViewPager)findViewById(R.id.view_pager);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
 
         setSupportActionBar(toolbar);
 
@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         //setting Tab layout (number of Tabs = number of ViewPager pages)
-        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         for (int i = 0; i < 3; i++) {
             tabLayout.addTab(tabLayout.newTab().setText(pageTitle[i]));
         }
@@ -48,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //set gravity for tab bar
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
+
+        //TO_DO CONTINUE_BUTTERKNIFE_IMPLEMENTATION
         //handling navigation view item event
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         assert navigationView != null;
