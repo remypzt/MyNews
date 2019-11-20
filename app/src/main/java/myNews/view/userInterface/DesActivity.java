@@ -7,6 +7,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import myNews.devexchanges.myNews.R;
 
 /**
@@ -15,11 +17,15 @@ import myNews.devexchanges.myNews.R;
 
 public class DesActivity extends AppCompatActivity{
 
+    //@BindView(R.id.toolbar) public Toolbar toolbar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_des);
+        //ButterKnife.bind(this);
 
+        //@BindView(R.id.toolbar) Toolbar toolbar;
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         TextView textView = (TextView)findViewById(R.id.text_view);
 

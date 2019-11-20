@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.drawerLayout) public DrawerLayout drawer;
     @BindView(R.id.tab_layout) public TabLayout tabLayout;
     @BindView(R.id.toolbar) public Toolbar toolbar;
+    @BindView(R.id.nav_view) public  NavigationView navigationView;
 
     private String[] pageTitle = {"Top Stories", "Fragment 2", "Fragment 3"};
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
 
@@ -48,9 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
 
-        //TO_DO CONTINUE_BUTTERKNIFE_IMPLEMENTATION
         //handling navigation view item event
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         assert navigationView != null;
         navigationView.setNavigationItemSelectedListener(this);
 
