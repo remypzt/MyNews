@@ -26,13 +26,7 @@ public class DesActivity extends AppCompatActivity{
         /*ButterKnife.bind(this);
 
         @BindView(R.id.toolbar) Toolbar toolbar;*/
-        /*Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);*/
-        TextView textView = (TextView)findViewById(R.id.text_view);
 
-        setSupportActionBar(toolbar);
-        if (getIntent() != null) {
-            textView.setText(getIntent().getStringExtra("string"));
-        }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
