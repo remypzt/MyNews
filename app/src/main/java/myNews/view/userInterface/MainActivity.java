@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.toolbar) public Toolbar toolbar;
     @BindView(R.id.nav_view) public  NavigationView navigationView;
 
-    private String[] pageTitle = {"Top Stories", "Fragment 2", "Fragment 3"};
+    private String[] pageTitle = {"Top Stories", "Most popular", "Business"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
