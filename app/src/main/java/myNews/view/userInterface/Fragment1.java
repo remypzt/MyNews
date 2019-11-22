@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import myNews.devexchanges.myNews.R;
 import myNews.service.repositories.model.Articles;
 import myNews.view.adaptater.ArticlesAdapter;
@@ -36,7 +35,7 @@ public class Fragment1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_content, container, false);
-        ButterKnife.bind(this, view);
+        /*        ButterKnife.bind(this, view);*/
         this.configureRecyclerView(); // - 4 Call during UI creation
         return view;
     }
