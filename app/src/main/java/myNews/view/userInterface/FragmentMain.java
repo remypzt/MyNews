@@ -21,7 +21,6 @@ import myNews.view.adaptater.ArticlesAdapter;
 
 public class FragmentMain extends Fragment
 {
-
     // FOR DESIGN
     @BindView(R.id.fragment_main_recycler_view)
     RecyclerView recyclerView; // 1 - Declare RecyclerView

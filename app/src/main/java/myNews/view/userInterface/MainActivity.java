@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.toolbar) public Toolbar toolbar;
     @BindView(R.id.nav_view) public  NavigationView navigationView;
 
+    /*private String[] pageTitle = {R.string.tab1_name, R.string.tab2_name, R.string.tab3_name};*/
     private String[] pageTitle = {"Top Stories", "Most Popular", "Business"};
 
     @Override
@@ -49,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //set gravity for tab bar
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
 
         //handling navigation view item event
         assert navigationView != null;
@@ -84,6 +84,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
+
+        /*switch (id)
+        {
+            case R.id.fr1:
+                viewPager.setCurrentItem(0);
+                break;
+            case R.id.fr2:
+                viewPager.setCurrentItem(1);
+                break;
+            case R.id.fr3:
+                viewPager.setCurrentItem(2);
+            case R.id.close:
+                finish();
+                break;
+        }*/
 
         if (id == R.id.fr1) {
             viewPager.setCurrentItem(0);

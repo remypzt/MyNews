@@ -2,6 +2,10 @@
     <string name="app_name">My News</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
+    <string name="tab1_name">Top Stories</string>
+    <string name="tab2_name">Most Popular</string>
+    <string name="tab3_name">Business</string>
+
 
     <string-array name="my_items">
         <item>Dummy Item 1</item>
@@ -18,8 +22,5 @@
         <item>Dummy Item 12</item>
         <item>Dummy Item 13</item>
         <item>Dummy Item 14</item>
-
-
-
     </string-array>
 </resources>
