@@ -26,7 +26,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.toolbar) public Toolbar toolbar;
     @BindView(R.id.nav_view) public  NavigationView navigationView;
 
-    /*private String[] pageTitle = {R.string.tab1_name, R.string.tab2_name, R.string.tab3_name};*/
+    /*private String[] pageTitle = {R.string.tab1_name, R.string.tab2_name, R.string.tab3_name};
+    I leave this part of code because i want to ask why It's doesn't work
+     */
     private String[] pageTitle = {"Top Stories", "Most Popular", "Business"};
 
     @Override
@@ -98,7 +100,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.close:
                 finish();
                 break;
-        }*/
+        }
+         I leave this part of code because i want to ask why It's doesn't work
+     */
+
 
         if (id == R.id.fr1) {
             viewPager.setCurrentItem(0);

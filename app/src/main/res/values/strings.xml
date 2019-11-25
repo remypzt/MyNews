@@ -6,7 +6,6 @@
     <string name="tab2_name">Most Popular</string>
     <string name="tab3_name">Business</string>
 
-
     <string-array name="my_items">
         <item>Dummy Item 1</item>
         <item>Dummy Item 2</item>
