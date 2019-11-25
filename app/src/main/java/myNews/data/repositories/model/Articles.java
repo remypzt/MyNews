@@ -1,4 +1,4 @@
-package myNews.service.repositories.model;
+package myNews.data.repositories.model;
 
 /**
  * Created by Remy Pouzet on 21/11/2019.
@@ -9,14 +9,24 @@ public class Articles
     private String mCategory;
     private String mUnderCategory;
     private String mTitle;
-    private long mDate;
+    private String mDate;
 
-    public Articles(String urlImage, String category, String underCategory, String title, long date)
+    public Articles(String urlImage, String category, String underCategory, String title, String date)
     {
         mUrlImage = urlImage;
         mCategory = category;
         mUnderCategory = underCategory;
         mTitle = title;
+        mDate = date;
+    }
+
+    public String getDate()
+    {
+        return mDate;
+    }
+
+    public void setDate(String date)
+    {
         mDate = date;
     }
 
@@ -60,13 +70,5 @@ public class Articles
         mTitle = title;
     }
 
-    public long getDate()
-    {
-        return mDate;
-    }
 
-    public void setDate(long date)
-    {
-        mDate = date;
-    }
 }

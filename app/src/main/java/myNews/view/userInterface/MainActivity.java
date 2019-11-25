@@ -1,16 +1,17 @@
 package myNews.view.userInterface;
 
-import android.content.Intent;
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.tabs.TabLayout;
-import androidx.core.view.GravityCompat;
-import androidx.viewpager.widget.ViewPager;
-import androidx.drawerlayout.widget.DrawerLayout;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
-import android.view.MenuItem;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -90,11 +91,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewPager.setCurrentItem(1);
         } else if (id == R.id.fr3) {
             viewPager.setCurrentItem(2);
-        } else if (id == R.id.go) {
-            Intent intent = new Intent(this, DesActivity.class);
-            intent.putExtra("string", "Go to other Activity by NavigationView item cliked!");
-            startActivity(intent);
-        } else if (id == R.id.close) {
+        } else if (id == R.id.close)
+        {
             finish();
         }
 

@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import myNews.data.repositories.model.Articles;
 import myNews.devexchanges.myNews.R;
-import myNews.service.repositories.model.Articles;
 import myNews.view.ArticlesViewHolder;
 
 /**

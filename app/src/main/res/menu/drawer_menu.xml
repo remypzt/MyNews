@@ -15,10 +15,6 @@
         android:icon="@android:drawable/ic_menu_set_as"
         android:title="Fragment 3" />
 
-    <item
-        android:id="@+id/go"
-        android:icon="@android:drawable/ic_menu_call"
-        android:title="Go to Other Activity" />
 
     <item
         android:id="@+id/close"

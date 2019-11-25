@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import myNews.data.repositories.model.Articles;
 import myNews.devexchanges.myNews.R;
-import myNews.service.repositories.model.Articles;
 
 /**
  * Created by Remy Pouzet on 21/11/2019.

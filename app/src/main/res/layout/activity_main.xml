@@ -51,15 +51,5 @@
 
     </androidx.drawerlayout.widget.DrawerLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_main_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </RelativeLayout>
 
 </LinearLayout>
