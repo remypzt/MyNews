@@ -11,13 +11,13 @@ public class Articles
     private String mTitle;
     private String mDate;
 
-    public Articles(String urlImage, String category, String underCategory, String title, String date)
+    public Articles(/*String urlImage, String category, String underCategory,*/ String title/*,String date*/)
     {
-        mUrlImage = urlImage;
+       /* mUrlImage = urlImage;
         mCategory = category;
-        mUnderCategory = underCategory;
+        mUnderCategory = underCategory;*/
         mTitle = title;
-        mDate = date;
+        /* mDate = date;*/
     }
 
     public String getDate()

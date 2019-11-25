@@ -31,7 +31,7 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesViewHolder> {
         // CREATE VIEW HOLDER AND INFLATING ITS XML LAYOUT
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.fragment_content, parent, false);
+        View view = inflater.inflate(R.layout.fragment_articles_content, parent, false);
 
         return new ArticlesViewHolder(view);
     }
