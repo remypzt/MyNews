@@ -24,6 +24,8 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesViewHolder> {
     // CONSTRUCTOR
     public ArticlesAdapter(List<Articles> articles) {
         this.articles = articles;
+        /*Articles test = new Articles("test");
+        this.articles.add(test);*/
     }
 
     @Override

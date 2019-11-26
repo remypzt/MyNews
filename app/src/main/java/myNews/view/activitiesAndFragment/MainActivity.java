@@ -1,4 +1,4 @@
-package myNews.view.userInterface;
+package myNews.view.activitiesAndFragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;

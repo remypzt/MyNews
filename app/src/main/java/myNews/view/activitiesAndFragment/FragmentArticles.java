@@ -1,4 +1,4 @@
-package myNews.view.userInterface;
+package myNews.view.activitiesAndFragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,6 +28,7 @@ public class FragmentArticles extends Fragment
     RecyclerView recyclerView; // 1 - Declare RecyclerView
 
     //FOR DATA
+    /*private Disposable disposable;*/
     // 2 - Declare list of users (GithubUser) & Adapter
     private List<Articles> articles;
     private ArticlesAdapter adapter;
@@ -50,12 +51,13 @@ public class FragmentArticles extends Fragment
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        /*getArticlesRepository();*/
 
+        /*getArticlesRepository();*/
     }
     @Override
     public void onDestroy() {
         super.onDestroy();
+        /*this.disposeWhenDestroy();*/
     }
 
     /*public ArticlesRepository getArticlesRepository(){
@@ -71,15 +73,23 @@ public class FragmentArticles extends Fragment
     private void configureRecyclerView(){
         // 3.1 - Reset list
         this.articles = new ArrayList<>();
-        /*Articles test = new Articles("test");
-        articles.add(test);*/
+        /* Articles test = new Articles("test");*/
+        /*this.articles.add(test);*/
         // 3.2 - Create adapter passing the list of users
         this.adapter = new ArticlesAdapter(this.articles);
         // 3.3 - Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.adapter);
         // 3.4 - Set layout manager to position the items
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
     }
+    // -------------------
+    // GET ARTICLES
+    // -------------------
+/*private void getArticles (){
+    Articles test = new Articles("test");
+    this.articles.add(test);
+}*/
 
 
     // -------------------
