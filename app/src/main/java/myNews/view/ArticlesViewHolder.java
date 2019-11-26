@@ -15,7 +15,7 @@ import myNews.devexchanges.myNews.R;
  */
 public class ArticlesViewHolder extends RecyclerView.ViewHolder {
 
-@BindView(R.id.fragment_main_item_title)
+    @BindView(R.id.Article_title)
 TextView textView;
 
 public ArticlesViewHolder(View itemView) {
