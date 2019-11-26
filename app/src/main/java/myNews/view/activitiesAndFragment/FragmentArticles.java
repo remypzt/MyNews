@@ -28,7 +28,6 @@ public class FragmentArticles extends Fragment
     RecyclerView recyclerView; // 1 - Declare RecyclerView
 
     //FOR DATA
-    /*private Disposable disposable;*/
     // 2 - Declare list of users (GithubUser) & Adapter
     private List<Articles> articles;
     private ArticlesAdapter adapter;
@@ -51,19 +50,18 @@ public class FragmentArticles extends Fragment
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         /*getArticlesRepository();*/
     }
     @Override
     public void onDestroy() {
         super.onDestroy();
-        /*this.disposeWhenDestroy();*/
+
     }
 
     /*public ArticlesRepository getArticlesRepository(){
         if (articlesRepository == null) articlesRepository = Injection.createArticlesRepository();
         return articlesRepository;
-    }*/
+    }*/ //TODO injection didn't work
 
     // -----------------
     // CONFIGURATION
@@ -75,6 +73,8 @@ public class FragmentArticles extends Fragment
         this.articles = new ArrayList<>();
         /* Articles test = new Articles("test");*/
         /*this.articles.add(test);*/
+        //TODO why this part of code didn't work for testing my recyclerView
+
         // 3.2 - Create adapter passing the list of users
         this.adapter = new ArticlesAdapter(this.articles);
         // 3.3 - Attach the adapter to the recyclerview to populate items
