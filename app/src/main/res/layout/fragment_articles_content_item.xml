@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/Article_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="39dp"
+        android:text="TextView" />
 
     <TextView
-        android:id="@+id/fragment_main_item_title"
-        android:layout_width="0dp"
+        android:id="@+id/Article_category"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_toRightOf="@id/Article_picture"
+        android:text="TextView" />
 
+    <TextView
+        android:id="@+id/Article_underCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/Article_category"
+        android:text="TextView" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/Article_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Article_category"
+        android:layout_toRightOf="@id/Article_picture"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/Article_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:text="TextView" />
+
+</RelativeLayout>
