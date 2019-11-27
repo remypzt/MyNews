@@ -22,7 +22,6 @@ public class FakeApiService implements ApiService
 
     public List<Articles> getArticles()
     {
-        // TODO: A modifier
-        return null;
+        return articles;
     }
 }

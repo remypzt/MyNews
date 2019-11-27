@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,14 +14,13 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import myNews.data.repositories.ArticlesRepository;
 import myNews.data.repositories.model.Articles;
 import myNews.devexchanges.myNews.R;
+import myNews.view.Base.BaseFragment;
 import myNews.view.adaptater.ArticlesAdapter;
 
-public class FragmentArticles extends Fragment
+public class FragmentArticles extends BaseFragment
 {
-
     // FOR DESIGN
     @BindView(R.id.fragment_main_recycler_view)
     RecyclerView recyclerView; // 1 - Declare RecyclerView
@@ -31,7 +29,7 @@ public class FragmentArticles extends Fragment
     // 2 - Declare list of users (GithubUser) & Adapter
     private List<Articles> articles;
     private ArticlesAdapter adapter;
-    private ArticlesRepository articlesRepository;
+    /* private ArticlesRepository articlesRepository;*/
 
     public FragmentArticles()
     {
@@ -50,8 +48,7 @@ public class FragmentArticles extends Fragment
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        /*getArticlesRepository();*/
-        /*updateListOfArticles();*/
+        updateListOfArticles();
     }
     @Override
     public void onDestroy() {
@@ -59,7 +56,7 @@ public class FragmentArticles extends Fragment
 
     }
 
-    /*public ArticlesRepository getArticlesRepository(){
+   /* public ArticlesRepository getArticlesRepository(){
         if (articlesRepository == null) articlesRepository = Injection.createArticlesRepository();
         return articlesRepository;
     }*/
@@ -73,9 +70,10 @@ public class FragmentArticles extends Fragment
     private void configureRecyclerView(){
         // 3.1 - Reset list
         this.articles = new ArrayList<>();
+
         /*Articles test = new Articles("test");
         this.articles.add(test);
-        this part of code (commented) its for testing by hard writing way my recyclerView*/
+        this part of code (commented) was for testing by hard writing way my recyclerView*/
 
         // 3.2 - Create adapter passing the list of users
         this.adapter = new ArticlesAdapter(this.articles);
@@ -88,19 +86,15 @@ public class FragmentArticles extends Fragment
     // -------------------
     // GET ARTICLES
     // -------------------
-/*private void getArticles (){
-    Articles test = new Articles("test");
-    this.articles.add(test);
-}*/
 
 
     // -------------------
     // UPDATE UI
     // -------------------
 
-    private void updateListOfArticles(List<Articles> articles)
+    private void updateListOfArticles()
     {
-        articles.addAll(articles);
+        articles.addAll(articlesRepository.getArticles());
         adapter.notifyDataSetChanged();
     }
 }

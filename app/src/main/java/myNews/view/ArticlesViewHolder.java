@@ -23,8 +23,12 @@ public ArticlesViewHolder(View itemView) {
         ButterKnife.bind(this, itemView);
         }
 
-public void updateWithArticles(Articles articles){
-
+    public void updateWithArticles(Articles articles)
+    {
+        this.textView.setText((articles.getUrlImage()));
+        this.textView.setText(articles.getCategory());
+        this.textView.setText(articles.getUnderCategory());
+        this.textView.setText(articles.getDate());
         this.textView.setText(articles.getTitle());
-        }
+    }
         }

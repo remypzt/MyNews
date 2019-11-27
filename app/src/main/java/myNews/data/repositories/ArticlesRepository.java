@@ -19,6 +19,9 @@ public class ArticlesRepository
 
     public List<Articles> getArticles()
     {
-        return null;
+        return apiService.getArticles();
+
+
+
     }
 }
