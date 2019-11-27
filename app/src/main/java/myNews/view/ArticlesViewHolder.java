@@ -24,6 +24,7 @@ public ArticlesViewHolder(View itemView) {
         }
 
 public void updateWithArticles(Articles articles){
+
         this.textView.setText(articles.getTitle());
         }
         }

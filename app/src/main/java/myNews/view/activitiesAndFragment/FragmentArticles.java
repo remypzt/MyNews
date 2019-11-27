@@ -44,13 +44,14 @@ public class FragmentArticles extends Fragment
         ButterKnife.bind(this, view);
         this.configureRecyclerView(); // - 4 Call during UI creation
         return view;
-        /*updateListOfArticles();*/
+
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         /*getArticlesRepository();*/
+        /*updateListOfArticles();*/
     }
     @Override
     public void onDestroy() {
@@ -61,7 +62,8 @@ public class FragmentArticles extends Fragment
     /*public ArticlesRepository getArticlesRepository(){
         if (articlesRepository == null) articlesRepository = Injection.createArticlesRepository();
         return articlesRepository;
-    }*/ //TODO injection didn't work
+    }*/
+    //TODO injection didn't work
 
     // -----------------
     // CONFIGURATION
@@ -71,9 +73,9 @@ public class FragmentArticles extends Fragment
     private void configureRecyclerView(){
         // 3.1 - Reset list
         this.articles = new ArrayList<>();
-        /* Articles test = new Articles("test");*/
-        /*this.articles.add(test);*/
-        //TODO why this part of code didn't work for testing my recyclerView
+        /*Articles test = new Articles("test");
+        this.articles.add(test);
+        this part of code (commented) its for testing by hard writing way my recyclerView*/
 
         // 3.2 - Create adapter passing the list of users
         this.adapter = new ArticlesAdapter(this.articles);
