@@ -1,4 +1,4 @@
-package myNews.data.service.API;
+package myNews.data.service.FakeAPI;
 
 import java.util.List;
 

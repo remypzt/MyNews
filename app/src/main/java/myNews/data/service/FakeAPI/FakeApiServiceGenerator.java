@@ -1,4 +1,4 @@
-package myNews.data.service.API;
+package myNews.data.service.FakeAPI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,8 +12,8 @@ import myNews.data.repositories.model.Articles;
 public class FakeApiServiceGenerator
 {
     public static List<Articles> FAKE_ARTICLES = Arrays.asList(
-            new Articles("C:\\Users\\moi\\AndroidStudioProjects\\MyNews\\app\\src\\main\\res\\test.jpg", "categorie", "sous categorie", "titre", "date"),
-            new Articles("C:\\Users\\moi\\AndroidStudioProjects\\MyNews\\app\\src\\main\\res\\test.jpg", "categorie", "sous categorie", "titre", "date1")
+            new Articles("image", "categorie", "sous categorie", "titre", "date"),
+            new Articles("C:\\Users\\moi\\AndroidStudioProjects\\MyNews\\app\\src\\main\\res\\test.jpg", "categorie", "sous categorie", "titre1", "date1")
     );
 
     static List<Articles> generateArticles()

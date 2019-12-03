@@ -14,9 +14,17 @@ import myNews.devexchanges.myNews.R;
  * Created by Remy Pouzet on 21/11/2019.
  */
 public class ArticlesViewHolder extends RecyclerView.ViewHolder {
-
+    @BindView(R.id.Article_picture)
+    TextView mPicture;
+    @BindView(R.id.Article_category)
+    TextView mCategory;
+    @BindView(R.id.Article_underCategory)
+    TextView mUnderCategory;
     @BindView(R.id.Article_title)
-TextView textView;
+    TextView mTitle;
+    @BindView(R.id.Article_date)
+    TextView mDate;
+
 
 public ArticlesViewHolder(View itemView) {
         super(itemView);
@@ -25,10 +33,10 @@ public ArticlesViewHolder(View itemView) {
 
     public void updateWithArticles(Articles articles)
     {
-        this.textView.setText((articles.getUrlImage()));
-        this.textView.setText(articles.getCategory());
-        this.textView.setText(articles.getUnderCategory());
-        this.textView.setText(articles.getDate());
-        this.textView.setText(articles.getTitle());
+        this.mPicture.setText((articles.getUrlImage()));
+        this.mCategory.setText(articles.getCategory() + ">");
+        this.mUnderCategory.setText(articles.getUnderCategory());
+        this.mDate.setText(articles.getDate());
+        this.mTitle.setText(articles.getTitle());
     }
         }

@@ -5,6 +5,7 @@
     <string name="tab1_name">Top Stories</string>
     <string name="tab2_name">Most Popular</string>
     <string name="tab3_name">Business</string>
+    <string name="textview">TextView</string>
 
     <string-array name="my_items">
         <item>Dummy Item 1</item>

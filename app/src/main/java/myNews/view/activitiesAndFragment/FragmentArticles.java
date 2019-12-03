@@ -26,7 +26,7 @@ public class FragmentArticles extends BaseFragment
     RecyclerView recyclerView; // 1 - Declare RecyclerView
 
     //FOR DATA
-    // 2 - Declare list of users (GithubUser) & Adapter
+    // 2 - Declare list of Articles & Adapter
     private List<Articles> articles;
     private ArticlesAdapter adapter;
     /* private ArticlesRepository articlesRepository;*/
@@ -60,7 +60,7 @@ public class FragmentArticles extends BaseFragment
         if (articlesRepository == null) articlesRepository = Injection.createArticlesRepository();
         return articlesRepository;
     }*/
-    //TODO injection didn't work
+
 
     // -----------------
     // CONFIGURATION
@@ -71,11 +71,12 @@ public class FragmentArticles extends BaseFragment
         // 3.1 - Reset list
         this.articles = new ArrayList<>();
 
+        //this part of code (commented) was for testing by plain text way my recyclerView
         /*Articles test = new Articles("test");
-        this.articles.add(test);
-        this part of code (commented) was for testing by hard writing way my recyclerView*/
+        this.articles.add(test);*/
 
-        // 3.2 - Create adapter passing the list of users
+
+        // 3.2 - Create adapter passing the list of articles
         this.adapter = new ArticlesAdapter(this.articles);
         // 3.3 - Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.adapter);
@@ -83,9 +84,6 @@ public class FragmentArticles extends BaseFragment
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
     }
-    // -------------------
-    // GET ARTICLES
-    // -------------------
 
 
     // -------------------

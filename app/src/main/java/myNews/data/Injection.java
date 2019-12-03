@@ -1,7 +1,7 @@
 package myNews.data;
 
 import myNews.data.repositories.ArticlesRepository;
-import myNews.data.service.API.FakeApiService;
+import myNews.data.service.FakeAPI.FakeApiService;
 
 /**
  * Created by Remy Pouzet on 25/11/2019.
