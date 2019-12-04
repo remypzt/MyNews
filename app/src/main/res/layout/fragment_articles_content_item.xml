@@ -8,6 +8,7 @@
         android:id="@+id/Article_picture"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_margin="15dp"
         android:text="@string/textview" />
 
     <TextView
@@ -16,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/Article_picture"
         android:text="@string/textview"
+        android:layout_marginTop="15dp"
         android:textStyle="bold" />
 
     <TextView
@@ -24,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/Article_category"
         android:text="@string/textview"
+        android:layout_marginTop="15dp"
         android:textStyle="bold" />
 
     <TextView
@@ -33,7 +36,9 @@
         android:layout_below="@id/Article_category"
         android:layout_toEndOf="@id/Article_picture"
         android:text="@string/textview"
-        android:textSize="18sp" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/Article_date"
@@ -41,6 +46,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_margin="15dp"
         android:text="@string/textview" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/Article_title"
+        android:layout_toEndOf="@id/Article_picture"
+        android:background="@android:color/darker_gray" />
+
 
 </RelativeLayout>

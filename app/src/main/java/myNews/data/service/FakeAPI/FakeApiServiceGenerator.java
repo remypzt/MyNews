@@ -13,7 +13,7 @@ public class FakeApiServiceGenerator
 {
     public static List<Articles> FAKE_ARTICLES = Arrays.asList(
             new Articles("image", "categorie", "sous categorie", "titre", "date"),
-            new Articles("C:\\Users\\moi\\AndroidStudioProjects\\MyNews\\app\\src\\main\\res\\test.jpg", "categorie", "sous categorie", "titre1", "date1")
+            new Articles("image2", "categorie2", "sous categorie2", "titre2", "date2")
     );
 
     static List<Articles> generateArticles()

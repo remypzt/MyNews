@@ -34,7 +34,7 @@ public ArticlesViewHolder(View itemView) {
     public void updateWithArticles(Articles articles)
     {
         this.mPicture.setText((articles.getUrlImage()));
-        this.mCategory.setText(articles.getCategory() + ">");
+        this.mCategory.setText(articles.getCategory() + " " + ">" + " ");
         this.mUnderCategory.setText(articles.getUnderCategory());
         this.mDate.setText(articles.getDate());
         this.mTitle.setText(articles.getTitle());
