@@ -3,6 +3,7 @@ package myNews.data.service.FakeAPI;
 import java.util.List;
 
 import myNews.data.repositories.model.Articles;
+import myNews.data.service.ApiService;
 
 import static myNews.data.service.FakeAPI.FakeApiServiceGenerator.generateArticles;
 

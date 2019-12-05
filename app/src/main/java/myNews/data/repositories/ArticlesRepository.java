@@ -3,7 +3,7 @@ package myNews.data.repositories;
 import java.util.List;
 
 import myNews.data.repositories.model.Articles;
-import myNews.data.service.FakeAPI.ApiService;
+import myNews.data.service.ApiService;
 
 /**
  * Created by Remy Pouzet on 25/11/2019.

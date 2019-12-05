@@ -56,12 +56,6 @@ public class FragmentArticles extends BaseFragment
 
     }
 
-   /* public ArticlesRepository getArticlesRepository(){
-        if (articlesRepository == null) articlesRepository = Injection.createArticlesRepository();
-        return articlesRepository;
-    }*/
-
-
     // -----------------
     // CONFIGURATION
     // -----------------
@@ -71,7 +65,7 @@ public class FragmentArticles extends BaseFragment
         // 3.1 - Reset list
         this.articles = new ArrayList<>();
 
-        //this part of code (commented) was for testing by plain text way my recyclerView
+        /* this part of code (commented) was for testing by plain text way the recyclerView*/
         /*Articles test = new Articles("test");
         this.articles.add(test);*/
 
@@ -84,7 +78,6 @@ public class FragmentArticles extends BaseFragment
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
     }
-
 
     // -------------------
     // UPDATE UI

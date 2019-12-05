@@ -1,4 +1,4 @@
-package myNews.data.service.FakeAPI;
+package myNews.data.service;
 
 import java.util.List;
 
@@ -10,6 +10,5 @@ import myNews.data.repositories.model.Articles;
 public interface ApiService
 {
     List<Articles> getArticles();
-
 }
 
