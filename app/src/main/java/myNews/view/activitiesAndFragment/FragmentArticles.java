@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +30,7 @@ public class FragmentArticles extends BaseFragment
     // 2 - Declare list of Articles & Adapter
     private List<Articles> articles;
     private ArticlesAdapter adapter;
+    private ViewModel mViewModel;
     /* private ArticlesRepository articlesRepository;*/
 
     public FragmentArticles()
