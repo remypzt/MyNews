@@ -1,4 +1,4 @@
-package myNews.data.service;
+package myNews.data.service.API;
 
 import java.util.List;
 
