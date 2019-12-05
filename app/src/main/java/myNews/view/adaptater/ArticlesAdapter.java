@@ -13,6 +13,7 @@ import myNews.data.repositories.model.Articles;
 import myNews.devexchanges.myNews.R;
 import myNews.view.ArticlesViewHolder;
 
+
 /**
  * Created by Remy Pouzet on 21/11/2019.
  */

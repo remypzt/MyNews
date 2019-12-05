@@ -4,12 +4,11 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
+    <ImageView
         android:id="@+id/Article_picture"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_margin="15dp"
-        android:text="@string/textview" />
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_margin="15dp" />
 
     <TextView
         android:id="@+id/Article_category"
@@ -52,7 +51,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/Article_title"
+        android:layout_below="@id/Article_picture"
         android:layout_toEndOf="@id/Article_picture"
         android:background="@android:color/darker_gray" />
 

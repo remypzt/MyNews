@@ -15,5 +15,6 @@
             </intent-filter>
         </activity>
     </application>
-
+    <!-- internet permission required as images are loaded via Glide from an internet url -->
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

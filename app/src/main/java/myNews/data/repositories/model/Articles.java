@@ -37,7 +37,7 @@ public class Articles
 
     public void setUrlImage(String urlImage)
     {
-        mUrlImage = urlImage;
+        this.mUrlImage = urlImage;
     }
 
     public String getCategory()

@@ -1,21 +1,27 @@
 package myNews.view;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import myNews.data.repositories.model.Articles;
 import myNews.devexchanges.myNews.R;
 
+
 /**
  * Created by Remy Pouzet on 21/11/2019.
  */
+
+
 public class ArticlesViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.Article_picture)
-    TextView mPicture;
+    ImageView mPicture;
     @BindView(R.id.Article_category)
     TextView mCategory;
     @BindView(R.id.Article_underCategory)
@@ -26,6 +32,7 @@ public class ArticlesViewHolder extends RecyclerView.ViewHolder {
     TextView mDate;
 
 
+
 public ArticlesViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
@@ -33,7 +40,7 @@ public ArticlesViewHolder(View itemView) {
 
     public void updateWithArticles(Articles articles)
     {
-        this.mPicture.setText((articles.getUrlImage()));
+        Glide.with(mPicture.getContext()).load(articles.getUrlImage()).into(mPicture);
         this.mCategory.setText(articles.getCategory() + " " + ">" + " ");
         this.mUnderCategory.setText(articles.getUnderCategory());
         this.mDate.setText(articles.getDate());
