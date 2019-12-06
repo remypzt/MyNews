@@ -85,6 +85,7 @@ public class FragmentArticles extends BaseFragment
     // UPDATE UI
     // -------------------
 
+    //updateListOfArticles still in Fragments cause I must call the adapter
     private void updateListOfArticles()
     {
         articles.addAll(articlesRepository.getArticles());

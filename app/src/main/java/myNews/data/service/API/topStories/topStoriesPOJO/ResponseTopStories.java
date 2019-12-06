@@ -7,7 +7,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
-public class Response
+public class ResponseTopStories
 {
 
     @SerializedName("copyright")
@@ -92,7 +92,7 @@ public class Response
     public String toString()
     {
         return
-                "Response{" +
+                "ResponseTopStories{" +
                         "copyright = '" + copyright + '\'' +
                         ",last_updated = '" + lastUpdated + '\'' +
                         ",section = '" + section + '\'' +

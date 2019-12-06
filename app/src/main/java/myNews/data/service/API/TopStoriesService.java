@@ -2,7 +2,7 @@ package myNews.data.service.API;
 
 import java.util.List;
 
-import myNews.data.repositories.model.Articles;
+import myNews.data.service.API.topStories.topStoriesPOJO.ResponseTopStories;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -14,13 +14,13 @@ import retrofit2.http.Path;
  */
 public interface TopStoriesService
 {
+    final String API_KEY = "api-key=tGTrUuWczkuqWkLodwuXPqGprAUDTymQ";
+
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/topstories/v2/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
-    // maybe I'll must replace Articles by ResultsItem or by perfacet method and
-    // and Perhaps I'll must add ".json" to "arts"
 
-    @GET("arts")
-    Call<List<Articles>> getFollowing(@Path("arts") String articles);
+    @GET("{section}.json?" + API_KEY)
+    Call<List<ResponseTopStories>> getFollowing(@Path("section") String section);
 }

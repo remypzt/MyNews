@@ -5,8 +5,8 @@ import androidx.annotation.Nullable;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-import myNews.data.repositories.model.Articles;
 import myNews.data.service.API.TopStoriesService;
+import myNews.data.service.API.topStories.topStoriesPOJO.ResponseTopStories;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,8 +17,8 @@ import retrofit2.Response;
 public class TopStoriesCalls
 {
 
-    // 2 - Public method to start fetching users following by Jake Wharton
-    public static void fetchArtsArticles(Callbacks callbacks, String arts)
+    // 2 - Public method to start fetching Articles
+    public static void fetchArtsResponseArticles(Callbacks callbacks, String section)
     {
 
         // 2.1 - Create a weak reference to callback (avoid memory leaks)
@@ -28,14 +28,14 @@ public class TopStoriesCalls
         TopStoriesService topStoriesService = TopStoriesService.retrofit.create(TopStoriesService.class);
 
         // 2.3 - Create the call on NYT API
-        Call<List<Articles>> call = topStoriesService.getFollowing(arts);
+        Call<List<ResponseTopStories>> call = topStoriesService.getFollowing(section);
 
         // 2.4 - Start the call
-        call.enqueue(new Callback<List<Articles>>()
+        call.enqueue(new Callback<List<ResponseTopStories>>()
         {
 
             @Override
-            public void onResponse(Call<List<Articles>> call, Response<List<Articles>> response)
+            public void onResponse(Call<List<ResponseTopStories>> call, Response<List<ResponseTopStories>> response)
             {
                 // 2.5 - Call the proper callback used in controller (MainFragment)
                 if (callbacksWeakReference.get() != null)
@@ -43,7 +43,7 @@ public class TopStoriesCalls
             }
 
             @Override
-            public void onFailure(Call<List<Articles>> call, Throwable t)
+            public void onFailure(Call<List<ResponseTopStories>> call, Throwable t)
             {
                 // 2.5 - Call the proper callback used in controller (MainFragment)
                 if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onFailure();
@@ -54,7 +54,7 @@ public class TopStoriesCalls
     // 1 - Creating a callback
     public interface Callbacks
     {
-        void onResponse(@Nullable List<Articles> articles);
+        void onResponse(@Nullable List<ResponseTopStories> ResponseTopStories);
 
         void onFailure();
     }
