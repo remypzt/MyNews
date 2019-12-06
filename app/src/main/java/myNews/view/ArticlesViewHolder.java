@@ -36,7 +36,9 @@ public class ArticlesViewHolder extends RecyclerView.ViewHolder {
 public ArticlesViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+    String mContext =
         }
+
 
     public void updateWithArticles(Articles articles)
     {
