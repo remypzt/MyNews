@@ -9,18 +9,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
+import static myNews.Others.Constant.API_KEY;
+
+
 /**
  * Created by Remy Pouzet on 05/12/2019.
  */
-public interface TopStoriesService
+public interface NYTAPIInterfaceService
 {
-    final String API_KEY = "api-key=tGTrUuWczkuqWkLodwuXPqGprAUDTymQ";
-
     public static final Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://api.nytimes.com/svc/topstories/v2/")
+            .baseUrl("https://api.nytimes.com/svc/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    @GET("{section}.json?" + API_KEY)
+    @GET("topstories/v2/{section}.json?" + API_KEY)
     Call<List<ResponseTopStories>> getFollowing(@Path("section") String section);
 }

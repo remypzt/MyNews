@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-import myNews.data.service.API.TopStoriesService;
+import myNews.data.service.API.NYTAPIInterfaceService;
 import myNews.data.service.API.topStories.topStoriesPOJO.ResponseTopStories;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,17 +18,19 @@ public class TopStoriesCalls
 {
 
     // 2 - Public method to start fetching Articles
-    public static void fetchArtsResponseArticles(Callbacks callbacks, String section)
+    public static void fetchTopStoriesResponseArticles(Callbacks callbacks, String section)
     {
 
         // 2.1 - Create a weak reference to callback (avoid memory leaks)
         final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<Callbacks>(callbacks);
 
         // 2.2 - Get a Retrofit instance and the related endpoints
-        TopStoriesService topStoriesService = TopStoriesService.retrofit.create(TopStoriesService.class);
+        NYTAPIInterfaceService nytapiInterfaceService = NYTAPIInterfaceService.retrofit.create(NYTAPIInterfaceService.class);
 
         // 2.3 - Create the call on NYT API
-        Call<List<ResponseTopStories>> call = topStoriesService.getFollowing(section);
+        //TODO maybe there is a mistake about getFollowing
+
+        Call<List<ResponseTopStories>> call = nytapiInterfaceService.getFollowing(section);
 
         // 2.4 - Start the call
         call.enqueue(new Callback<List<ResponseTopStories>>()

@@ -48,23 +48,7 @@ public class FragmentArticles extends BaseFragment
         View view = inflater.inflate(R.layout.fragment_articles_content, container, false);
         ButterKnife.bind(this, view);
         this.configureRecyclerView(); // - 4 Call during UI creation
-
-
-        TopStoriesCalls.fetchArtsResponseArticles(new TopStoriesCalls.Callbacks()
-        {
-            @Override
-            public void onResponse(@Nullable List<ResponseTopStories> articles)
-            {
-
-            }
-
-            @Override
-            public void onFailure()
-            {
-
-            }
-        }, "arts");
-
+        this.callArtsSectionArticlesFromTopStories();
         return view;
 
     }
@@ -80,6 +64,23 @@ public class FragmentArticles extends BaseFragment
 
     }
 
+    private void callArtsSectionArticlesFromTopStories()
+    {
+        TopStoriesCalls.fetchTopStoriesResponseArticles(new TopStoriesCalls.Callbacks()
+        {
+            @Override
+            public void onResponse(@Nullable List<ResponseTopStories> articles)
+            {
+
+            }
+
+            @Override
+            public void onFailure()
+            {
+
+            }
+        }, "arts");
+    }
     // -----------------
     // CONFIGURATION
     // -----------------
@@ -107,7 +108,7 @@ public class FragmentArticles extends BaseFragment
     // UPDATE UI
     // -------------------
 
-    //updateListOfArticles still in Fragments cause I must call the adapter
+    //updateListOfArticles still in Fragments cause I must call the adapter and I cannot do it in viewmodel
     private void updateListOfArticles()
     {
         articles.addAll(articlesRepository.getArticles());
