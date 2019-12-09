@@ -71,15 +71,14 @@ public class FragmentArticles extends BaseFragment
             @Override
             public void onResponse(@Nullable List<ResponseTopStories> articles)
             {
-
             }
 
             @Override
             public void onFailure()
             {
-
             }
         }, "arts");
+
     }
     // -----------------
     // CONFIGURATION

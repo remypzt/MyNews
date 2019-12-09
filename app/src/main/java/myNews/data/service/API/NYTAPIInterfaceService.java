@@ -24,4 +24,5 @@ public interface NYTAPIInterfaceService
 
     @GET("topstories/v2/{section}.json?" + API_KEY)
     Call<List<ResponseTopStories>> getFollowing(@Path("section") String section);
+
 }
