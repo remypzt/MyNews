@@ -16,6 +16,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import myNews.data.repositories.model.Articles;
+import myNews.data.service.API.topStories.TopStoriesCalls;
+import myNews.data.service.API.topStories.topStoriesPOJO.ResponseTopStories;
 import myNews.devexchanges.myNews.R;
 import myNews.view.Base.BaseFragment;
 import myNews.view.adaptater.ArticlesAdapter;
@@ -33,8 +35,11 @@ public class FragmentArticles extends BaseFragment
     private ViewModel mViewModel;
     /* private ArticlesRepository articlesRepository;*/
 
+
     public FragmentArticles()
     {
+
+
     }
 
     @Nullable
@@ -43,6 +48,23 @@ public class FragmentArticles extends BaseFragment
         View view = inflater.inflate(R.layout.fragment_articles_content, container, false);
         ButterKnife.bind(this, view);
         this.configureRecyclerView(); // - 4 Call during UI creation
+
+
+        TopStoriesCalls.fetchArtsResponseArticles(new TopStoriesCalls.Callbacks()
+        {
+            @Override
+            public void onResponse(@Nullable List<ResponseTopStories> articles)
+            {
+
+            }
+
+            @Override
+            public void onFailure()
+            {
+
+            }
+        }, "arts");
+
         return view;
 
     }

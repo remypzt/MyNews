@@ -5,6 +5,7 @@ package myNews.data.repositories.model;
  */
 public class Articles
 {
+
     private String mUrlImage;
     private String mCategory;
     private String mUnderCategory;
@@ -18,7 +19,9 @@ public class Articles
         mUnderCategory = underCategory;
         mTitle = title;
         mDate = date;
+
     }
+
 
     public String getDate()
     {
