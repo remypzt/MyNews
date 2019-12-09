@@ -5,15 +5,16 @@ package myNews.data.repositories.model;
  */
 public class Articles
 {
-
+    private int mDrawableImage;
     private String mUrlImage;
     private String mCategory;
     private String mUnderCategory;
     private String mTitle;
     private String mDate;
 
-    public Articles(String urlImage, String category, String underCategory, String title, String date)
+    public Articles(int drawableImage, String urlImage, String category, String underCategory, String title, String date)
     {
+        mDrawableImage = drawableImage;
         mUrlImage = urlImage;
         mCategory = category;
         mUnderCategory = underCategory;
@@ -22,6 +23,15 @@ public class Articles
 
     }
 
+    public int getDrawableImage()
+    {
+        return mDrawableImage;
+    }
+
+    public void setDrawableImage(int drawableImage)
+    {
+        mDrawableImage = drawableImage;
+    }
 
     public String getDate()
     {

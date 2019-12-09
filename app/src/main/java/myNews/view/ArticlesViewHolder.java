@@ -42,9 +42,7 @@ public ArticlesViewHolder(View itemView) {
     public void updateWithArticles(Articles articles)
     {
 
-        Glide.with(mPicture.getContext()).load(articles.getUrlImage()).placeholder(R.drawable.test).into(mPicture);
-       /*  if (mPicture.getContext()!= null)
-        {} else { this.mPicture.setImageDrawable(articles.getUrlImage());}*/
+        Glide.with(mPicture.getContext()).load(articles.getUrlImage()).placeholder(articles.getDrawableImage()).into(mPicture);
         this.mCategory.setText(articles.getCategory() + " " + ">" + " ");
         this.mUnderCategory.setText(articles.getUnderCategory());
         this.mDate.setText(articles.getDate());
