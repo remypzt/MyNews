@@ -5,9 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import myNews.data.repositories.model.Articles;
-import myNews.data.service.API.topStories.topStoriesPOJO.MultimediaItem;
 import myNews.data.service.API.topStories.topStoriesPOJO.ResponseTopStories;
-import myNews.data.service.API.topStories.topStoriesPOJO.ResultsItem;
 import myNews.devexchanges.myNews.R;
 
 
@@ -24,11 +22,11 @@ public class Utils
 
     private static Articles mArticlesItems = new Articles(
             R.drawable.test,
-            new MultimediaItem().getUrl(),
+           /* new MultimediaItem().getUrl(),
             new ResultsItem().getSection(),
             new ResultsItem().getSubsection(),
             new ResultsItem().getTitle(),
-            new ResultsItem().getPublishedDate()
+            new ResultsItem().getPublishedDate()*/
     );
 
 
