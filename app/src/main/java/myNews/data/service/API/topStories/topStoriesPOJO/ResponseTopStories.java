@@ -1,5 +1,6 @@
 package myNews.data.service.API.topStories.topStoriesPOJO;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class ResponseTopStories
     private String section;
 
     @SerializedName("results")
+    @Expose
     private List<ResultsItem> results;
 
     @SerializedName("num_results")

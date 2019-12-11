@@ -1,5 +1,6 @@
 package myNews.data.service.API.topStories.topStoriesPOJO;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public class ResultsItem
     private List<String> perFacet;
 
     @SerializedName("subsection")
+    @Expose
     private String subsection;
 
     @SerializedName("item_type")
@@ -23,12 +25,14 @@ public class ResultsItem
     private List<String> orgFacet;
 
     @SerializedName("section")
+    @Expose
     private String section;
 
     @SerializedName("abstract")
     private String jsonMemberAbstract;
 
     @SerializedName("title")
+    @Expose
     private String title;
 
     @SerializedName("des_facet")
@@ -44,6 +48,7 @@ public class ResultsItem
     private String materialTypeFacet;
 
     @SerializedName("multimedia")
+    @Expose
     private List<MultimediaItem> multimedia;
 
     @SerializedName("geo_facet")
@@ -59,6 +64,7 @@ public class ResultsItem
     private String byline;
 
     @SerializedName("published_date")
+    @Expose
     private String publishedDate;
 
     @SerializedName("kicker")

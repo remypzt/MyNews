@@ -1,5 +1,6 @@
 package myNews.data.service.API.topStories.topStoriesPOJO;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import javax.annotation.Generated;
@@ -27,6 +28,7 @@ public class MultimediaItem
     private String type;
 
     @SerializedName("url")
+    @Expose
     private String url;
 
     @SerializedName("height")
