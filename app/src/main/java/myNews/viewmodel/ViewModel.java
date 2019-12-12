@@ -1,28 +1,29 @@
 package myNews.viewmodel;
 
+import myNews.view.activitiesAndFragment.FragmentArticles;
+import myNews.view.adaptater.ViewPagerAdapter;
+
 /**
  * Created by Remy Pouzet on 05/12/2019.
  */
 public class ViewModel extends androidx.lifecycle.ViewModel
 {
-
-
+    static int IdOfSelectedTab = ViewPagerAdapter.getIdOfSelectedTab();
     // Simplified idea to manage tabs displaying
-   /* public List<Articles> displayingAppropriateListOfArticles(){
-
-        switch (MainActivity.gettabselected)
+    public void displayingAppropriateListOfArticles()
+    {
+        switch (IdOfSelectedTab)
         {
-            case R.id.0:
-                TopStories;
+            case 0:
+                FragmentArticles.setSection("home");
                 break;
-            case R.id.1:
+            /*case 1:
                 Mostpopular;
-                break;
+                break;*/
             default:
-                Buisness;
+                FragmentArticles.setSection("arts");
         }
-     Simplified idea to manage tabs displaying
+    }
+}
 
-}
-*/
-}
+

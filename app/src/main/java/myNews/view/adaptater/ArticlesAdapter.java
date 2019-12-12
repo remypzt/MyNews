@@ -11,7 +11,6 @@ import java.util.List;
 
 import myNews.data.repositories.model.Articles;
 import myNews.devexchanges.myNews.R;
-import myNews.view.ArticlesViewHolder;
 
 
 /**

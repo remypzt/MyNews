@@ -35,6 +35,13 @@ public class FragmentArticles extends BaseFragment
     private List<Articles> articles;
     private ArticlesAdapter adapter;
     private ViewModel mViewModel;
+    public static String section;
+
+    public static void setSection(String section)
+    {
+        FragmentArticles.section = section;
+    }
+
     /* private ArticlesRepository articlesRepository;*/
 
 
@@ -50,7 +57,7 @@ public class FragmentArticles extends BaseFragment
         View view = inflater.inflate(R.layout.fragment_articles_content, container, false);
         ButterKnife.bind(this, view);
         this.configureRecyclerView(); // - 4 Call during UI creation
-        this.callArtsSectionArticlesFromTopStories();
+        this.callArticlesFromTopStories();
         return view;
 
     }
@@ -68,7 +75,7 @@ public class FragmentArticles extends BaseFragment
 
     }
 
-    private void callArtsSectionArticlesFromTopStories()
+    private void callArticlesFromTopStories()
     {
         TopStoriesCalls.fetchTopStoriesResponseArticles(new TopStoriesCalls.Callbacks()
         {
@@ -91,9 +98,10 @@ public class FragmentArticles extends BaseFragment
             {
                 Log.d("Test", "onFailure");
             }
-        }, "arts");
-
+        }, section);
     }
+
+
     // -----------------
     // CONFIGURATION
     // -----------------

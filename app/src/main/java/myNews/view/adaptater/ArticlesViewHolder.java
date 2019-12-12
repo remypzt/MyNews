@@ -1,4 +1,4 @@
-package myNews.view;
+package myNews.view.adaptater;
 
 import android.view.View;
 import android.widget.ImageView;

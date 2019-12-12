@@ -8,6 +8,12 @@ import myNews.view.activitiesAndFragment.FragmentArticles;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
+    public static int IdOfSelectedTab;
+
+    public static int getIdOfSelectedTab()
+    {
+        return IdOfSelectedTab;
+    }
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -16,9 +22,24 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if (position ==0) {
             return new FragmentArticles();
+
         } else if (position == 1) {
             return new FragmentArticles();
         } else return new FragmentArticles();
+    }
+
+    public void getIdofSelectedTab(int position)
+    {
+        if (position == 0)
+        {
+            IdOfSelectedTab = 0;
+        } else if (position == 1)
+        {
+            IdOfSelectedTab = 0;
+        } else
+        {
+            IdOfSelectedTab = 0;
+        }
     }
 
     @Override

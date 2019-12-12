@@ -19,13 +19,11 @@ public class Utils
 
     public static List<Articles> generateArticlesFromTopStories(ResponseTopStories responseTopStories)
     {
-
-
         if (responseTopStories != null)
         {
             List<ResultsItem> resultsTopStories = responseTopStories.getResults();
 
-            for (int x = sizeOfArticlesList; x <= resultsTopStories.size() && x <= 48; x++)
+            for (int x = sizeOfArticlesList; x <= resultsTopStories.size() && x <= 20; x++)
                 articles.add(addArticleFromTopStories(resultsTopStories.get(x)));
 
         }
