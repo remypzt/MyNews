@@ -35,10 +35,10 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
             IdOfSelectedTab = 0;
         } else if (position == 1)
         {
-            IdOfSelectedTab = 0;
+            IdOfSelectedTab = 1;
         } else
         {
-            IdOfSelectedTab = 0;
+            IdOfSelectedTab = 2;
         }
     }
 
