@@ -43,7 +43,13 @@ public ArticlesViewHolder(View itemView) {
     {
 
         Glide.with(mPicture.getContext()).load(articles.getUrlImage()).placeholder(articles.getDrawableImage()).into(mPicture);
-        this.mCategory.setText(articles.getCategory() + " " + ">" + " ");
+        if (articles.getUnderCategory().length() >= 1)
+        {
+            this.mCategory.setText(articles.getCategory() + " " + ">" + " ");
+        } else
+        {
+            this.mCategory.setText(articles.getCategory());
+        }
         this.mUnderCategory.setText(articles.getUnderCategory());
         this.mDate.setText(articles.getDate());
         this.mTitle.setText(articles.getTitle());
