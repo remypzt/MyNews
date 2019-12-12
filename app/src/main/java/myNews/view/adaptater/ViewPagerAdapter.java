@@ -22,7 +22,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if (position ==0) {
             return new FragmentArticles();
-
         } else if (position == 1) {
             return new FragmentArticles();
         } else return new FragmentArticles();
