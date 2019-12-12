@@ -1,7 +1,5 @@
 package myNews.data.service.API;
 
-import java.util.List;
-
 import myNews.data.service.API.topStories.topStoriesPOJO.ResponseTopStories;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -23,6 +21,6 @@ public interface NYTAPIInterfaceService
             .build();
 
     @GET("topstories/v2/{section}.json?" + API_KEY)
-    Call<List<ResponseTopStories>> getFollowing(@Path("section") String section);
+    Call<ResponseTopStories> getFollowing(@Path("section") String section);
 
 }

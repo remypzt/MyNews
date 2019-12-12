@@ -30,25 +30,24 @@ public class TopStoriesCalls
         // 2.3 - Create the call on NYT API
         //TODO maybe there is a mistake about getFollowing
 
-        Call<List<ResponseTopStories>> call = nytapiInterfaceService.getFollowing(section);
+        Call<ResponseTopStories> call = nytapiInterfaceService.getFollowing(section);
 
         // 2.4 - Start the call
-        call.enqueue(new Callback<List<ResponseTopStories>>()
+        call.enqueue(new Callback<ResponseTopStories>()
         {
 
             @Override
-            public void onResponse(Call<List<ResponseTopStories>> call, Response<List<ResponseTopStories>> response)
+            public void onResponse(Call<ResponseTopStories> call, Response<ResponseTopStories> response)
             {
                 // 2.5 - Call the proper callback used in controller (MainFragment)
-                if (callbacksWeakReference.get() != null)
-                    callbacksWeakReference.get().onResponse(response.body());
+                callbacks.onResponse(response.body());
             }
 
             @Override
-            public void onFailure(Call<List<ResponseTopStories>> call, Throwable t)
+            public void onFailure(Call<ResponseTopStories> call, Throwable t)
             {
                 // 2.5 - Call the proper callback used in controller (MainFragment)
-                if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onFailure();
+                callbacks.onFailure();
             }
         });
     }
@@ -56,6 +55,9 @@ public class TopStoriesCalls
     // 1 - Creating a callback
     public interface Callbacks
     {
+        void onResponse(@Nullable ResponseTopStories articles);
+
+
         void onResponse(@Nullable List<ResponseTopStories> ResponseTopStories);
 
         void onFailure();

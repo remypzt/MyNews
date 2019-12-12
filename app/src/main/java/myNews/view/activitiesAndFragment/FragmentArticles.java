@@ -1,6 +1,7 @@
 package myNews.view.activitiesAndFragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import myNews.Others.Utils;
 import myNews.data.repositories.model.Articles;
 import myNews.data.service.API.topStories.TopStoriesCalls;
 import myNews.data.service.API.topStories.topStoriesPOJO.ResponseTopStories;
@@ -58,6 +60,8 @@ public class FragmentArticles extends BaseFragment
         super.onViewCreated(view, savedInstanceState);
         updateListOfArticles();
     }
+
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -69,13 +73,23 @@ public class FragmentArticles extends BaseFragment
         TopStoriesCalls.fetchTopStoriesResponseArticles(new TopStoriesCalls.Callbacks()
         {
             @Override
-            public void onResponse(@Nullable List<ResponseTopStories> articles)
+            public void onResponse(@Nullable ResponseTopStories articles)
             {
+                Log.d("Test", "onResponse");
+                List<Articles> articlesList = Utils.generateArticlesFromTopStories(articles);
+                updateList(articlesList);
+            }
+
+            @Override
+            public void onResponse(@Nullable List<ResponseTopStories> ResponseTopStories)
+            {
+
             }
 
             @Override
             public void onFailure()
             {
+                Log.d("Test", "onFailure");
             }
         }, "arts");
 
@@ -111,6 +125,13 @@ public class FragmentArticles extends BaseFragment
     private void updateListOfArticles()
     {
         articles.addAll(articlesRepository.getArticles());
+        adapter.notifyDataSetChanged();
+    }
+
+    private void updateList(List<Articles> articlesList)
+    {
+        articles.clear();
+        articles.addAll(articlesList);
         adapter.notifyDataSetChanged();
     }
 }

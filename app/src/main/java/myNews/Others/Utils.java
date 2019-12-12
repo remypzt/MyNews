@@ -1,11 +1,11 @@
 package myNews.Others;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import myNews.data.repositories.model.Articles;
 import myNews.data.service.API.topStories.topStoriesPOJO.ResponseTopStories;
+import myNews.data.service.API.topStories.topStoriesPOJO.ResultsItem;
 import myNews.devexchanges.myNews.R;
 
 
@@ -14,38 +14,35 @@ import myNews.devexchanges.myNews.R;
  */
 public class Utils
 {
-    private static ResponseTopStories mResponseTopStories = new ResponseTopStories();
-    private static List mResults = mResponseTopStories.getResults();
-    private static int mSize = mResults.size();
-    private static List<Articles> ARTICLES = Arrays.asList();
+    private static List<Articles> articles = new ArrayList<>();
+    private static int sizeOfArticlesList = articles.size();
 
-
-    private static Articles mArticlesItems = new Articles(
-            R.drawable.test,
-           /* new MultimediaItem().getUrl(),
-            new ResultsItem().getSection(),
-            new ResultsItem().getSubsection(),
-            new ResultsItem().getTitle(),
-            new ResultsItem().getPublishedDate()*/
-    );
-
-
-    public static void addingAllArticles()
+    public static List<Articles> generateArticlesFromTopStories(ResponseTopStories responseTopStories)
     {
-        while (ARTICLES.size() <= mSize)
+
+
+        if (responseTopStories != null)
         {
-            addingArticles();
+            List<ResultsItem> resultsTopStories = responseTopStories.getResults();
+
+            for (int x = sizeOfArticlesList; x <= resultsTopStories.size() && x <= 48; x++)
+                articles.add(addArticleFromTopStories(resultsTopStories.get(x)));
+
         }
+        return articles;
     }
 
-    private static void addingArticles()
+    private static Articles addArticleFromTopStories(ResultsItem resultsItem)
     {
-        ARTICLES.add(ARTICLES.size() + 1, mArticlesItems);
-    }
+        String multimediaUrl = resultsItem.getMultimedia().size() != 0 ? resultsItem.getMultimedia().get(sizeOfArticlesList).getUrl() : "";
 
-    public static List<Articles> generateArticles()
-    {
-        return new ArrayList<>(ARTICLES);
+        return new Articles(R.drawable.test, multimediaUrl, resultsItem.getSection(),
+                resultsItem.getSubsection(), resultsItem.getTitle(), resultsItem.getPublishedDate());
     }
-
 }
+
+
+
+
+
+
