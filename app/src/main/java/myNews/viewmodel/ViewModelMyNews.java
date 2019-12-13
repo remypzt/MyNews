@@ -1,14 +1,18 @@
 package myNews.viewmodel;
 
 import myNews.view.activitiesAndFragment.FragmentArticles;
-import myNews.view.adaptater.ViewPagerAdapter;
 
 /**
  * Created by Remy Pouzet on 05/12/2019.
  */
-public class ViewModel extends androidx.lifecycle.ViewModel
+public class ViewModelMyNews extends androidx.lifecycle.ViewModel
 {
-    static int IdOfSelectedTab = ViewPagerAdapter.getIdOfSelectedTab();
+    int IdOfSelectedTab;
+
+    public ViewModelMyNews(int position)
+    {
+        IdOfSelectedTab = position;
+    }
 
     public void displayingAppropriateListOfArticles()
     {

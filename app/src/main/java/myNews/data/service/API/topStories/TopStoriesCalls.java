@@ -3,7 +3,6 @@ package myNews.data.service.API.topStories;
 import androidx.annotation.Nullable;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
 
 import myNews.data.service.API.NYTAPIInterfaceService;
 import myNews.data.service.API.topStories.topStoriesPOJO.ResponseTopStories;
@@ -57,8 +56,6 @@ public class TopStoriesCalls
     {
         void onResponse(@Nullable ResponseTopStories articles);
 
-
-        void onResponse(@Nullable List<ResponseTopStories> ResponseTopStories);
 
         void onFailure();
     }

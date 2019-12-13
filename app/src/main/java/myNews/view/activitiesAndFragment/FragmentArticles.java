@@ -22,6 +22,7 @@ import myNews.data.service.API.topStories.topStoriesPOJO.ResponseTopStories;
 import myNews.myNews.R;
 import myNews.view.Base.BaseFragment;
 import myNews.view.adaptater.ArticlesAdapter;
+import myNews.viewmodel.ViewModelMyNews;
 
 public class FragmentArticles extends BaseFragment
 {
@@ -35,7 +36,9 @@ public class FragmentArticles extends BaseFragment
     private ArticlesAdapter adapter;
     public static String section;
 
-    private static myNews.viewmodel.ViewModel viewModel = new myNews.viewmodel.ViewModel();
+    private ViewModelMyNews viewModelMyNews;
+    private int position;
+    // = new myNews.viewmodel.ViewModelMyNews()
 
     public static void setSection(String section)
     {
@@ -45,18 +48,24 @@ public class FragmentArticles extends BaseFragment
     /* private ArticlesRepository articlesRepository;*/
 
 
-    public FragmentArticles()
+    public static FragmentArticles newInstance(int position)
     {
-
-
+        FragmentArticles fragment = new FragmentArticles();
+        Bundle bundle = new Bundle();
+        bundle.putInt("position", position);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        this.position = getArguments().getInt("position");
+        viewModelMyNews = new ViewModelMyNews(position);
+
         View view = inflater.inflate(R.layout.fragment_articles_content, container, false);
         ButterKnife.bind(this, view);
-        viewModel.displayingAppropriateListOfArticles();
+        viewModelMyNews.displayingAppropriateListOfArticles();
         this.configureRecyclerView(); // - 4 Call during UI creation
         this.callArticlesFromTopStories();
         return view;
@@ -87,11 +96,7 @@ public class FragmentArticles extends BaseFragment
                 updateList(articlesList);
             }
 
-            @Override
-            public void onResponse(@Nullable List<ResponseTopStories> ResponseTopStories)
-            {
 
-            }
 
             @Override
             public void onFailure()
