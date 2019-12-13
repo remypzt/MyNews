@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -8,7 +9,8 @@
         android:id="@+id/Article_picture"
         android:layout_width="90dp"
         android:layout_height="90dp"
-        android:layout_margin="15dp" />
+        android:layout_margin="15dp"
+        android:contentDescription="@string/picture_illustrating_the_article" />
 
     <TextView
         android:id="@+id/Article_category"
@@ -37,7 +39,7 @@
         android:text="@string/textview"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:textSize="18dp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/Article_date"
@@ -46,7 +48,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="15dp"
-        android:text="@string/textview" />
+        android:text="@string/textview"
+        tools:ignore="RelativeOverlap" />
 
     <View
         android:layout_width="match_parent"

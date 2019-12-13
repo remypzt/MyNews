@@ -7,7 +7,7 @@ import myNews.view.activitiesAndFragment.FragmentArticles;
  */
 public class ViewModelMyNews extends androidx.lifecycle.ViewModel
 {
-    int IdOfSelectedTab;
+    private int IdOfSelectedTab;
 
     public ViewModelMyNews(int position)
     {

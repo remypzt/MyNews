@@ -15,7 +15,8 @@ import static myNews.others.Constant.API_KEY;
  */
 public interface NytApiInterfaceService
 {
-    public static final Retrofit retrofit = new Retrofit.Builder()
+    //Interface elements are public static and final
+    Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();

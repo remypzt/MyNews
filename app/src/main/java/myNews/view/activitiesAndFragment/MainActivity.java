@@ -26,9 +26,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.toolbar) public Toolbar toolbar;
     @BindView(R.id.nav_view) public  NavigationView navigationView;
 
-    /*private String[] pageTitle = {getString(R.id.tab).string.tab1_name, R.string.tab2_name, R.string.tab3_name};
-    I leave this part of code because i want to ask why It's doesn't work
-     */
     private String[] pageTitle = {"Top Stories", "Most Popular", "Business"};
 
     @Override
@@ -65,7 +62,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         //change ViewPager page when tab selected
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
+        {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());

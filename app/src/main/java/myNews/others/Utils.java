@@ -1,5 +1,7 @@
 package myNews.others;
 
+import android.annotation.SuppressLint;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,14 +20,12 @@ import myNews.myNews.R;
  */
 public class Utils
 {
-    static String publishedDateAdaptedForArticlesFormat;
+    private static String publishedDateAdaptedForArticlesFormat;
 
 
     public static List<Articles> generateArticlesFromTopStories(ResponseTopStories responseTopStories)
     {
         List<Articles> articles = new ArrayList<>();
-        int sizeOfArticlesList = articles.size();
-
         if (responseTopStories != null)
         {
             List<ResultsItem> resultsTopStories = responseTopStories.getResults();
@@ -41,13 +41,14 @@ public class Utils
     {
         String multimediaUrl = resultsItem.getMultimedia().size() != 0 ? resultsItem.getMultimedia().get(0).getUrl() : "";
 
-        SimpleDateFormat publishedDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat publishedDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
         // Why publishedDateInDateFormat is null ???
-        Date publishedDateInDateFormat = null;
+        Date publishedDateInDateFormat;
         try
         {
             publishedDateInDateFormat = publishedDate.parse(resultsItem.getPublishedDate());
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            assert publishedDateInDateFormat != null;
             publishedDateAdaptedForArticlesFormat = dateFormat.format(publishedDateInDateFormat);
             System.out.println(publishedDateAdaptedForArticlesFormat);
         } catch (ParseException e)

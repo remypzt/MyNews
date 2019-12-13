@@ -2,8 +2,6 @@ package myNews.data.service.realAPI.topStories;
 
 import androidx.annotation.Nullable;
 
-import java.lang.ref.WeakReference;
-
 import myNews.data.service.realAPI.NytApiInterfaceService;
 import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResponseTopStories;
 import retrofit2.Call;
@@ -21,7 +19,7 @@ public class TopStoriesCalls
     {
 
         // 2.1 - Create a weak reference to callback (avoid memory leaks)
-        final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<Callbacks>(callbacks);
+        // final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<Callbacks>(callbacks);
 
         // 2.2 - Get a Retrofit instance and the related endpoints
         NytApiInterfaceService nytapiInterfaceService = NytApiInterfaceService.retrofit.create(NytApiInterfaceService.class);

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,7 +35,7 @@ public class FragmentArticles extends BaseFragment
     // 2 - Declare list of Articles & Adapter
     private List<Articles> articles;
     private ArticlesAdapter adapter;
-    public static String section;
+    private static String section;
 
     private ViewModelMyNews viewModelMyNews;
     private int position;
@@ -44,9 +45,7 @@ public class FragmentArticles extends BaseFragment
     {
         FragmentArticles.section = section;
     }
-
     /* private ArticlesRepository articlesRepository;*/
-
 
     public static FragmentArticles newInstance(int position)
     {
@@ -59,7 +58,9 @@ public class FragmentArticles extends BaseFragment
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
+        assert getArguments() != null;
         this.position = getArguments().getInt("position");
         viewModelMyNews = new ViewModelMyNews(position);
 
@@ -72,14 +73,16 @@ public class FragmentArticles extends BaseFragment
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
         updateListOfArticles();
     }
 
 
     @Override
-    public void onDestroy() {
+    public void onDestroy()
+    {
         super.onDestroy();
 
     }
@@ -97,7 +100,6 @@ public class FragmentArticles extends BaseFragment
             }
 
 
-
             @Override
             public void onFailure()
             {
@@ -112,14 +114,14 @@ public class FragmentArticles extends BaseFragment
     // -----------------
 
     // 3 - Configure RecyclerView, Adapter, LayoutManager & glue it together
-    private void configureRecyclerView(){
+    private void configureRecyclerView()
+    {
         // 3.1 - Reset list
         this.articles = new ArrayList<>();
 
         /* this part of code (commented) was for testing by plain text way the recyclerView*/
         /*Articles test = new Articles("test");
         this.articles.add(test);*/
-
 
         // 3.2 - Create adapter passing the list of articles
         this.adapter = new ArticlesAdapter(this.articles);

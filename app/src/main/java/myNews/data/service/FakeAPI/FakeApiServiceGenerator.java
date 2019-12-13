@@ -12,11 +12,11 @@ import myNews.myNews.R;
 /**
  * Created by Remy Pouzet on 25/11/2019.
  */
-public class FakeApiServiceGenerator
+class FakeApiServiceGenerator
 {
     private static String title = new ResultsItem().getTitle();
-    ;
-    public static List<Articles> FAKE_ARTICLES = Arrays.asList(
+
+    private static List<Articles> FAKE_ARTICLES = Arrays.asList(
             new Articles(R.drawable.test,
                     "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png",
                     "categorie",
