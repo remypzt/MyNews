@@ -23,7 +23,7 @@ public class Utils
         {
             List<ResultsItem> resultsTopStories = responseTopStories.getResults();
 
-            for (int x = sizeOfArticlesList; x <= resultsTopStories.size() && x <= 20; x++)
+            for (int x = sizeOfArticlesList; x <= resultsTopStories.size() - 1; x++)
                 articles.add(addArticleFromTopStories(resultsTopStories.get(x)));
 
         }
@@ -34,6 +34,14 @@ public class Utils
     {
         String multimediaUrl = resultsItem.getMultimedia().size() != 0 ? resultsItem.getMultimedia().get(sizeOfArticlesList).getUrl() : "";
 
+      /*  SimpleDateFormat publishedDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        // Why publishedDateInDateFormat is null ???
+        Date publishedDateInDateFormat = publishedDate.parse(resultsItem.getPublishedDate(),new ParsePosition(0));
+
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String publishedDateAdaptedForArticlesFormat = dateFormat.format(publishedDateInDateFormat);
+        System.out.println(publishedDateAdaptedForArticlesFormat);
+*/
         return new Articles(R.drawable.test, multimediaUrl, resultsItem.getSection(),
                 resultsItem.getSubsection(), resultsItem.getTitle(), resultsItem.getPublishedDate());
     }

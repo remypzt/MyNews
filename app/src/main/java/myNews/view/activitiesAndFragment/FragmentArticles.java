@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,8 +33,9 @@ public class FragmentArticles extends BaseFragment
     // 2 - Declare list of Articles & Adapter
     private List<Articles> articles;
     private ArticlesAdapter adapter;
-    private ViewModel mViewModel;
     public static String section;
+
+    private static myNews.viewmodel.ViewModel viewModel = new myNews.viewmodel.ViewModel();
 
     public static void setSection(String section)
     {
@@ -56,10 +56,10 @@ public class FragmentArticles extends BaseFragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_articles_content, container, false);
         ButterKnife.bind(this, view);
+        viewModel.displayingAppropriateListOfArticles();
         this.configureRecyclerView(); // - 4 Call during UI creation
         this.callArticlesFromTopStories();
         return view;
-
     }
 
     @Override

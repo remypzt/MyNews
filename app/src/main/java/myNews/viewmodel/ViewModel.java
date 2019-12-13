@@ -9,7 +9,7 @@ import myNews.view.adaptater.ViewPagerAdapter;
 public class ViewModel extends androidx.lifecycle.ViewModel
 {
     static int IdOfSelectedTab = ViewPagerAdapter.getIdOfSelectedTab();
-    // Simplified idea to manage tabs displaying
+
     public void displayingAppropriateListOfArticles()
     {
         switch (IdOfSelectedTab)
