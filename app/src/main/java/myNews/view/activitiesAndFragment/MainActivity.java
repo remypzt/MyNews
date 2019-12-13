@@ -15,7 +15,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import myNews.devexchanges.myNews.R;
+import myNews.myNews.R;
 import myNews.view.adaptater.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{

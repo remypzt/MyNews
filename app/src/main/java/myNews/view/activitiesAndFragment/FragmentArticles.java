@@ -19,7 +19,7 @@ import myNews.Others.Utils;
 import myNews.data.repositories.model.Articles;
 import myNews.data.service.API.topStories.TopStoriesCalls;
 import myNews.data.service.API.topStories.topStoriesPOJO.ResponseTopStories;
-import myNews.devexchanges.myNews.R;
+import myNews.myNews.R;
 import myNews.view.Base.BaseFragment;
 import myNews.view.adaptater.ArticlesAdapter;
 

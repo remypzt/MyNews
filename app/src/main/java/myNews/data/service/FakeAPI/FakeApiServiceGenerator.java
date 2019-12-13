@@ -6,7 +6,7 @@ import java.util.List;
 
 import myNews.data.repositories.model.Articles;
 import myNews.data.service.API.topStories.topStoriesPOJO.ResultsItem;
-import myNews.devexchanges.myNews.R;
+import myNews.myNews.R;
 
 
 /**

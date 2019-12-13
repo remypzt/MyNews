@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import myNews.data.repositories.model.Articles;
-import myNews.devexchanges.myNews.R;
+import myNews.myNews.R;
 
 
 /**
