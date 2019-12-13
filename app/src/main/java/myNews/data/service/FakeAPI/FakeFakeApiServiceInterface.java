@@ -10,7 +10,7 @@ import static myNews.data.service.FakeAPI.FakeApiServiceGenerator.generateArticl
  * Created by Remy Pouzet on 25/11/2019.
  */
 
-public class FakeApiService implements ApiService
+public class FakeFakeApiServiceInterface implements FakeApiServiceInterface
 {
 
     private List<Articles> articles = generateArticles();

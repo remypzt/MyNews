@@ -1,4 +1,4 @@
-package myNews.data.service.API.topStories.topStoriesPOJO;
+package myNews.data.service.realAPI.topStories.topStoriesPOJO;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

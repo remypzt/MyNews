@@ -1,4 +1,4 @@
-package myNews.Others;
+package myNews.others;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -8,8 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 import myNews.data.repositories.model.Articles;
-import myNews.data.service.API.topStories.topStoriesPOJO.ResponseTopStories;
-import myNews.data.service.API.topStories.topStoriesPOJO.ResultsItem;
+import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResponseTopStories;
+import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResultsItem;
 import myNews.myNews.R;
 
 

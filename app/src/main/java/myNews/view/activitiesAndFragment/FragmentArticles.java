@@ -15,13 +15,13 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import myNews.Others.Utils;
 import myNews.data.repositories.model.Articles;
-import myNews.data.service.API.topStories.TopStoriesCalls;
-import myNews.data.service.API.topStories.topStoriesPOJO.ResponseTopStories;
+import myNews.data.service.realAPI.topStories.TopStoriesCalls;
+import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResponseTopStories;
 import myNews.myNews.R;
-import myNews.view.Base.BaseFragment;
+import myNews.others.Utils;
 import myNews.view.adaptater.ArticlesAdapter;
+import myNews.view.base.BaseFragment;
 import myNews.viewmodel.ViewModelMyNews;
 
 public class FragmentArticles extends BaseFragment

@@ -1,4 +1,4 @@
-package myNews.view.Base;
+package myNews.view.base;
 
 import androidx.fragment.app.Fragment;
 

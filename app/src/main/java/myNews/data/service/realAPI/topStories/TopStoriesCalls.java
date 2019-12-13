@@ -1,11 +1,11 @@
-package myNews.data.service.API.topStories;
+package myNews.data.service.realAPI.topStories;
 
 import androidx.annotation.Nullable;
 
 import java.lang.ref.WeakReference;
 
-import myNews.data.service.API.NYTAPIInterfaceService;
-import myNews.data.service.API.topStories.topStoriesPOJO.ResponseTopStories;
+import myNews.data.service.realAPI.NytApiInterfaceService;
+import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResponseTopStories;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,7 +24,7 @@ public class TopStoriesCalls
         final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<Callbacks>(callbacks);
 
         // 2.2 - Get a Retrofit instance and the related endpoints
-        NYTAPIInterfaceService nytapiInterfaceService = NYTAPIInterfaceService.retrofit.create(NYTAPIInterfaceService.class);
+        NytApiInterfaceService nytapiInterfaceService = NytApiInterfaceService.retrofit.create(NytApiInterfaceService.class);
 
         // 2.3 - Create the call on NYT API
         //TODO maybe there is a mistake about getFollowing

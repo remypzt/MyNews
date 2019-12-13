@@ -1,4 +1,4 @@
-package myNews.Others;
+package myNews.others;
 
 /**
  * Created by Remy Pouzet on 09/12/2019.

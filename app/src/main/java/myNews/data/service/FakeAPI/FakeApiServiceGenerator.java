@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import myNews.data.repositories.model.Articles;
-import myNews.data.service.API.topStories.topStoriesPOJO.ResultsItem;
+import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResultsItem;
 import myNews.myNews.R;
 
 

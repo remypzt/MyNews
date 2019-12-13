@@ -3,23 +3,23 @@ package myNews.data.repositories;
 import java.util.List;
 
 import myNews.data.repositories.model.Articles;
-import myNews.data.service.FakeAPI.ApiService;
+import myNews.data.service.FakeAPI.FakeApiServiceInterface;
 
 /**
  * Created by Remy Pouzet on 25/11/2019.
  */
 public class ArticlesRepository
 {
-    private final ApiService apiService;
+    private final FakeApiServiceInterface mFakeApiServiceInterface;
 
-    public ArticlesRepository(ApiService apiService)
+    public ArticlesRepository(FakeApiServiceInterface fakeApiServiceInterface)
     {
-        this.apiService = apiService;
+        this.mFakeApiServiceInterface = fakeApiServiceInterface;
     }
 
     public List<Articles> getArticles()
     {
-        return apiService.getArticles();
+        return mFakeApiServiceInterface.getArticles();
 
 
 
