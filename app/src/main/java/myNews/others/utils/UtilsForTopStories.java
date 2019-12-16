@@ -25,16 +25,16 @@ public class UtilsForTopStories
 
     public static List<Articles> generateArticlesFromTopStories(ResponseOfTopStories responseOfTopStories)
     {
-        List<Articles> articles = new ArrayList<>();
+        List<Articles> topStoriesArticles = new ArrayList<>();
         if (responseOfTopStories != null)
         {
             List<ResultsItemOfTopStories> resultsTopStories = responseOfTopStories.getResults();
 
             for (int x = 0; x <= resultsTopStories.size() - 1; x++)
-                articles.add(addArticleFromTopStories(resultsTopStories.get(x)));
+                topStoriesArticles.add(addArticleFromTopStories(resultsTopStories.get(x)));
 
         }
-        return articles;
+        return topStoriesArticles;
     }
 
     private static Articles addArticleFromTopStories(ResultsItemOfTopStories resultsItemOfTopStories)
@@ -42,7 +42,6 @@ public class UtilsForTopStories
         String multimediaUrl = resultsItemOfTopStories.getMultimedia().size() != 0 ? resultsItemOfTopStories.getMultimedia().get(0).getUrl() : "";
 
         @SuppressLint("SimpleDateFormat") SimpleDateFormat publishedDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
-        // Why publishedDateInDateFormat is null ???
         Date publishedDateInDateFormat;
         try
         {

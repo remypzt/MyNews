@@ -1,12 +1,6 @@
 package myNews.others.utils;
 
-import android.annotation.SuppressLint;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import myNews.data.repositories.model.Articles;
@@ -27,22 +21,21 @@ public class UtilsForMostPopular
     public static List<Articles> generateArticlesFromMostPopular(ResponseOfMostPopular responseOfMostPopular
     )
     {
-        List<Articles> articles = new ArrayList<>();
+        List<Articles> mostPopularArticles = new ArrayList<>();
         if (responseOfMostPopular != null)
         {
             List<ResultsItemOfMostPopular> resultsMostPopular = responseOfMostPopular.getResults();
 
             for (int x = 0; x <= resultsMostPopular.size() - 1; x++)
-                articles.add(addArticleFromMostPopular(resultsMostPopular.get(x)));
+                mostPopularArticles.add(addArticleFromMostPopular(resultsMostPopular.get(x)));
 
         }
-        return articles;
+        return mostPopularArticles;
     }
 
     private static Articles addArticleFromMostPopular(ResultsItemOfMostPopular resultsItemOfMostPopular)
     {
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat publishedDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
-        // Why publishedDateInDateFormat is null ???
+       /* @SuppressLint("SimpleDateFormat") SimpleDateFormat publishedDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
         Date publishedDateInDateFormat;
         try
         {
@@ -54,14 +47,16 @@ public class UtilsForMostPopular
         } catch (ParseException e)
         {
             e.printStackTrace();
-        }
+        }*/
 
 
         return new Articles(R.drawable.test,
-                mediaMetadataItemOfMostPopular.getUrl(),
-                resultsItemOfMostPopular.getSection(),
-                null/*there isn't subsection object for MostPopular*/,
-                resultsItemOfMostPopular.getTitle(),
-                publishedDateAdaptedForArticlesFormat);
+                "", "", "", "", "" /* for test */
+                // mediaMetadataItemOfMostPopular.getUrl(),
+                // resultsItemOfMostPopular.getSection(),
+                //null/*there isn't subsection object for MostPopular*/,
+                //resultsItemOfMostPopular.getTitle(),
+                //publishedDateAdaptedForArticlesFormat
+        );
     }
 }

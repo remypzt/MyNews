@@ -40,6 +40,8 @@ public class MostPopularCalls
                 callbacks.onResponse(response.body());
             }
 
+            // Most popular displaying doesn't work cause :
+            //com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_ARRAY but was STRING at line 1 column 2715 path $.results[1].per_facet
             @Override
             public void onFailure(Call<ResponseOfMostPopular> call, Throwable t)
             {
