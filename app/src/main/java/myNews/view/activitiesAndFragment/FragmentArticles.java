@@ -30,20 +30,16 @@ import myNews.viewmodel.ViewModelMyNews;
 
 public class FragmentArticles extends BaseFragment
 {
+    private static String section;
+    private static String query;
+    private static String filter;
     // FOR DESIGN
     @BindView(R.id.fragment_main_recycler_view)
     RecyclerView recyclerView; // 1 - Declare RecyclerView
-
     //FOR DATA
     // 2 - Declare list of Articles & Adapter
     private List<Articles> articles;
     private ArticlesAdapter adapter;
-    private static String section;
-    private static String query;
-
-
-    private static String filter;
-
     private ViewModelMyNews viewModelMyNews;
     private int position;
     // = new myNews.viewmodel.ViewModelMyNews()
