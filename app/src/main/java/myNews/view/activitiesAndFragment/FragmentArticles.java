@@ -17,10 +17,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import myNews.data.repositories.model.Articles;
+import myNews.data.service.realAPI.mostPopular.MostPopularCalls;
+import myNews.data.service.realAPI.mostPopular.mostPopularPOJO.ResponseOfMostPopular;
 import myNews.data.service.realAPI.topStories.TopStoriesCalls;
-import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResponseTopStories;
+import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResponseOfTopStories;
 import myNews.myNews.R;
-import myNews.others.Utils;
+import myNews.others.utils.UtilsForMostPopular;
+import myNews.others.utils.UtilsForTopStories;
 import myNews.view.adaptater.ArticlesAdapter;
 import myNews.view.base.BaseFragment;
 import myNews.viewmodel.ViewModelMyNews;
@@ -36,6 +39,10 @@ public class FragmentArticles extends BaseFragment
     private List<Articles> articles;
     private ArticlesAdapter adapter;
     private static String section;
+    private static String query;
+
+
+    private static String filter;
 
     private ViewModelMyNews viewModelMyNews;
     private int position;
@@ -45,6 +52,17 @@ public class FragmentArticles extends BaseFragment
     {
         FragmentArticles.section = section;
     }
+
+    public static void setQuery(String query)
+    {
+        FragmentArticles.query = query;
+    }
+
+    public static void setFilter(String filter)
+    {
+        FragmentArticles.filter = filter;
+    }
+
     /* private ArticlesRepository articlesRepository;*/
 
     public static FragmentArticles newInstance(int position)
@@ -92,10 +110,10 @@ public class FragmentArticles extends BaseFragment
         TopStoriesCalls.fetchTopStoriesResponseArticles(new TopStoriesCalls.Callbacks()
         {
             @Override
-            public void onResponse(@Nullable ResponseTopStories articles)
+            public void onResponse(@Nullable ResponseOfTopStories articles)
             {
                 Log.d("Test", "onResponse");
-                List<Articles> articlesList = Utils.generateArticlesFromTopStories(articles);
+                List<Articles> articlesList = UtilsForTopStories.generateArticlesFromTopStories(articles);
                 updateList(articlesList);
             }
 
@@ -108,6 +126,48 @@ public class FragmentArticles extends BaseFragment
         }, section);
     }
 
+    private void callArticlesFromMostPopular()
+    {
+        MostPopularCalls.fetchMostPopularResponseArticles(new MostPopularCalls.Callbacks()
+        {
+            @Override
+            public void onResponse(@Nullable ResponseOfMostPopular articles)
+            {
+                Log.d("Test", "onResponse");
+                List<Articles> articlesList = UtilsForMostPopular.generateArticlesFromMostPopular(articles);
+                updateList(articlesList);
+            }
+
+
+            @Override
+            public void onFailure()
+            {
+                Log.d("Test", "onFailure");
+            }
+        }, "");
+    }
+
+    /*private void callArticlesFromArticleSearch()
+    {
+        ArticleSearchCalls.fetchArticleSearchResponseArticles(new ArticleSearchCalls.Callbacks()
+        {
+            @Override
+            public void onResponse(@Nullable ResponseOfArticleSearch articles)
+            {
+                Log.d("Test", "onResponse");
+                List<Articles> articlesList = UtilsForArticleSearch.generateArticlesFromArticleSearch(articles);
+                updateList(articlesList);
+            }
+
+
+            @Override
+            public void onFailure()
+            {
+                Log.d("Test", "onFailure");
+            }
+        }, query, filter);
+    }*/
+
 
     // -----------------
     // CONFIGURATION
@@ -119,8 +179,8 @@ public class FragmentArticles extends BaseFragment
         // 3.1 - Reset list
         this.articles = new ArrayList<>();
 
-        /* this part of code (commented) was for testing by plain text way the recyclerView*/
-        /*Articles test = new Articles("test");
+        /* this part of code (commented) was for testing by plain text way the recyclerView
+        Articles test = new Articles("test");
         this.articles.add(test);*/
 
         // 3.2 - Create adapter passing the list of articles

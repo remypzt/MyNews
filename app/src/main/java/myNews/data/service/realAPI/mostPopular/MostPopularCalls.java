@@ -1,21 +1,21 @@
-package myNews.data.service.realAPI.topStories;
+package myNews.data.service.realAPI.mostPopular;
 
 import androidx.annotation.Nullable;
 
 import myNews.data.service.realAPI.NytApiInterfaceService;
-import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResponseOfTopStories;
+import myNews.data.service.realAPI.mostPopular.mostPopularPOJO.ResponseOfMostPopular;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by Remy Pouzet on 05/12/2019.
+ * Created by Remy Pouzet on 16/12/2019.
  */
-public class TopStoriesCalls
+public class MostPopularCalls
 {
 
     // 2 - Public method to start fetching Articles
-    public static void fetchTopStoriesResponseArticles(Callbacks callbacks, String section)
+    public static void fetchMostPopularResponseArticles(MostPopularCalls.Callbacks callbacks, String nothing)
     {
 
         // 2.1 - Create a weak reference to callback (avoid memory leaks)
@@ -25,23 +25,23 @@ public class TopStoriesCalls
         NytApiInterfaceService nytapiInterfaceService = NytApiInterfaceService.retrofit.create(NytApiInterfaceService.class);
 
         // 2.3 - Create the call on NYT API
-        //TODO maybe there is a mistake about getResponseOfTopStories
+        //TODO maybe there is a mistake about getResponseOfMostPopular
 
-        Call<ResponseOfTopStories> call = nytapiInterfaceService.getResponseOfTopStories(section);
+        Call<ResponseOfMostPopular> call = nytapiInterfaceService.getResponseOfMostPopular(nothing);
 
         // 2.4 - Start the call
-        call.enqueue(new Callback<ResponseOfTopStories>()
+        call.enqueue(new Callback<ResponseOfMostPopular>()
         {
 
             @Override
-            public void onResponse(Call<ResponseOfTopStories> call, Response<ResponseOfTopStories> response)
+            public void onResponse(Call<ResponseOfMostPopular> call, Response<ResponseOfMostPopular> response)
             {
                 // 2.5 - Call the proper callback used in controller (MainFragment)
                 callbacks.onResponse(response.body());
             }
 
             @Override
-            public void onFailure(Call<ResponseOfTopStories> call, Throwable t)
+            public void onFailure(Call<ResponseOfMostPopular> call, Throwable t)
             {
                 // 2.5 - Call the proper callback used in controller (MainFragment)
                 callbacks.onFailure();
@@ -52,7 +52,7 @@ public class TopStoriesCalls
     // 1 - Creating a callback
     public interface Callbacks
     {
-        void onResponse(@Nullable ResponseOfTopStories articles);
+        void onResponse(@Nullable ResponseOfMostPopular articles);
 
 
         void onFailure();

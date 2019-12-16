@@ -1,4 +1,4 @@
-package myNews.others;
+package myNews.others.utils;
 
 import android.annotation.SuppressLint;
 
@@ -10,25 +10,25 @@ import java.util.Date;
 import java.util.List;
 
 import myNews.data.repositories.model.Articles;
-import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResponseTopStories;
-import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResultsItem;
+import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResponseOfTopStories;
+import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResultsItemOfTopStories;
 import myNews.myNews.R;
 
 
 /**
  * Created by Remy Pouzet on 09/12/2019.
  */
-public class Utils
+public class UtilsForTopStories
 {
     private static String publishedDateAdaptedForArticlesFormat;
 
 
-    public static List<Articles> generateArticlesFromTopStories(ResponseTopStories responseTopStories)
+    public static List<Articles> generateArticlesFromTopStories(ResponseOfTopStories responseOfTopStories)
     {
         List<Articles> articles = new ArrayList<>();
-        if (responseTopStories != null)
+        if (responseOfTopStories != null)
         {
-            List<ResultsItem> resultsTopStories = responseTopStories.getResults();
+            List<ResultsItemOfTopStories> resultsTopStories = responseOfTopStories.getResults();
 
             for (int x = 0; x <= resultsTopStories.size() - 1; x++)
                 articles.add(addArticleFromTopStories(resultsTopStories.get(x)));
@@ -37,16 +37,16 @@ public class Utils
         return articles;
     }
 
-    private static Articles addArticleFromTopStories(ResultsItem resultsItem)
+    private static Articles addArticleFromTopStories(ResultsItemOfTopStories resultsItemOfTopStories)
     {
-        String multimediaUrl = resultsItem.getMultimedia().size() != 0 ? resultsItem.getMultimedia().get(0).getUrl() : "";
+        String multimediaUrl = resultsItemOfTopStories.getMultimedia().size() != 0 ? resultsItemOfTopStories.getMultimedia().get(0).getUrl() : "";
 
         @SuppressLint("SimpleDateFormat") SimpleDateFormat publishedDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
         // Why publishedDateInDateFormat is null ???
         Date publishedDateInDateFormat;
         try
         {
-            publishedDateInDateFormat = publishedDate.parse(resultsItem.getPublishedDate());
+            publishedDateInDateFormat = publishedDate.parse(resultsItemOfTopStories.getPublishedDate());
             @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             assert publishedDateInDateFormat != null;
             publishedDateAdaptedForArticlesFormat = dateFormat.format(publishedDateInDateFormat);
@@ -57,8 +57,8 @@ public class Utils
         }
 
 
-        return new Articles(R.drawable.test, multimediaUrl, resultsItem.getSection(),
-                resultsItem.getSubsection(), resultsItem.getTitle(), publishedDateAdaptedForArticlesFormat);
+        return new Articles(R.drawable.test, multimediaUrl, resultsItemOfTopStories.getSection(),
+                resultsItemOfTopStories.getSubsection(), resultsItemOfTopStories.getTitle(), publishedDateAdaptedForArticlesFormat);
     }
 }
 

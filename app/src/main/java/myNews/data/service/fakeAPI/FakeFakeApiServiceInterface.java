@@ -1,10 +1,10 @@
-package myNews.data.service.FakeAPI;
+package myNews.data.service.fakeAPI;
 
 import java.util.List;
 
 import myNews.data.repositories.model.Articles;
 
-import static myNews.data.service.FakeAPI.FakeApiServiceGenerator.generateArticles;
+import static myNews.data.service.fakeAPI.FakeApiServiceGenerator.generateArticles;
 
 /**
  * Created by Remy Pouzet on 25/11/2019.

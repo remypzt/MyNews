@@ -7,7 +7,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
-public class ResponseTopStories
+public class ResponseOfTopStories
 {
 
     @SerializedName("copyright")
@@ -20,7 +20,7 @@ public class ResponseTopStories
     private String section;
 
     @SerializedName("results")
-    private List<ResultsItem> results;
+    private List<ResultsItemOfTopStories> results;
 
     @SerializedName("num_results")
     private int numResults;
@@ -58,12 +58,12 @@ public class ResponseTopStories
         this.section = section;
     }
 
-    public List<ResultsItem> getResults()
+    public List<ResultsItemOfTopStories> getResults()
     {
         return results;
     }
 
-    public void setResults(List<ResultsItem> results)
+    public void setResults(List<ResultsItemOfTopStories> results)
     {
         this.results = results;
     }
@@ -92,7 +92,7 @@ public class ResponseTopStories
     public String toString()
     {
         return
-                "ResponseTopStories{" +
+                "ResponseOfTopStories{" +
                         "copyright = '" + copyright + '\'' +
                         ",last_updated = '" + lastUpdated + '\'' +
                         ",section = '" + section + '\'' +

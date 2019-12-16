@@ -1,11 +1,11 @@
-package myNews.data.service.FakeAPI;
+package myNews.data.service.fakeAPI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import myNews.data.repositories.model.Articles;
-import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResultsItem;
+import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResultsItemOfTopStories;
 import myNews.myNews.R;
 
 
@@ -14,7 +14,7 @@ import myNews.myNews.R;
  */
 class FakeApiServiceGenerator
 {
-    private static String title = new ResultsItem().getTitle();
+    private static String title = new ResultsItemOfTopStories().getTitle();
 
     private static List<Articles> FAKE_ARTICLES = Arrays.asList(
             new Articles(R.drawable.test,

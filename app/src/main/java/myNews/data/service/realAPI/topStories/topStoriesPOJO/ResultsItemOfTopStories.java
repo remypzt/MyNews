@@ -8,7 +8,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
-public class ResultsItem
+public class ResultsItemOfTopStories
 {
 
     @SerializedName("per_facet")
@@ -45,7 +45,7 @@ public class ResultsItem
     private String materialTypeFacet;
 
     @SerializedName("multimedia")
-    private List<MultimediaItem> multimedia;
+    private List<MultimediaItemOfTopStories> multimedia;
 
     @SerializedName("geo_facet")
     private List<Object> geoFacet;
@@ -175,12 +175,12 @@ public class ResultsItem
         this.materialTypeFacet = materialTypeFacet;
     }
 
-    public List<MultimediaItem> getMultimedia()
+    public List<MultimediaItemOfTopStories> getMultimedia()
     {
         return multimedia;
     }
 
-    public void setMultimedia(List<MultimediaItem> multimedia)
+    public void setMultimedia(List<MultimediaItemOfTopStories> multimedia)
     {
         this.multimedia = multimedia;
     }
@@ -249,7 +249,7 @@ public class ResultsItem
     public String toString()
     {
         return
-                "ResultsItem{" +
+                "ResultsItemOfTopStories{" +
                         "per_facet = '" + perFacet + '\'' +
                         ",subsection = '" + subsection + '\'' +
                         ",item_type = '" + itemType + '\'' +

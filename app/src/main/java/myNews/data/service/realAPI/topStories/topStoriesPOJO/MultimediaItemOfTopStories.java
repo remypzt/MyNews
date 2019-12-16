@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
-public class MultimediaItem
+public class MultimediaItemOfTopStories
 {
 
     @SerializedName("copyright")
@@ -117,7 +117,7 @@ public class MultimediaItem
     public String toString()
     {
         return
-                "MultimediaItem{" +
+                "MultimediaItemOfTopStories{" +
                         "copyright = '" + copyright + '\'' +
                         ",subtype = '" + subtype + '\'' +
                         ",format = '" + format + '\'' +

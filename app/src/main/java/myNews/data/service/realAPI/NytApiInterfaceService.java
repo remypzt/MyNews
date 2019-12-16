@@ -1,6 +1,8 @@
 package myNews.data.service.realAPI;
 
-import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResponseTopStories;
+import myNews.data.service.realAPI.articleSearch.articleSearchPOJO.ResponseOfArticleSearch;
+import myNews.data.service.realAPI.mostPopular.mostPopularPOJO.ResponseOfMostPopular;
+import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResponseOfTopStories;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -22,6 +24,12 @@ public interface NytApiInterfaceService
             .build();
 
     @GET("topstories/v2/{section}.json?" + API_KEY)
-    Call<ResponseTopStories> getFollowing(@Path("section") String section);
+    Call<ResponseOfTopStories> getResponseOfTopStories(@Path("section") String section);
+
+    @GET("mostpopular/v2/viewed/7.json?" + API_KEY)
+    Call<ResponseOfMostPopular> getResponseOfMostPopular(@Path("") String nothing);
+
+    @GET("search/v2/articlesearch.json?q={query}&fq={filter}" + API_KEY)
+    Call<ResponseOfArticleSearch> getResponseOfArticleSearch(@Path("query") String query, @Path("filter") String filter);
 
 }
