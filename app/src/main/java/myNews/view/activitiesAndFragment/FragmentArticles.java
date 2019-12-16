@@ -86,7 +86,7 @@ public class FragmentArticles extends BaseFragment
         ButterKnife.bind(this, view);
         viewModelMyNews.displayingAppropriateListOfArticles();
         this.configureRecyclerView(); // - 4 Call during UI creation
-        this.callArticlesFromTopStories();
+        this.callArticlesFromMostPopular();
         return view;
     }
 
@@ -144,7 +144,7 @@ public class FragmentArticles extends BaseFragment
             {
                 Log.d("Test", "onFailure");
             }
-        }, "");
+        });
     }
 
     /*private void callArticlesFromArticleSearch()

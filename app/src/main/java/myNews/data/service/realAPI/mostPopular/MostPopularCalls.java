@@ -15,7 +15,7 @@ public class MostPopularCalls
 {
 
     // 2 - Public method to start fetching Articles
-    public static void fetchMostPopularResponseArticles(MostPopularCalls.Callbacks callbacks, String nothing)
+    public static void fetchMostPopularResponseArticles(MostPopularCalls.Callbacks callbacks)
     {
 
         // 2.1 - Create a weak reference to callback (avoid memory leaks)
@@ -27,7 +27,7 @@ public class MostPopularCalls
         // 2.3 - Create the call on NYT API
         //TODO maybe there is a mistake about getResponseOfMostPopular
 
-        Call<ResponseOfMostPopular> call = nytapiInterfaceService.getResponseOfMostPopular(nothing);
+        Call<ResponseOfMostPopular> call = nytapiInterfaceService.getResponseOfMostPopular();
 
         // 2.4 - Start the call
         call.enqueue(new Callback<ResponseOfMostPopular>()

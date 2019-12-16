@@ -27,7 +27,7 @@ public interface NytApiInterfaceService
     Call<ResponseOfTopStories> getResponseOfTopStories(@Path("section") String section);
 
     @GET("mostpopular/v2/viewed/7.json?" + API_KEY)
-    Call<ResponseOfMostPopular> getResponseOfMostPopular(@Path("") String nothing);
+    Call<ResponseOfMostPopular> getResponseOfMostPopular();
 
     @GET("search/v2/articlesearch.json?q={query}&fq={filter}" + API_KEY)
     Call<ResponseOfArticleSearch> getResponseOfArticleSearch(@Path("query") String query, @Path("filter") String filter);
