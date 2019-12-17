@@ -8,11 +8,11 @@ import myNews.data.service.fakeAPI.FakeApiServiceInterface;
 /**
  * Created by Remy Pouzet on 25/11/2019.
  */
-public class ArticlesRepository
+public class FakeApiRepository
 {
     private final FakeApiServiceInterface mFakeApiServiceInterface;
 
-    public ArticlesRepository(FakeApiServiceInterface fakeApiServiceInterface)
+    public FakeApiRepository(FakeApiServiceInterface fakeApiServiceInterface)
     {
         this.mFakeApiServiceInterface = fakeApiServiceInterface;
     }

@@ -55,7 +55,6 @@ public class UtilsForTopStories
             e.printStackTrace();
         }
 
-
         return new Articles(R.drawable.test, multimediaUrl, resultsItemOfTopStories.getSection(),
                 resultsItemOfTopStories.getSubsection(), resultsItemOfTopStories.getTitle(), publishedDateAdaptedForArticlesFormat);
     }

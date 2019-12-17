@@ -1,7 +1,6 @@
 package myNews.view.activitiesAndFragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,22 +16,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import myNews.data.repositories.model.Articles;
-import myNews.data.service.realAPI.mostPopular.MostPopularCalls;
-import myNews.data.service.realAPI.mostPopular.mostPopularPOJO.ResponseOfMostPopular;
-import myNews.data.service.realAPI.topStories.TopStoriesCalls;
-import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResponseOfTopStories;
 import myNews.myNews.R;
-import myNews.others.utils.UtilsForMostPopular;
-import myNews.others.utils.UtilsForTopStories;
 import myNews.view.adaptater.ArticlesAdapter;
 import myNews.view.base.BaseFragment;
 import myNews.viewmodel.ViewModelMyNews;
 
 public class FragmentArticles extends BaseFragment
 {
-    private static String section;
-    private static String query;
-    private static String filter;
+
     // FOR DESIGN
     @BindView(R.id.fragment_main_recycler_view)
     RecyclerView recyclerView; // 1 - Declare RecyclerView
@@ -44,22 +35,8 @@ public class FragmentArticles extends BaseFragment
     private int position;
     // = new myNews.viewmodel.ViewModelMyNews()
 
-    public static void setSection(String section)
-    {
-        FragmentArticles.section = section;
-    }
 
-    public static void setQuery(String query)
-    {
-        FragmentArticles.query = query;
-    }
-
-    public static void setFilter(String filter)
-    {
-        FragmentArticles.filter = filter;
-    }
-
-    /* private ArticlesRepository articlesRepository;*/
+    /* private FakeApiRepository mFakeApiRepository;*/
 
     public static FragmentArticles newInstance(int position)
     {
@@ -80,9 +57,9 @@ public class FragmentArticles extends BaseFragment
 
         View view = inflater.inflate(R.layout.fragment_articles_content, container, false);
         ButterKnife.bind(this, view);
-        viewModelMyNews.displayingAppropriateListOfArticles();
+
         this.configureRecyclerView(); // - 4 Call during UI creation
-        this.callArticlesFromMostPopular();
+        //this.callArticlesFromTopStories();
         return view;
     }
 
@@ -101,68 +78,6 @@ public class FragmentArticles extends BaseFragment
 
     }
 
-    private void callArticlesFromTopStories()
-    {
-        TopStoriesCalls.fetchTopStoriesResponseArticles(new TopStoriesCalls.Callbacks()
-        {
-            @Override
-            public void onResponse(@Nullable ResponseOfTopStories articles)
-            {
-                Log.d("Test", "onResponse");
-                List<Articles> articlesList = UtilsForTopStories.generateArticlesFromTopStories(articles);
-                updateList(articlesList);
-            }
-
-
-            @Override
-            public void onFailure()
-            {
-                Log.d("Test", "onFailure");
-            }
-        }, section);
-    }
-
-    private void callArticlesFromMostPopular()
-    {
-        MostPopularCalls.fetchMostPopularResponseArticles(new MostPopularCalls.Callbacks()
-        {
-            @Override
-            public void onResponse(@Nullable ResponseOfMostPopular articles)
-            {
-                Log.d("Test", "onResponse");
-                List<Articles> articlesList = UtilsForMostPopular.generateArticlesFromMostPopular(articles);
-                updateList(articlesList);
-            }
-
-
-            @Override
-            public void onFailure()
-            {
-                Log.d("Test", "onFailure");
-            }
-        });
-    }
-
-    /*private void callArticlesFromArticleSearch()
-    {
-        ArticleSearchCalls.fetchArticleSearchResponseArticles(new ArticleSearchCalls.Callbacks()
-        {
-            @Override
-            public void onResponse(@Nullable ResponseOfArticleSearch articles)
-            {
-                Log.d("Test", "onResponse");
-                List<Articles> articlesList = UtilsForArticleSearch.generateArticlesFromArticleSearch(articles);
-                updateList(articlesList);
-            }
-
-
-            @Override
-            public void onFailure()
-            {
-                Log.d("Test", "onFailure");
-            }
-        }, query, filter);
-    }*/
 
 
     // -----------------
@@ -193,13 +108,13 @@ public class FragmentArticles extends BaseFragment
     // -------------------
 
     //updateListOfArticles still in Fragments cause I must call the adapter and I cannot do it in viewmodel
-    private void updateListOfArticles()
+    public void updateListOfArticles()
     {
-        articles.addAll(articlesRepository.getArticles());
+        articles.addAll(mFakeApiRepository.getArticles());
         adapter.notifyDataSetChanged();
     }
 
-    private void updateList(List<Articles> articlesList)
+    public void updateList(List<Articles> articlesList)
     {
         articles.clear();
         articles.addAll(articlesList);
