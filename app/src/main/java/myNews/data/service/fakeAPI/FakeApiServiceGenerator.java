@@ -12,8 +12,7 @@ import myNews.myNews.R;
 /**
  * Created by Remy Pouzet on 25/11/2019.
  */
-class FakeApiServiceGenerator
-{
+class FakeApiServiceGenerator {
     private static String title = new ResultsItemOfTopStories().getTitle();
 
     private static List<Articles> FAKE_ARTICLES = Arrays.asList(

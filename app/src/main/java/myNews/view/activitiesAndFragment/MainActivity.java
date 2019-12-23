@@ -26,14 +26,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.toolbar) public Toolbar toolbar;
     @BindView(R.id.nav_view) public  NavigationView navigationView;
 
-    private String[] pageTitle = {"Top Stories", "Most Popular", "Business"};
+    private String[] pageTitle = {"Top Stories", "Most Popular", "Technology"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         setSupportActionBar(toolbar);
 
         //create default navigation drawer toggle
@@ -62,8 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         //change ViewPager page when tab selected
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
-        {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
@@ -85,8 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch (id)
-        {
+        switch (id) {
             case R.id.fr1:
                 viewPager.setCurrentItem(0);
                 break;
@@ -100,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 finish();
                 break;
         }
-
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

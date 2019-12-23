@@ -9,7 +9,6 @@ import javax.annotation.Generated;
 @Generated("com.robohorse.robopojogenerator")
 public class BylineOfArticleSearch
 {
-
     @SerializedName("original")
     private String original;
 
@@ -50,8 +49,7 @@ public class BylineOfArticleSearch
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return
                 "BylineOfArticleSearch{" +
                         "original = '" + original + '\'' +

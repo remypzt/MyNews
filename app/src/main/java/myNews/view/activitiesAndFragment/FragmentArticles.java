@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,28 +19,20 @@ import butterknife.ButterKnife;
 import myNews.data.repositories.model.Articles;
 import myNews.myNews.R;
 import myNews.view.adaptater.ArticlesAdapter;
-import myNews.view.base.BaseFragment;
 import myNews.viewmodel.ViewModelMyNews;
 
-public class FragmentArticles extends BaseFragment
-{
-
+public class FragmentArticles extends Fragment {
     // FOR DESIGN
     @BindView(R.id.fragment_main_recycler_view)
-    RecyclerView recyclerView; // 1 - Declare RecyclerView
+    RecyclerView recyclerView;
+
     //FOR DATA
-    // 2 - Declare list of Articles & Adapter
     private List<Articles> articles;
     private ArticlesAdapter adapter;
     private ViewModelMyNews viewModelMyNews;
     private int position;
-    // = new myNews.viewmodel.ViewModelMyNews()
 
-
-    /* private FakeApiRepository mFakeApiRepository;*/
-
-    public static FragmentArticles newInstance(int position)
-    {
+    public static FragmentArticles newInstance(int position) {
         FragmentArticles fragment = new FragmentArticles();
         Bundle bundle = new Bundle();
         bundle.putInt("position", position);
@@ -49,44 +42,30 @@ public class FragmentArticles extends BaseFragment
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         assert getArguments() != null;
         this.position = getArguments().getInt("position");
-        viewModelMyNews = new ViewModelMyNews(position);
-
         View view = inflater.inflate(R.layout.fragment_articles_content, container, false);
         ButterKnife.bind(this, view);
-
-        this.configureRecyclerView(); // - 4 Call during UI creation
-        //this.callArticlesFromTopStories();
+        this.configureRecyclerView();
         return view;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
-    {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        updateListOfArticles();
+        viewModelMyNews = new ViewModelMyNews(position);
+        viewModelMyNews.getNews().observe(this, this::updateList);
     }
-
 
     @Override
-    public void onDestroy()
-    {
+    public void onDestroy() {
         super.onDestroy();
-
     }
 
-
-
-    // -----------------
     // CONFIGURATION
-    // -----------------
-
     // 3 - Configure RecyclerView, Adapter, LayoutManager & glue it together
-    private void configureRecyclerView()
-    {
+    private void configureRecyclerView() {
         // 3.1 - Reset list
         this.articles = new ArrayList<>();
 
@@ -100,22 +79,11 @@ public class FragmentArticles extends BaseFragment
         this.recyclerView.setAdapter(this.adapter);
         // 3.4 - Set layout manager to position the items
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
     }
 
-    // -------------------
     // UPDATE UI
-    // -------------------
-
     //updateListOfArticles still in Fragments cause I must call the adapter and I cannot do it in viewmodel
-    public void updateListOfArticles()
-    {
-        articles.addAll(mFakeApiRepository.getArticles());
-        adapter.notifyDataSetChanged();
-    }
-
-    public void updateList(List<Articles> articlesList)
-    {
+    public void updateList(List<Articles> articlesList) {
         articles.clear();
         articles.addAll(articlesList);
         adapter.notifyDataSetChanged();

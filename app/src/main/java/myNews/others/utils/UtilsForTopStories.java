@@ -14,49 +14,36 @@ import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResponseOfTopStorie
 import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResultsItemOfTopStories;
 import myNews.myNews.R;
 
-
 /**
  * Created by Remy Pouzet on 09/12/2019.
  */
-public class UtilsForTopStories
-{
+public class UtilsForTopStories {
     private static String publishedDateAdaptedForArticlesFormat;
 
-
-    public static List<Articles> generateArticlesFromTopStories(ResponseOfTopStories responseOfTopStories)
-    {
+    public static List<Articles> generateArticlesFromTopStories(ResponseOfTopStories responseOfTopStories) {
         List<Articles> topStoriesArticles = new ArrayList<>();
-        if (responseOfTopStories != null)
-        {
+        if (responseOfTopStories != null) {
             List<ResultsItemOfTopStories> resultsTopStories = responseOfTopStories.getResults();
-
             for (int x = 0; x <= resultsTopStories.size() - 1; x++)
                 topStoriesArticles.add(addArticleFromTopStories(resultsTopStories.get(x)));
-
         }
         return topStoriesArticles;
     }
 
-    private static Articles addArticleFromTopStories(ResultsItemOfTopStories resultsItemOfTopStories)
-    {
+    private static Articles addArticleFromTopStories(ResultsItemOfTopStories resultsItemOfTopStories) {
         String multimediaUrl = resultsItemOfTopStories.getMultimedia().size() != 0 ? resultsItemOfTopStories.getMultimedia().get(0).getUrl() : "";
-
         @SuppressLint("SimpleDateFormat") SimpleDateFormat publishedDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
         Date publishedDateInDateFormat;
-        try
-        {
+        try {
             publishedDateInDateFormat = publishedDate.parse(resultsItemOfTopStories.getPublishedDate());
             @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             assert publishedDateInDateFormat != null;
             publishedDateAdaptedForArticlesFormat = dateFormat.format(publishedDateInDateFormat);
             System.out.println(publishedDateAdaptedForArticlesFormat);
-        } catch (ParseException e)
-        {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        return new Articles(R.drawable.test, multimediaUrl, resultsItemOfTopStories.getSection(),
-                resultsItemOfTopStories.getSubsection(), resultsItemOfTopStories.getTitle(), publishedDateAdaptedForArticlesFormat);
+        return new Articles(R.drawable.test, multimediaUrl, resultsItemOfTopStories.getSection(), resultsItemOfTopStories.getSubsection(), resultsItemOfTopStories.getTitle(), publishedDateAdaptedForArticlesFormat);
     }
 }
 

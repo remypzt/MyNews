@@ -20,7 +20,6 @@ public class Articles
         mUnderCategory = underCategory;
         mTitle = title;
         mDate = date;
-
     }
 
     public int getDrawableImage()

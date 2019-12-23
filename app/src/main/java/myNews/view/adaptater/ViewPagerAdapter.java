@@ -8,9 +8,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import myNews.view.activitiesAndFragment.FragmentArticles;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
-
-
-
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -24,7 +21,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
             return FragmentArticles.newInstance(position);
         } else return FragmentArticles.newInstance(position);
     }
-
 
     //= there is 3 tabs
     @Override

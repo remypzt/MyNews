@@ -20,8 +20,7 @@ import myNews.myNews.R;
  */
 
 
-class ArticlesViewHolder extends RecyclerView.ViewHolder
-{
+class ArticlesViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.Article_picture)
     ImageView mPicture;
     @BindView(R.id.Article_category)
@@ -33,27 +32,21 @@ class ArticlesViewHolder extends RecyclerView.ViewHolder
     @BindView(R.id.Article_date)
     TextView mDate;
 
-
-    ArticlesViewHolder(View itemView)
-    {
+    ArticlesViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         }
 
-
     @SuppressLint("SetTextI18n")
-    void updateWithArticles(Articles articles)
-    {
+    void updateWithArticles(Articles articles) {
         Glide.with(mPicture.getContext()).load(articles.getUrlImage()).placeholder(articles.getDrawableImage()).into(mPicture);
-        if (articles.getUnderCategory().length() >= 1)
-        {
+        if (articles.getUnderCategory().length() >= 1) {
             this.mCategory.setText(articles.getCategory() + " " + ">" + " ");
-        } else
-        {
+        } else {
             this.mCategory.setText(articles.getCategory());
         }
         this.mUnderCategory.setText(articles.getUnderCategory());
         this.mDate.setText(articles.getDate());
         this.mTitle.setText(articles.getTitle());
     }
-        }
+}

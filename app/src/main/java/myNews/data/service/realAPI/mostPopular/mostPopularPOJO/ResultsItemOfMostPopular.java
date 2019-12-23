@@ -10,11 +10,6 @@ import javax.annotation.Generated;
 public class ResultsItemOfMostPopular
 {
 
-    @SerializedName("per_facet")
-    private List<String> perFacet;
-
-    @SerializedName("org_facet")
-    private List<String> orgFacet;
 
     @SerializedName("column")
     private Object column;
@@ -40,8 +35,6 @@ public class ResultsItemOfMostPopular
     @SerializedName("title")
     private String title;
 
-    @SerializedName("des_facet")
-    private List<String> desFacet;
 
     @SerializedName("uri")
     private String uri;
@@ -52,8 +45,6 @@ public class ResultsItemOfMostPopular
     @SerializedName("adx_keywords")
     private String adxKeywords;
 
-    @SerializedName("geo_facet")
-    private List<String> geoFacet;
 
     @SerializedName("id")
     private long id;
@@ -67,25 +58,6 @@ public class ResultsItemOfMostPopular
     @SerializedName("views")
     private int views;
 
-    public List<String> getPerFacet()
-    {
-        return perFacet;
-    }
-
-    public void setPerFacet(List<String> perFacet)
-    {
-        this.perFacet = perFacet;
-    }
-
-    public List<String> getOrgFacet()
-    {
-        return orgFacet;
-    }
-
-    public void setOrgFacet(List<String> orgFacet)
-    {
-        this.orgFacet = orgFacet;
-    }
 
     public Object getColumn()
     {
@@ -167,15 +139,7 @@ public class ResultsItemOfMostPopular
         this.title = title;
     }
 
-    public List<String> getDesFacet()
-    {
-        return desFacet;
-    }
 
-    public void setDesFacet(List<String> desFacet)
-    {
-        this.desFacet = desFacet;
-    }
 
     public String getUri()
     {
@@ -207,15 +171,7 @@ public class ResultsItemOfMostPopular
         this.adxKeywords = adxKeywords;
     }
 
-    public List<String> getGeoFacet()
-    {
-        return geoFacet;
-    }
 
-    public void setGeoFacet(List<String> geoFacet)
-    {
-        this.geoFacet = geoFacet;
-    }
 
     public long getId()
     {
@@ -262,8 +218,7 @@ public class ResultsItemOfMostPopular
     {
         return
                 "ResultsItemOfTopStories{" +
-                        "per_facet = '" + perFacet + '\'' +
-                        ",org_facet = '" + orgFacet + '\'' +
+
                         ",column = '" + column + '\'' +
                         ",section = '" + section + '\'' +
                         ",abstract = '" + jsonMemberAbstract + '\'' +
@@ -272,11 +227,11 @@ public class ResultsItemOfMostPopular
                         ",media = '" + media + '\'' +
                         ",type = '" + type + '\'' +
                         ",title = '" + title + '\'' +
-                        ",des_facet = '" + desFacet + '\'' +
+
                         ",uri = '" + uri + '\'' +
                         ",url = '" + url + '\'' +
                         ",adx_keywords = '" + adxKeywords + '\'' +
-                        ",geo_facet = '" + geoFacet + '\'' +
+
                         ",id = '" + id + '\'' +
                         ",byline = '" + byline + '\'' +
                         ",published_date = '" + publishedDate + '\'' +
