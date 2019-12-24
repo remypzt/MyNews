@@ -15,7 +15,6 @@
         android:icon="@android:drawable/ic_menu_set_as"
         android:title="@string/tab3_name" />
 
-
     <item
         android:id="@+id/close"
         android:icon="@android:drawable/ic_menu_info_details"
