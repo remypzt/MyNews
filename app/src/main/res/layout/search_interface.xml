@@ -5,12 +5,12 @@
     android:orientation="vertical">
 
     <Spinner
-        android:id="@+id/spinner3"
+        android:id="@+id/select_date_of_beginning"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/select_date_of_ending"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -24,5 +24,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Button" />
+
+    <TextView
+        android:id="@+id/datePickerValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

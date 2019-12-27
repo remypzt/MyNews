@@ -5,36 +5,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <com.yalantis.jellytoolbar.widget.JellyToolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="?attr/colorPrimaryDark"
         android:minHeight="?attr/actionBarSize"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        app:cancelIcon="@drawable/ic_close"
-        app:endColor="@color/colorEnd"
-        app:icon="@drawable/ic_search"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:menu="@menu/toolbar"
-        app:startColor="@color/colorStart"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+        app:titleTextColor="@android:color/white" />
 
-        app:title="My News"
-
-        app:titleTextColor="@android:color/white">
-
-        <EditText
-            android:id="@+id/myEditText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#00000000" />
-    </com.yalantis.jellytoolbar.widget.JellyToolbar>
-    <!-- this is a comment
-app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
- android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-
-        -->
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
