@@ -1,5 +1,6 @@
 package myNews.view.activitiesAndFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.toolbar)
     public Toolbar toolbar;
     @BindView(R.id.nav_view) public  NavigationView navigationView;
+
 
     private String[] pageTitle = {"Top Stories", "Most Popular", "Technology"};
 
@@ -121,4 +123,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.menuNotifications) {
+            Intent SetNotificationsActivity = new Intent(MainActivity.this, SetNotificationsActivity.class);
+            startActivity(SetNotificationsActivity);
+        }
+        if (id == R.id.action_search) {
+            Intent SearchActivity = new Intent(MainActivity.this, SearchActivity.class);
+            startActivity(SearchActivity);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
+

@@ -8,6 +8,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <activity android:name="myNews.view.activitiesAndFragment.SearchActivity"></activity>
+        <activity android:name="myNews.view.activitiesAndFragment.SetNotificationsActivity"></activity>
         <activity android:name="myNews.view.activitiesAndFragment.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

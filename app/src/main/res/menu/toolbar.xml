@@ -12,7 +12,7 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/menuAbout"
+        android:id="@+id/menuNotifications"
         android:title="Notification" />
 
     <item

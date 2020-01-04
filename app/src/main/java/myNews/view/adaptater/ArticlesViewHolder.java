@@ -1,6 +1,7 @@
 package myNews.view.adaptater;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,16 +33,19 @@ class ArticlesViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.Article_date)
     TextView mDate;
 
+    private Context mContext;
+
     ArticlesViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+        mContext = itemView.getContext();
         }
 
     @SuppressLint("SetTextI18n")
     void updateWithArticles(Articles articles) {
-        if (mPicture.getContext() != null) {
-            Glide.with(mPicture.getContext()).load(articles.getUrlImage()).placeholder(articles.getDrawableImage()).into(mPicture);
-        }
+
+        Glide.with(this.mContext).load(articles.getUrlImage()).placeholder(articles.getDrawableImage()).into(mPicture);
+
         if (articles.getUnderCategory().length() >= 1) {
             this.mCategory.setText(articles.getCategory() + " " + ">" + " ");
         } else {
