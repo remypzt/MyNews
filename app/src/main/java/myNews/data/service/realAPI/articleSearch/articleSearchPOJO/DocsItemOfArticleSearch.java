@@ -7,8 +7,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
-public class DocsItemOfArticleSearch
-{
+public class DocsItemOfArticleSearch {
 
     @SerializedName("snippet")
     private String snippet;
@@ -64,209 +63,152 @@ public class DocsItemOfArticleSearch
     @SerializedName("document_type")
     private String documentType;
 
-    public String getSnippet()
-    {
+    public String getSnippet() {
         return snippet;
     }
 
-    public void setSnippet(String snippet)
-    {
+    public void setSnippet(String snippet) {
         this.snippet = snippet;
     }
 
-    public List<Object> getKeywords()
-    {
+    public List<Object> getKeywords() {
         return keywords;
     }
 
-    public void setKeywords(List<Object> keywords)
-    {
+    public void setKeywords(List<Object> keywords) {
         this.keywords = keywords;
     }
 
-    public String getSectionName()
-    {
+    public String getSectionName() {
         return sectionName;
     }
 
-    public void setSectionName(String sectionName)
-    {
+    public void setSectionName(String sectionName) {
         this.sectionName = sectionName;
     }
 
-    public String getJsonMemberAbstract()
-    {
+    public String getJsonMemberAbstract() {
         return jsonMemberAbstract;
     }
 
-    public void setJsonMemberAbstract(String jsonMemberAbstract)
-    {
+    public void setJsonMemberAbstract(String jsonMemberAbstract) {
         this.jsonMemberAbstract = jsonMemberAbstract;
     }
 
-    public String getSource()
-    {
+    public String getSource() {
         return source;
     }
 
-    public void setSource(String source)
-    {
+    public void setSource(String source) {
         this.source = source;
     }
 
-    public String getUri()
-    {
+    public String getUri() {
         return uri;
     }
 
-    public void setUri(String uri)
-    {
+    public void setUri(String uri) {
         this.uri = uri;
     }
 
-    public String getNewsDesk()
-    {
+    public String getNewsDesk() {
         return newsDesk;
     }
 
-    public void setNewsDesk(String newsDesk)
-    {
+    public void setNewsDesk(String newsDesk) {
         this.newsDesk = newsDesk;
     }
 
-    public String getPubDate()
-    {
+    public String getPubDate() {
         return pubDate;
     }
 
-    public void setPubDate(String pubDate)
-    {
+    public void setPubDate(String pubDate) {
         this.pubDate = pubDate;
     }
 
-    public List<MultimediaItemOfArticleSearch> getMultimedia()
-    {
+    public List<MultimediaItemOfArticleSearch> getMultimedia() {
         return multimedia;
     }
 
-    public void setMultimedia(List<MultimediaItemOfArticleSearch> multimedia)
-    {
+    public void setMultimedia(List<MultimediaItemOfArticleSearch> multimedia) {
         this.multimedia = multimedia;
     }
 
-    public int getWordCount()
-    {
+    public int getWordCount() {
         return wordCount;
     }
 
-    public void setWordCount(int wordCount)
-    {
+    public void setWordCount(int wordCount) {
         this.wordCount = wordCount;
     }
 
-    public String getLeadParagraph()
-    {
+    public String getLeadParagraph() {
         return leadParagraph;
     }
 
-    public void setLeadParagraph(String leadParagraph)
-    {
+    public void setLeadParagraph(String leadParagraph) {
         this.leadParagraph = leadParagraph;
     }
 
-    public String getTypeOfMaterial()
-    {
+    public String getTypeOfMaterial() {
         return typeOfMaterial;
     }
 
-    public void setTypeOfMaterial(String typeOfMaterial)
-    {
+    public void setTypeOfMaterial(String typeOfMaterial) {
         this.typeOfMaterial = typeOfMaterial;
     }
 
-    public String getWebUrl()
-    {
+    public String getWebUrl() {
         return webUrl;
     }
 
-    public void setWebUrl(String webUrl)
-    {
+    public void setWebUrl(String webUrl) {
         this.webUrl = webUrl;
     }
 
-    public String getId()
-    {
+    public String getId() {
         return id;
     }
 
-    public void setId(String id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getSubsectionName()
-    {
+    public String getSubsectionName() {
         return subsectionName;
     }
 
-    public void setSubsectionName(String subsectionName)
-    {
+    public void setSubsectionName(String subsectionName) {
         this.subsectionName = subsectionName;
     }
 
-    public HeadlineOfArticleSearch getHeadlineOfArticleSearch()
-    {
+    public HeadlineOfArticleSearch getHeadlineOfArticleSearch() {
         return mHeadlineOfArticleSearch;
     }
 
-    public void setHeadlineOfArticleSearch(HeadlineOfArticleSearch headlineOfArticleSearch)
-    {
+    public void setHeadlineOfArticleSearch(HeadlineOfArticleSearch headlineOfArticleSearch) {
         this.mHeadlineOfArticleSearch = headlineOfArticleSearch;
     }
 
-    public BylineOfArticleSearch getBylineOfArticleSearch()
-    {
+    public BylineOfArticleSearch getBylineOfArticleSearch() {
         return mBylineOfArticleSearch;
     }
 
-    public void setBylineOfArticleSearch(BylineOfArticleSearch bylineOfArticleSearch)
-    {
+    public void setBylineOfArticleSearch(BylineOfArticleSearch bylineOfArticleSearch) {
         this.mBylineOfArticleSearch = bylineOfArticleSearch;
     }
 
-    public String getDocumentType()
-    {
+    public String getDocumentType() {
         return documentType;
     }
 
-    public void setDocumentType(String documentType)
-    {
+    public void setDocumentType(String documentType) {
         this.documentType = documentType;
     }
 
     @Override
-    public String toString()
-    {
-        return
-                "DocsItemOfArticleSearch{" +
-                        "snippet = '" + snippet + '\'' +
-                        ",keywords = '" + keywords + '\'' +
-                        ",section_name = '" + sectionName + '\'' +
-                        ",abstract = '" + jsonMemberAbstract + '\'' +
-                        ",source = '" + source + '\'' +
-                        ",uri = '" + uri + '\'' +
-                        ",news_desk = '" + newsDesk + '\'' +
-                        ",pub_date = '" + pubDate + '\'' +
-                        ",multimedia = '" + multimedia + '\'' +
-                        ",word_count = '" + wordCount + '\'' +
-                        ",lead_paragraph = '" + leadParagraph + '\'' +
-                        ",type_of_material = '" + typeOfMaterial + '\'' +
-                        ",web_url = '" + webUrl + '\'' +
-                        ",_id = '" + id + '\'' +
-                        ",subsection_name = '" + subsectionName + '\'' +
-                        ",mHeadlineOfArticleSearch = '" + mHeadlineOfArticleSearch + '\'' +
-                        ",mBylineOfArticleSearch = '" + mBylineOfArticleSearch + '\'' +
-                        ",document_type = '" + documentType + '\'' +
-                        "}";
+    public String toString() {
+        return "DocsItemOfArticleSearch{" + "snippet = '" + snippet + '\'' + ",keywords = '" + keywords + '\'' + ",section_name = '" + sectionName + '\'' + ",abstract = '" + jsonMemberAbstract + '\'' + ",source = '" + source + '\'' + ",uri = '" + uri + '\'' + ",news_desk = '" + newsDesk + '\'' + ",pub_date = '" + pubDate + '\'' + ",multimedia = '" + multimedia + '\'' + ",word_count = '" + wordCount + '\'' + ",lead_paragraph = '" + leadParagraph + '\'' + ",type_of_material = '" + typeOfMaterial + '\'' + ",web_url = '" + webUrl + '\'' + ",_id = '" + id + '\'' + ",subsection_name = '" + subsectionName + '\'' + ",mHeadlineOfArticleSearch = '" + mHeadlineOfArticleSearch + '\'' + ",mBylineOfArticleSearch = '" + mBylineOfArticleSearch + '\'' + ",document_type = '" + documentType + '\'' + "}";
     }
 }

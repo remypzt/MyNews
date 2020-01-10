@@ -7,8 +7,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
-public class ResponseOfMostPopular
-{
+public class ResponseOfMostPopular {
 
     @SerializedName("copyright")
     private String copyright;
@@ -22,55 +21,40 @@ public class ResponseOfMostPopular
     @SerializedName("status")
     private String status;
 
-    public String getCopyright()
-    {
+    public String getCopyright() {
         return copyright;
     }
 
-    public void setCopyright(String copyright)
-    {
+    public void setCopyright(String copyright) {
         this.copyright = copyright;
     }
 
-    public List<ResultsItemOfMostPopular> getResults()
-    {
+    public List<ResultsItemOfMostPopular> getResults() {
         return results;
     }
 
-    public void setResults(List<ResultsItemOfMostPopular> results)
-    {
+    public void setResults(List<ResultsItemOfMostPopular> results) {
         this.results = results;
     }
 
-    public int getNumResults()
-    {
+    public int getNumResults() {
         return numResults;
     }
 
-    public void setNumResults(int numResults)
-    {
+    public void setNumResults(int numResults) {
         this.numResults = numResults;
     }
 
-    public String getStatus()
-    {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status)
-    {
+    public void setStatus(String status) {
         this.status = status;
     }
 
     @Override
-    public String toString()
-    {
-        return
-                "ResponseOfMostPopular{" +
-                        "copyright = '" + copyright + '\'' +
-                        ",results = '" + results + '\'' +
-                        ",num_results = '" + numResults + '\'' +
-                        ",status = '" + status + '\'' +
-                        "}";
+    public String toString() {
+        return "ResponseOfMostPopular{" + "copyright = '" + copyright + '\'' + ",results = '" + results + '\'' + ",num_results = '" + numResults + '\'' + ",status = '" + status + '\'' + "}";
     }
 }

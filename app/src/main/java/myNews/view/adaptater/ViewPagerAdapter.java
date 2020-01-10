@@ -15,7 +15,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        if (position ==0) {
+        if (position == 0) {
             return FragmentArticles.newInstance(position);
         } else if (position == 1) {
             return FragmentArticles.newInstance(position);

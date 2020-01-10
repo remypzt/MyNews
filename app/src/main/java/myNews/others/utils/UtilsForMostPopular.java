@@ -20,7 +20,6 @@ import myNews.myNews.R;
 public class UtilsForMostPopular {
     private static String publishedDateAdaptedForArticlesFormat;
     private static ResultsItemOfMostPopular mediaMetadataItemOfMostPopular;
-    //TODO there is very probably something wrong about the way to get URL of articlePicture
 
     public static List<Articles> generateArticlesFromMostPopular(ResponseOfMostPopular responseOfMostPopular) {
         List<Articles> mostPopularArticles = new ArrayList<>();
@@ -42,12 +41,10 @@ public class UtilsForMostPopular {
             assert publishedDateInDateFormat != null;
             publishedDateAdaptedForArticlesFormat = dateFormat.format(publishedDateInDateFormat);
             System.out.println(publishedDateAdaptedForArticlesFormat);
-        } catch (ParseException e)
-        {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        return new Articles(R.drawable.test, multimediaUrl, resultsItemOfMostPopular.getSection(), ""/*there isn't subsection object for MostPopular*/, resultsItemOfMostPopular.getTitle(), publishedDateAdaptedForArticlesFormat
-        );
+        return new Articles(R.drawable.test, multimediaUrl, resultsItemOfMostPopular.getSection(), ""/*there isn't subsection object for MostPopular*/, resultsItemOfMostPopular.getTitle(), publishedDateAdaptedForArticlesFormat);
     }
 }

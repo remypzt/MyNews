@@ -7,8 +7,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
-public class ResponseOfArticleSearch
-{
+public class ResponseOfArticleSearch {
 
     @SerializedName("copyright")
     private String copyright;
@@ -25,66 +24,48 @@ public class ResponseOfArticleSearch
     @SerializedName("mMetaOfArticleSearch")
     private MetaOfArticleSearch mMetaOfArticleSearch;
 
-    public String getCopyright()
-    {
+    public String getCopyright() {
         return copyright;
     }
 
-    public void setCopyright(String copyright)
-    {
+    public void setCopyright(String copyright) {
         this.copyright = copyright;
     }
 
-    public ResponseOfArticleSearch getResponseOfArticleSearch()
-    {
+    public ResponseOfArticleSearch getResponseOfArticleSearch() {
         return mResponseOfArticleSearch;
     }
 
-    public void setResponseOfArticleSearch(ResponseOfArticleSearch responseOfArticleSearch)
-    {
+    public void setResponseOfArticleSearch(ResponseOfArticleSearch responseOfArticleSearch) {
         this.mResponseOfArticleSearch = responseOfArticleSearch;
     }
 
-    public String getStatus()
-    {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status)
-    {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public List<DocsItemOfArticleSearch> getDocs()
-    {
+    public List<DocsItemOfArticleSearch> getDocs() {
         return docs;
     }
 
-    public void setDocs(List<DocsItemOfArticleSearch> docs)
-    {
+    public void setDocs(List<DocsItemOfArticleSearch> docs) {
         this.docs = docs;
     }
 
-    public MetaOfArticleSearch getMetaOfArticleSearch()
-    {
+    public MetaOfArticleSearch getMetaOfArticleSearch() {
         return mMetaOfArticleSearch;
     }
 
-    public void setMetaOfArticleSearch(MetaOfArticleSearch metaOfArticleSearch)
-    {
+    public void setMetaOfArticleSearch(MetaOfArticleSearch metaOfArticleSearch) {
         this.mMetaOfArticleSearch = metaOfArticleSearch;
     }
 
     @Override
-    public String toString()
-    {
-        return
-                "ResponseOfArticleSearch{" +
-                        "copyright = '" + copyright + '\'' +
-                        ",mResponseOfArticleSearch = '" + mResponseOfArticleSearch + '\'' +
-                        ",status = '" + status + '\'' +
-                        ",docs = '" + docs + '\'' +
-                        ",mMetaOfArticleSearch = '" + mMetaOfArticleSearch + '\'' +
-                        "}";
+    public String toString() {
+        return "ResponseOfArticleSearch{" + "copyright = '" + copyright + '\'' + ",mResponseOfArticleSearch = '" + mResponseOfArticleSearch + '\'' + ",status = '" + status + '\'' + ",docs = '" + docs + '\'' + ",mMetaOfArticleSearch = '" + mMetaOfArticleSearch + '\'' + "}";
     }
 }

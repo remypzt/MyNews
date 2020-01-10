@@ -5,8 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
-public class MediaMetadataItemOfMostPopular
-{
+public class MediaMetadataItemOfMostPopular {
 
     @SerializedName("format")
     private String format;
@@ -20,55 +19,40 @@ public class MediaMetadataItemOfMostPopular
     @SerializedName("height")
     private int height;
 
-    public String getFormat()
-    {
+    public String getFormat() {
         return format;
     }
 
-    public void setFormat(String format)
-    {
+    public void setFormat(String format) {
         this.format = format;
     }
 
-    public int getWidth()
-    {
+    public int getWidth() {
         return width;
     }
 
-    public void setWidth(int width)
-    {
+    public void setWidth(int width) {
         this.width = width;
     }
 
-    public String getUrl()
-    {
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url)
-    {
+    public void setUrl(String url) {
         this.url = url;
     }
 
-    public int getHeight()
-    {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(int height)
-    {
+    public void setHeight(int height) {
         this.height = height;
     }
 
     @Override
-    public String toString()
-    {
-        return
-                "MediaMetadataItemOfMostPopular{" +
-                        "format = '" + format + '\'' +
-                        ",width = '" + width + '\'' +
-                        ",url = '" + url + '\'' +
-                        ",height = '" + height + '\'' +
-                        "}";
+    public String toString() {
+        return "MediaMetadataItemOfMostPopular{" + "format = '" + format + '\'' + ",width = '" + width + '\'' + ",url = '" + url + '\'' + ",height = '" + height + '\'' + "}";
     }
 }

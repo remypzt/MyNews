@@ -5,8 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
-public class LegacyOfArticleSearch
-{
+public class LegacyOfArticleSearch {
 
     @SerializedName("widewidth")
     private int widewidth;
@@ -35,110 +34,80 @@ public class LegacyOfArticleSearch
     @SerializedName("xlargeheight")
     private int xlargeheight;
 
-    public int getWidewidth()
-    {
+    public int getWidewidth() {
         return widewidth;
     }
 
-    public void setWidewidth(int widewidth)
-    {
+    public void setWidewidth(int widewidth) {
         this.widewidth = widewidth;
     }
 
-    public int getWideheight()
-    {
+    public int getWideheight() {
         return wideheight;
     }
 
-    public void setWideheight(int wideheight)
-    {
+    public void setWideheight(int wideheight) {
         this.wideheight = wideheight;
     }
 
-    public String getWide()
-    {
+    public String getWide() {
         return wide;
     }
 
-    public void setWide(String wide)
-    {
+    public void setWide(String wide) {
         this.wide = wide;
     }
 
-    public String getThumbnail()
-    {
+    public String getThumbnail() {
         return thumbnail;
     }
 
-    public void setThumbnail(String thumbnail)
-    {
+    public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
     }
 
-    public int getThumbnailwidth()
-    {
+    public int getThumbnailwidth() {
         return thumbnailwidth;
     }
 
-    public void setThumbnailwidth(int thumbnailwidth)
-    {
+    public void setThumbnailwidth(int thumbnailwidth) {
         this.thumbnailwidth = thumbnailwidth;
     }
 
-    public int getThumbnailheight()
-    {
+    public int getThumbnailheight() {
         return thumbnailheight;
     }
 
-    public void setThumbnailheight(int thumbnailheight)
-    {
+    public void setThumbnailheight(int thumbnailheight) {
         this.thumbnailheight = thumbnailheight;
     }
 
-    public String getXlarge()
-    {
+    public String getXlarge() {
         return xlarge;
     }
 
-    public void setXlarge(String xlarge)
-    {
+    public void setXlarge(String xlarge) {
         this.xlarge = xlarge;
     }
 
-    public int getXlargewidth()
-    {
+    public int getXlargewidth() {
         return xlargewidth;
     }
 
-    public void setXlargewidth(int xlargewidth)
-    {
+    public void setXlargewidth(int xlargewidth) {
         this.xlargewidth = xlargewidth;
     }
 
-    public int getXlargeheight()
-    {
+    public int getXlargeheight() {
         return xlargeheight;
     }
 
-    public void setXlargeheight(int xlargeheight)
-    {
+    public void setXlargeheight(int xlargeheight) {
         this.xlargeheight = xlargeheight;
     }
 
     @Override
-    public String toString()
-    {
-        return
-                "LegacyOfArticleSearch{" +
-                        "widewidth = '" + widewidth + '\'' +
-                        ",wideheight = '" + wideheight + '\'' +
-                        ",wide = '" + wide + '\'' +
-                        ",thumbnail = '" + thumbnail + '\'' +
-                        ",thumbnailwidth = '" + thumbnailwidth + '\'' +
-                        ",thumbnailheight = '" + thumbnailheight + '\'' +
-                        ",xlarge = '" + xlarge + '\'' +
-                        ",xlargewidth = '" + xlargewidth + '\'' +
-                        ",xlargeheight = '" + xlargeheight + '\'' +
-                        "}";
+    public String toString() {
+        return "LegacyOfArticleSearch{" + "widewidth = '" + widewidth + '\'' + ",wideheight = '" + wideheight + '\'' + ",wide = '" + wide + '\'' + ",thumbnail = '" + thumbnail + '\'' + ",thumbnailwidth = '" + thumbnailwidth + '\'' + ",thumbnailheight = '" + thumbnailheight + '\'' + ",xlarge = '" + xlarge + '\'' + ",xlargewidth = '" + xlargewidth + '\'' + ",xlargeheight = '" + xlargeheight + '\'' + "}";
     }
 }

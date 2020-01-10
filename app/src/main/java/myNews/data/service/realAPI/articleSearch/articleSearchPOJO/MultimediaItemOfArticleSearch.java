@@ -5,8 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
-public class MultimediaItemOfArticleSearch
-{
+public class MultimediaItemOfArticleSearch {
 
     @SerializedName("mLegacyOfArticleSearch")
     private LegacyOfArticleSearch mLegacyOfArticleSearch;
@@ -41,132 +40,96 @@ public class MultimediaItemOfArticleSearch
     @SerializedName("height")
     private int height;
 
-    public LegacyOfArticleSearch getLegacyOfArticleSearch()
-    {
+    public LegacyOfArticleSearch getLegacyOfArticleSearch() {
         return mLegacyOfArticleSearch;
     }
 
-    public void setLegacyOfArticleSearch(LegacyOfArticleSearch legacyOfArticleSearch)
-    {
+    public void setLegacyOfArticleSearch(LegacyOfArticleSearch legacyOfArticleSearch) {
         this.mLegacyOfArticleSearch = legacyOfArticleSearch;
     }
 
-    public String getSubtype()
-    {
+    public String getSubtype() {
         return subtype;
     }
 
-    public void setSubtype(String subtype)
-    {
+    public void setSubtype(String subtype) {
         this.subtype = subtype;
     }
 
-    public String getCropName()
-    {
+    public String getCropName() {
         return cropName;
     }
 
-    public void setCropName(String cropName)
-    {
+    public void setCropName(String cropName) {
         this.cropName = cropName;
     }
 
-    public int getWidth()
-    {
+    public int getWidth() {
         return width;
     }
 
-    public void setWidth(int width)
-    {
+    public void setWidth(int width) {
         this.width = width;
     }
 
-    public int getRank()
-    {
+    public int getRank() {
         return rank;
     }
 
-    public void setRank(int rank)
-    {
+    public void setRank(int rank) {
         this.rank = rank;
     }
 
-    public Object getCaption()
-    {
+    public Object getCaption() {
         return caption;
     }
 
-    public void setCaption(Object caption)
-    {
+    public void setCaption(Object caption) {
         this.caption = caption;
     }
 
-    public String getSubType()
-    {
+    public String getSubType() {
         return subType;
     }
 
-    public void setSubType(String subType)
-    {
+    public void setSubType(String subType) {
         this.subType = subType;
     }
 
-    public Object getCredit()
-    {
+    public Object getCredit() {
         return credit;
     }
 
-    public void setCredit(Object credit)
-    {
+    public void setCredit(Object credit) {
         this.credit = credit;
     }
 
-    public String getType()
-    {
+    public String getType() {
         return type;
     }
 
-    public void setType(String type)
-    {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public String getUrl()
-    {
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url)
-    {
+    public void setUrl(String url) {
         this.url = url;
     }
 
-    public int getHeight()
-    {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(int height)
-    {
+    public void setHeight(int height) {
         this.height = height;
     }
 
     @Override
-    public String toString()
-    {
-        return
-                "MultimediaItemOfArticleSearch{" +
-                        "mLegacyOfArticleSearch = '" + mLegacyOfArticleSearch + '\'' +
-                        ",subtype = '" + subtype + '\'' +
-                        ",crop_name = '" + cropName + '\'' +
-                        ",width = '" + width + '\'' +
-                        ",rank = '" + rank + '\'' +
-                        ",caption = '" + caption + '\'' +
-                        ",subType = '" + subType + '\'' +
-                        ",credit = '" + credit + '\'' +
-                        ",type = '" + type + '\'' +
-                        ",url = '" + url + '\'' +
-                        ",height = '" + height + '\'' +
-                        "}";
+    public String toString() {
+        return "MultimediaItemOfArticleSearch{" + "mLegacyOfArticleSearch = '" + mLegacyOfArticleSearch + '\'' + ",subtype = '" + subtype + '\'' + ",crop_name = '" + cropName + '\'' + ",width = '" + width + '\'' + ",rank = '" + rank + '\'' + ",caption = '" + caption + '\'' + ",subType = '" + subType + '\'' + ",credit = '" + credit + '\'' + ",type = '" + type + '\'' + ",url = '" + url + '\'' + ",height = '" + height + '\'' + "}";
     }
 }

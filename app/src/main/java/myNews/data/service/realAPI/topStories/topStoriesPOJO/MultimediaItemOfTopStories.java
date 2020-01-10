@@ -6,8 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
-public class MultimediaItemOfTopStories
-{
+public class MultimediaItemOfTopStories {
 
     @SerializedName("copyright")
     private String copyright;
@@ -33,99 +32,72 @@ public class MultimediaItemOfTopStories
     @SerializedName("height")
     private int height;
 
-    public String getCopyright()
-    {
+    public String getCopyright() {
         return copyright;
     }
 
-    public void setCopyright(String copyright)
-    {
+    public void setCopyright(String copyright) {
         this.copyright = copyright;
     }
 
-    public String getSubtype()
-    {
+    public String getSubtype() {
         return subtype;
     }
 
-    public void setSubtype(String subtype)
-    {
+    public void setSubtype(String subtype) {
         this.subtype = subtype;
     }
 
-    public String getFormat()
-    {
+    public String getFormat() {
         return format;
     }
 
-    public void setFormat(String format)
-    {
+    public void setFormat(String format) {
         this.format = format;
     }
 
-    public int getWidth()
-    {
+    public int getWidth() {
         return width;
     }
 
-    public void setWidth(int width)
-    {
+    public void setWidth(int width) {
         this.width = width;
     }
 
-    public String getCaption()
-    {
+    public String getCaption() {
         return caption;
     }
 
-    public void setCaption(String caption)
-    {
+    public void setCaption(String caption) {
         this.caption = caption;
     }
 
-    public String getType()
-    {
+    public String getType() {
         return type;
     }
 
-    public void setType(String type)
-    {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public String getUrl()
-    {
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url)
-    {
+    public void setUrl(String url) {
         this.url = url;
     }
 
-    public int getHeight()
-    {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(int height)
-    {
+    public void setHeight(int height) {
         this.height = height;
     }
 
     @Override
-    public String toString()
-    {
-        return
-                "MultimediaItemOfTopStories{" +
-                        "copyright = '" + copyright + '\'' +
-                        ",subtype = '" + subtype + '\'' +
-                        ",format = '" + format + '\'' +
-                        ",width = '" + width + '\'' +
-                        ",caption = '" + caption + '\'' +
-                        ",type = '" + type + '\'' +
-                        ",url = '" + url + '\'' +
-                        ",height = '" + height + '\'' +
-                        "}";
+    public String toString() {
+        return "MultimediaItemOfTopStories{" + "copyright = '" + copyright + '\'' + ",subtype = '" + subtype + '\'' + ",format = '" + format + '\'' + ",width = '" + width + '\'' + ",caption = '" + caption + '\'' + ",type = '" + type + '\'' + ",url = '" + url + '\'' + ",height = '" + height + '\'' + "}";
     }
 }

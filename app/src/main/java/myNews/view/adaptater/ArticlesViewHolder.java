@@ -39,7 +39,7 @@ class ArticlesViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         ButterKnife.bind(this, itemView);
         mContext = itemView.getContext();
-        }
+    }
 
     @SuppressLint("SetTextI18n")
     void updateWithArticles(Articles articles) {

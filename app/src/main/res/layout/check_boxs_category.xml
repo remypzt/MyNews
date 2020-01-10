@@ -9,28 +9,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:text="@string/checkbox" />
+        android:text="Arts" />
 
     <CheckBox
         android:id="@+id/checkBox2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/checkBox"
-        android:text="@string/checkbox" />
+        android:text="Business" />
 
     <CheckBox
         android:id="@+id/checkBox3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/checkBox2"
-        android:text="@string/checkbox" />
+        android:text="Technology" />
 
     <CheckBox
         android:id="@+id/checkBox4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/midle"
-        android:text="@string/checkbox" />
+        android:text="Politics" />
 
     <CheckBox
         android:id="@+id/checkBox5"
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/checkBox"
         android:layout_toEndOf="@id/midle"
-        android:text="@string/checkbox" />
+        android:text="Sports" />
 
     <CheckBox
         android:id="@+id/checkBox6"
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/checkBox2"
         android:layout_toEndOf="@id/midle"
-        android:text="@string/checkbox" />
+        android:text="Travel" />
 
     <TextView
         android:id="@+id/midle"

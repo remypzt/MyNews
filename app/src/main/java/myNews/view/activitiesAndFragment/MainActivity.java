@@ -21,14 +21,18 @@ import butterknife.ButterKnife;
 import myNews.myNews.R;
 import myNews.view.adaptater.ViewPagerAdapter;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    @BindView(R.id.view_pager) public ViewPager viewPager;
-    @BindView(R.id.drawerLayout) public DrawerLayout drawer;
-    @BindView(R.id.tab_layout) public TabLayout tabLayout;
+    @BindView(R.id.view_pager)
+    public ViewPager viewPager;
+    @BindView(R.id.drawerLayout)
+    public DrawerLayout drawer;
+    @BindView(R.id.tab_layout)
+    public TabLayout tabLayout;
     @BindView(R.id.toolbar)
     public Toolbar toolbar;
-    @BindView(R.id.nav_view) public  NavigationView navigationView;
+    @BindView(R.id.nav_view)
+    public NavigationView navigationView;
 
 
     private String[] pageTitle = {"Top Stories", "Most Popular", "Technology"};
@@ -42,8 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         //create default navigation drawer toggle
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -88,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.toolbar, menu);
-
         return true;
     }
 

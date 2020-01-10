@@ -33,8 +33,7 @@ public class NytApiRepository {
         return nytApiRepository;
     }
 
-    public MutableLiveData<List<Articles>> getTopStories(String section)
-    {
+    public MutableLiveData<List<Articles>> getTopStories(String section) {
         MutableLiveData<List<Articles>> topStories = new MutableLiveData<>();
         mNytApiInterfaceService.getResponseOfTopStories(section).enqueue(new Callback<ResponseOfTopStories>() {
             @Override

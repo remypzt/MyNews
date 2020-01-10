@@ -5,8 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
-public class PersonItemOfArticleSearch
-{
+public class PersonItemOfArticleSearch {
 
     @SerializedName("firstname")
     private String firstname;
@@ -32,99 +31,72 @@ public class PersonItemOfArticleSearch
     @SerializedName("lastname")
     private String lastname;
 
-    public String getFirstname()
-    {
+    public String getFirstname() {
         return firstname;
     }
 
-    public void setFirstname(String firstname)
-    {
+    public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
 
-    public String getRole()
-    {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(String role)
-    {
+    public void setRole(String role) {
         this.role = role;
     }
 
-    public Object getQualifier()
-    {
+    public Object getQualifier() {
         return qualifier;
     }
 
-    public void setQualifier(Object qualifier)
-    {
+    public void setQualifier(Object qualifier) {
         this.qualifier = qualifier;
     }
 
-    public String getOrganization()
-    {
+    public String getOrganization() {
         return organization;
     }
 
-    public void setOrganization(String organization)
-    {
+    public void setOrganization(String organization) {
         this.organization = organization;
     }
 
-    public Object getMiddlename()
-    {
+    public Object getMiddlename() {
         return middlename;
     }
 
-    public void setMiddlename(Object middlename)
-    {
+    public void setMiddlename(Object middlename) {
         this.middlename = middlename;
     }
 
-    public int getRank()
-    {
+    public int getRank() {
         return rank;
     }
 
-    public void setRank(int rank)
-    {
+    public void setRank(int rank) {
         this.rank = rank;
     }
 
-    public Object getTitle()
-    {
+    public Object getTitle() {
         return title;
     }
 
-    public void setTitle(Object title)
-    {
+    public void setTitle(Object title) {
         this.title = title;
     }
 
-    public String getLastname()
-    {
+    public String getLastname() {
         return lastname;
     }
 
-    public void setLastname(String lastname)
-    {
+    public void setLastname(String lastname) {
         this.lastname = lastname;
     }
 
     @Override
-    public String toString()
-    {
-        return
-                "PersonItemOfArticleSearch{" +
-                        "firstname = '" + firstname + '\'' +
-                        ",role = '" + role + '\'' +
-                        ",qualifier = '" + qualifier + '\'' +
-                        ",organization = '" + organization + '\'' +
-                        ",middlename = '" + middlename + '\'' +
-                        ",rank = '" + rank + '\'' +
-                        ",title = '" + title + '\'' +
-                        ",lastname = '" + lastname + '\'' +
-                        "}";
+    public String toString() {
+        return "PersonItemOfArticleSearch{" + "firstname = '" + firstname + '\'' + ",role = '" + role + '\'' + ",qualifier = '" + qualifier + '\'' + ",organization = '" + organization + '\'' + ",middlename = '" + middlename + '\'' + ",rank = '" + rank + '\'' + ",title = '" + title + '\'' + ",lastname = '" + lastname + '\'' + "}";
     }
 }

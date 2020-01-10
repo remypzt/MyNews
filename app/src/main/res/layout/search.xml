@@ -1,48 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+
         android:layout_width="match_parent"
-        android:id="@+id/input_search"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
 
-        <com.google.android.material.textfield.TextInputEditText
+
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+        app:title="Search Articles"
+
+        app:titleTextColor="@android:color/white" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parentConstraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintBottom_toBottomOf="@id/guidelineB"
+        app:layout_constraintEnd_toStartOf="@id/guidelineR"
+        app:layout_constraintStart_toStartOf="@id/guidelineL"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_search"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="hint" />
-    </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/date_of_beginning"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Search query term"
+
+
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/begin_date"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Begin Date"
+
+            app:layout_constraintEnd_toStartOf="@+id/guideline48"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_search" />
+
+        <Button
+            android:id="@+id/date_of_beginning"
+
+            style="?android:attr/spinnerStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintEnd_toStartOf="@+id/guideline48"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/begin_date" />
+
+        <View
+            android:id="@+id/underline_begin_date"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+
+            android:background="@android:color/darker_gray"
+
+            app:layout_constraintEnd_toEndOf="@id/date_of_beginning"
+            app:layout_constraintStart_toStartOf="@id/date_of_beginning"
+            app:layout_constraintTop_toBottomOf="@id/date_of_beginning" />
+
+        <TextView
+            android:id="@+id/end_date"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="End Date"
+
+            app:layout_constraintStart_toStartOf="@id/guideline52"
+
+            app:layout_constraintTop_toTopOf="@id/begin_date" />
+
+        <Button
+            android:id="@+id/date_of_ending"
+            style="?android:attr/spinnerStyle"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline52"
+            app:layout_constraintTop_toTopOf="@id/date_of_beginning" />
+
+        <View
+            android:id="@+id/underline_end_date"
+
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+
+            android:background="@android:color/darker_gray"
+
+            app:layout_constraintEnd_toEndOf="@id/date_of_ending"
+            app:layout_constraintStart_toEndOf="@+id/guideline52"
+            app:layout_constraintTop_toTopOf="@id/underline_begin_date" />
+
+        <include
+            android:id="@+id/check_boxs_cateroy"
+            layout="@layout/check_boxs_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date_of_ending" />
+
+        <Button
+            android:id="@+id/search_button"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/button_background"
+
+            android:text="Search"
+            android:textColor="@android:color/white"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/check_boxs_cateroy" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline48"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.48" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline52"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.52" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/input_search"
-        android:text="Select a date of beginning" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
 
-    <Button
-        android:id="@+id/date_of_ending"
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineT"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/input_search"
-        android:layout_toEndOf="@id/date_of_beginning"
-        android:text="Select a date of ending" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
 
-    <include
-        layout="@layout/check_boxs_category"
-        android:layout_width="match_parent"
-        android:id="@+id/check_boxs_cateroy"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineR"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/date_of_beginning" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
 
-    <Button
-        android:id="@+id/search_button"
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineB"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/check_boxs_cateroy"
-        android:text="Search" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,8 +7,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
-public class ResultsItemOfMostPopular
-{
+public class ResultsItemOfMostPopular {
 
 
     @SerializedName("column")
@@ -59,184 +58,137 @@ public class ResultsItemOfMostPopular
     private int views;
 
 
-    public Object getColumn()
-    {
+    public Object getColumn() {
         return column;
     }
 
-    public void setColumn(Object column)
-    {
+    public void setColumn(Object column) {
         this.column = column;
     }
 
-    public String getSection()
-    {
+    public String getSection() {
         return section;
     }
 
-    public void setSection(String section)
-    {
+    public void setSection(String section) {
         this.section = section;
     }
 
-    public String getJsonMemberAbstract()
-    {
+    public String getJsonMemberAbstract() {
         return jsonMemberAbstract;
     }
 
-    public void setJsonMemberAbstract(String jsonMemberAbstract)
-    {
+    public void setJsonMemberAbstract(String jsonMemberAbstract) {
         this.jsonMemberAbstract = jsonMemberAbstract;
     }
 
-    public String getSource()
-    {
+    public String getSource() {
         return source;
     }
 
-    public void setSource(String source)
-    {
+    public void setSource(String source) {
         this.source = source;
     }
 
-    public long getAssetId()
-    {
+    public long getAssetId() {
         return assetId;
     }
 
-    public void setAssetId(long assetId)
-    {
+    public void setAssetId(long assetId) {
         this.assetId = assetId;
     }
 
-    public List<MediaItemOfMostPopular> getMedia()
-    {
+    public List<MediaItemOfMostPopular> getMedia() {
         return media;
     }
 
-    public void setMedia(List<MediaItemOfMostPopular> media)
-    {
+    public void setMedia(List<MediaItemOfMostPopular> media) {
         this.media = media;
     }
 
-    public String getType()
-    {
+    public String getType() {
         return type;
     }
 
-    public void setType(String type)
-    {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title)
-    {
+    public void setTitle(String title) {
         this.title = title;
     }
 
 
-
-    public String getUri()
-    {
+    public String getUri() {
         return uri;
     }
 
-    public void setUri(String uri)
-    {
+    public void setUri(String uri) {
         this.uri = uri;
     }
 
-    public String getUrl()
-    {
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url)
-    {
+    public void setUrl(String url) {
         this.url = url;
     }
 
-    public String getAdxKeywords()
-    {
+    public String getAdxKeywords() {
         return adxKeywords;
     }
 
-    public void setAdxKeywords(String adxKeywords)
-    {
+    public void setAdxKeywords(String adxKeywords) {
         this.adxKeywords = adxKeywords;
     }
 
 
-
-    public long getId()
-    {
+    public long getId() {
         return id;
     }
 
-    public void setId(long id)
-    {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public String getByline()
-    {
+    public String getByline() {
         return byline;
     }
 
-    public void setByline(String byline)
-    {
+    public void setByline(String byline) {
         this.byline = byline;
     }
 
-    public String getPublishedDate()
-    {
+    public String getPublishedDate() {
         return publishedDate;
     }
 
-    public void setPublishedDate(String publishedDate)
-    {
+    public void setPublishedDate(String publishedDate) {
         this.publishedDate = publishedDate;
     }
 
-    public int getViews()
-    {
+    public int getViews() {
         return views;
     }
 
-    public void setViews(int views)
-    {
+    public void setViews(int views) {
         this.views = views;
     }
 
     @Override
-    public String toString()
-    {
-        return
-                "ResultsItemOfTopStories{" +
+    public String toString() {
+        return "ResultsItemOfTopStories{" +
 
-                        ",column = '" + column + '\'' +
-                        ",section = '" + section + '\'' +
-                        ",abstract = '" + jsonMemberAbstract + '\'' +
-                        ",source = '" + source + '\'' +
-                        ",asset_id = '" + assetId + '\'' +
-                        ",media = '" + media + '\'' +
-                        ",type = '" + type + '\'' +
-                        ",title = '" + title + '\'' +
+                ",column = '" + column + '\'' + ",section = '" + section + '\'' + ",abstract = '" + jsonMemberAbstract + '\'' + ",source = '" + source + '\'' + ",asset_id = '" + assetId + '\'' + ",media = '" + media + '\'' + ",type = '" + type + '\'' + ",title = '" + title + '\'' +
 
-                        ",uri = '" + uri + '\'' +
-                        ",url = '" + url + '\'' +
-                        ",adx_keywords = '" + adxKeywords + '\'' +
+                ",uri = '" + uri + '\'' + ",url = '" + url + '\'' + ",adx_keywords = '" + adxKeywords + '\'' +
 
-                        ",id = '" + id + '\'' +
-                        ",byline = '" + byline + '\'' +
-                        ",published_date = '" + publishedDate + '\'' +
-                        ",views = '" + views + '\'' +
-                        "}";
+                ",id = '" + id + '\'' + ",byline = '" + byline + '\'' + ",published_date = '" + publishedDate + '\'' + ",views = '" + views + '\'' + "}";
     }
 
 

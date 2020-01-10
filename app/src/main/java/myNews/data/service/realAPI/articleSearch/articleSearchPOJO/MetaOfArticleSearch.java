@@ -5,8 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
-public class MetaOfArticleSearch
-{
+public class MetaOfArticleSearch {
 
     @SerializedName("hits")
     private int hits;
@@ -17,44 +16,32 @@ public class MetaOfArticleSearch
     @SerializedName("time")
     private int time;
 
-    public int getHits()
-    {
+    public int getHits() {
         return hits;
     }
 
-    public void setHits(int hits)
-    {
+    public void setHits(int hits) {
         this.hits = hits;
     }
 
-    public int getOffset()
-    {
+    public int getOffset() {
         return offset;
     }
 
-    public void setOffset(int offset)
-    {
+    public void setOffset(int offset) {
         this.offset = offset;
     }
 
-    public int getTime()
-    {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(int time)
-    {
+    public void setTime(int time) {
         this.time = time;
     }
 
     @Override
-    public String toString()
-    {
-        return
-                "MetaOfArticleSearch{" +
-                        "hits = '" + hits + '\'' +
-                        ",offset = '" + offset + '\'' +
-                        ",time = '" + time + '\'' +
-                        "}";
+    public String toString() {
+        return "MetaOfArticleSearch{" + "hits = '" + hits + '\'' + ",offset = '" + offset + '\'' + ",time = '" + time + '\'' + "}";
     }
 }
