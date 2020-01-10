@@ -92,9 +92,9 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    private void launchTheSearch() {
+    /*private void launchTheSearch() {
         searchButton.setOnClickListener();
-    }
+    }*/
 }
 
 
