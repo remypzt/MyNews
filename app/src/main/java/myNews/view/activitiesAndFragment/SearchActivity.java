@@ -39,50 +39,32 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
         ButterKnife.bind(this);
-
         //Back arrow
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MainActivity.class)));
 
-        datepicker();
+        datepickerShort(beginbtndatepicker, endbtndatepicker);
+        datepickerShort(endbtndatepicker, beginbtndatepicker);
     }
 
-    public void datepicker() {
+    public void datepickerShort(Button button1, Button button2) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        beginbtndatepicker.setOnClickListener(v -> {
+        button1.setOnClickListener(v -> {
             DatePickerDialog dd = new DatePickerDialog(SearchActivity.this, (view, year, monthOfYear, dayOfMonth) -> {
                 try {
                     String dateInString = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
                     Date date = formatter.parse(dateInString);
-                    beginbtndatepicker.setText(formatter.format(date));
-                    if (endbtndatepicker.getText().length() > 1) {
-                        Date dateOfBeginning = formatter.parse((String) beginbtndatepicker.getText());
-                        Date dateOfEnding = formatter.parse((String) endbtndatepicker.getText());
+                    button1.setText(formatter.format(date));
+                    if (button2.getText().length() > 1) {
+                        Date dateOfBeginning = formatter.parse((String) button1.getText());
+                        Date dateOfEnding = formatter.parse((String) button2.getText());
                         int comparison = dateOfBeginning.compareTo(dateOfEnding);
-                        if (comparison > 0) {
+                        if (comparison > 0 && button1 == beginbtndatepicker) {
                             Toast.makeText(SearchActivity.this, "la date de début doit être antérieure à celle de fin", Toast.LENGTH_LONG).show();
-                            beginbtndatepicker.setText(null);
-                        }
-                    }
-                } catch (Exception ex) {
-                }
-            }, year, month, day);
-            dd.show();
-        });
-
-        endbtndatepicker.setOnClickListener(v -> {
-            DatePickerDialog dd = new DatePickerDialog(SearchActivity.this, (view, year, monthOfYear, dayOfMonth) -> {
-                try {
-                    String dateInString = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                    Date date = formatter.parse(dateInString);
-                    endbtndatepicker.setText(formatter.format(date));
-                    if (beginbtndatepicker.getText().length() > 1) {
-                        Date dateOfBeginning = formatter.parse((String) beginbtndatepicker.getText());
-                        Date dateOfEnding = formatter.parse((String) endbtndatepicker.getText());
-                        int comparison = dateOfBeginning.compareTo(dateOfEnding);
-                        if (comparison > 0) {
+                            button1.setText(null);
+                        } else if (comparison < 0 && button2 != endbtndatepicker) {
                             Toast.makeText(SearchActivity.this, "la date fin doit être ultérieure à celle de début", Toast.LENGTH_LONG).show();
-                            endbtndatepicker.setText(null);
+                            button1.setText(null);
                         }
                     }
                 } catch (Exception ex) {
@@ -91,10 +73,15 @@ public class SearchActivity extends AppCompatActivity {
             dd.show();
         });
     }
+    /*
+    private void launchTheSearch() {
+        searchButton.setOnClickListener(new View.OnClickListener(){
+         @Override
+            public void onClick(final View v) {
 
-    /*private void launchTheSearch() {
-        searchButton.setOnClickListener();
-    }*/
+         }
+        });
+}*/
 }
 
 

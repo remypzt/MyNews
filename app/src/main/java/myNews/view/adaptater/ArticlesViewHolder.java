@@ -43,8 +43,7 @@ class ArticlesViewHolder extends RecyclerView.ViewHolder {
 
     @SuppressLint("SetTextI18n")
     void updateWithArticles(Articles articles) {
-
-        Glide.with(this.mContext).load(articles.getUrlImage()).placeholder(articles.getDrawableImage()).into(mPicture);
+        Glide.with(mPicture.getContext()).load(articles.getUrlImage()).placeholder(articles.getDrawableImage()).into(mPicture);
 
         if (articles.getUnderCategory().length() >= 1) {
             this.mCategory.setText(articles.getCategory() + " " + ">" + " ");

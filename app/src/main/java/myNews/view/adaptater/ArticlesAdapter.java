@@ -41,6 +41,7 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesViewHolder> {
     @Override
     public void onBindViewHolder(ArticlesViewHolder viewHolder, int position) {
         viewHolder.updateWithArticles(this.articles.get(position));
+
     }
 
     // RETURN THE TOTAL COUNT OF ITEMS IN THE LIST
