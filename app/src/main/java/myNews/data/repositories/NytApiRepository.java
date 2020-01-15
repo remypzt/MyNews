@@ -75,9 +75,9 @@ public class NytApiRepository {
         return mostPopular;
     }
 
-    public MutableLiveData<List<Articles>> getSearchArticles(/*String query, String filter*/) {
+    public MutableLiveData<List<Articles>> getSearchArticles(String query, String filter, String beginDate, String endDate) {
         MutableLiveData<List<Articles>> searchArticles = new MutableLiveData<>();
-        mNytApiInterfaceService.getResponseOfArticleSearch(/*query, filter*/).enqueue(new Callback<ResponseOfArticleSearch>() {
+        mNytApiInterfaceService.getResponseOfArticleSearch(query, filter, beginDate, endDate).enqueue(new Callback<ResponseOfArticleSearch>() {
             @Override
             public void onResponse(Call<ResponseOfArticleSearch> call, Response<ResponseOfArticleSearch> response) {
                 if (response.isSuccessful()) {

@@ -31,9 +31,17 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     public Toolbar toolbar;
 
-
     Calendar c = Calendar.getInstance();
     int year = c.get(Calendar.YEAR), month = c.get(Calendar.MONTH), day = c.get(Calendar.DAY_OF_MONTH);
+
+    private static SearchActivity searchActivity;
+
+    public static SearchActivity getInstance() {
+        if (searchActivity == null) {
+            searchActivity = new SearchActivity();
+        }
+        return searchActivity;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +60,18 @@ public class SearchActivity extends AppCompatActivity {
         launchTheSearch();
     }
 
+    public Button getSearchButton() {
+        return searchButton;
+    }
+
+    public Button getBeginbtndatepicker() {
+        return beginbtndatepicker;
+    }
+
+    public Button getEndbtndatepicker() {
+        return endbtndatepicker;
+    }
+
     public void datepickerShort(Button button1, Button button2) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         button1.setOnClickListener(v -> {
@@ -60,6 +80,10 @@ public class SearchActivity extends AppCompatActivity {
                     String dateInString = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
                     Date date = formatter.parse(dateInString);
                     button1.setText(formatter.format(date));
+
+                    String dateInStringForData = year + "" + (monthOfYear + 1) + "" + dayOfMonth;
+                    button1.setPrivateImeOptions(dateInStringForData);
+
                     if (button2.getText().length() > 1) {
                         Date dateOfBeginning = formatter.parse((String) button1.getText());
                         Date dateOfEnding = formatter.parse((String) button2.getText());
@@ -85,7 +109,6 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(final View v) {
              Intent SearchResultsActivity = new Intent(SearchActivity.this, SearchResultsActivity.class);
              startActivity(SearchResultsActivity);
-
          }
         });
     }

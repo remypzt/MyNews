@@ -6,6 +6,7 @@ import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResponseOfTopStorie
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 import static myNews.others.Constant.API_KEY;
 
@@ -20,6 +21,6 @@ public interface NytApiInterfaceService {
     @GET("mostpopular/v2/viewed/7.json?" + API_KEY)
     Call<ResponseOfMostPopular> getResponseOfMostPopular();
 
-    @GET("search/v2/articlesearch.json?" + API_KEY)
-    Call<ResponseOfArticleSearch> getResponseOfArticleSearch(/*@Query("q") String query, @Query("fq") String filter*/);
+    @GET("search/v2/articlesearch.json?" + "{q}" + "{fq}" + "{begin_date}" + "{end_date}" + API_KEY)
+    Call<ResponseOfArticleSearch> getResponseOfArticleSearch(@Query("q") String query, @Query("fq") String filter, @Query("begin_date") String beginDate, @Query("end_date") String endDate);
 }
