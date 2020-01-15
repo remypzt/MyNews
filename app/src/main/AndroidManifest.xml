@@ -10,6 +10,7 @@
         android:theme="@style/AppTheme">
         <activity android:name="myNews.view.activitiesAndFragment.SearchActivity"></activity>
         <activity android:name="myNews.view.activitiesAndFragment.SetNotificationsActivity"></activity>
+        <activity android:name="myNews.view.activitiesAndFragment.SearchResultsActivity"></activity>
         <activity android:name="myNews.view.activitiesAndFragment.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

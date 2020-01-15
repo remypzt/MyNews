@@ -3,6 +3,7 @@ package myNews.view.activitiesAndFragment;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -39,12 +40,16 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
         ButterKnife.bind(this);
+
         //Back arrow
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MainActivity.class)));
 
+        //date picker ang error gestion
         datepickerShort(beginbtndatepicker, endbtndatepicker);
         datepickerShort(endbtndatepicker, beginbtndatepicker);
+
+        launchTheSearch();
     }
 
     public void datepickerShort(Button button1, Button button2) {
@@ -73,15 +78,17 @@ public class SearchActivity extends AppCompatActivity {
             dd.show();
         });
     }
-    /*
+
     private void launchTheSearch() {
         searchButton.setOnClickListener(new View.OnClickListener(){
          @Override
             public void onClick(final View v) {
+             Intent SearchResultsActivity = new Intent(SearchActivity.this, SearchResultsActivity.class);
+             startActivity(SearchResultsActivity);
 
          }
         });
-}*/
+    }
 }
 
 
