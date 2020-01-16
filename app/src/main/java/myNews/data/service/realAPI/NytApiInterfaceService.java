@@ -1,5 +1,6 @@
 package myNews.data.service.realAPI;
 
+import myNews.data.service.realAPI.articleSearch.articleSearchPOJO.ResponseOfArticleSearch;
 import myNews.data.service.realAPI.mostPopular.mostPopularPOJO.ResponseOfMostPopular;
 import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResponseOfTopStories;
 import retrofit2.Call;
