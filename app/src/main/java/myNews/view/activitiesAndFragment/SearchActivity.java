@@ -33,15 +33,8 @@ public class SearchActivity extends AppCompatActivity {
 
     Calendar c = Calendar.getInstance();
     int year = c.get(Calendar.YEAR), month = c.get(Calendar.MONTH), day = c.get(Calendar.DAY_OF_MONTH);
-
     private static SearchActivity searchActivity;
 
-    public static SearchActivity getInstance() {
-        if (searchActivity == null) {
-            searchActivity = new SearchActivity();
-        }
-        return searchActivity;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,28 +42,28 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.search);
         ButterKnife.bind(this);
 
+        Intent intent = new Intent(this, SearchResultsActivity.class);
+        Bundle bundle = new Bundle();
+
+
         //Back arrow
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MainActivity.class)));
 
-        //date picker ang error gestion
-        datepickerShort(beginbtndatepicker, endbtndatepicker);
-        datepickerShort(endbtndatepicker, beginbtndatepicker);
 
+        datepickerShort(beginbtndatepicker, endbtndatepicker);
+        bundle.putString("beginDate", beginbtndatepicker.getText().toString());
+        datepickerShort(endbtndatepicker, beginbtndatepicker);
+        bundle.putString("endDate", endbtndatepicker.getText().toString());
         launchTheSearch();
+        bundle.putString("query", getSearchButton().getText().toString());
+        startActivity(intent);
     }
 
     public Button getSearchButton() {
         return searchButton;
     }
 
-    public Button getBeginbtndatepicker() {
-        return beginbtndatepicker;
-    }
-
-    public Button getEndbtndatepicker() {
-        return endbtndatepicker;
-    }
 
     public void datepickerShort(Button button1, Button button2) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -83,6 +76,7 @@ public class SearchActivity extends AppCompatActivity {
 
                     String dateInStringForData = year + "" + (monthOfYear + 1) + "" + dayOfMonth;
                     button1.setPrivateImeOptions(dateInStringForData);
+
 
                     if (button2.getText().length() > 1) {
                         Date dateOfBeginning = formatter.parse((String) button1.getText());
@@ -107,6 +101,7 @@ public class SearchActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener(){
          @Override
             public void onClick(final View v) {
+
              Intent SearchResultsActivity = new Intent(SearchActivity.this, SearchResultsActivity.class);
              startActivity(SearchResultsActivity);
          }

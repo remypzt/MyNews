@@ -35,7 +35,10 @@ public class SearchResultsActivity extends AppCompatActivity {
     private List<Articles> articles;
     private ArticlesAdapter adapter;
     private ViewModelMyNewsForSearchArticles mViewModelMyNewsForSearchArticles;
-
+    Bundle bundle = getIntent().getExtras();
+    String query = bundle.getString("query");
+    String beginDate = bundle.getString("beginDate");
+    String endDate = bundle.getString("endDate");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +52,10 @@ public class SearchResultsActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SearchActivity.class)));
 
-        mViewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles();
+        mViewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles(query, beginDate, endDate);
         mViewModelMyNewsForSearchArticles.getNews().observe(this, this::updateList);
     }
+
 
     public void configureRecyclerView() {
 

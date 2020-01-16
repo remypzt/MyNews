@@ -8,41 +8,42 @@ import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
 public class BylineOfArticleSearch {
-    @SerializedName("original")
-    private String original;
 
-    @SerializedName("person")
-    private List<PersonItemOfArticleSearch> person;
+	@SerializedName("original")
+	private String original;
 
-    @SerializedName("organization")
-    private Object organization;
+	@SerializedName("person")
+	private List<PersonItemOfArticleSearch> person;
 
-    public String getOriginal() {
-        return original;
-    }
+	@SerializedName("organization")
+	private Object organization;
 
-    public void setOriginal(String original) {
-        this.original = original;
-    }
+	public String getOriginal() {
+		return original;
+	}
 
-    public List<PersonItemOfArticleSearch> getPerson() {
-        return person;
-    }
+	public void setOriginal(String original) {
+		this.original = original;
+	}
 
-    public void setPerson(List<PersonItemOfArticleSearch> person) {
-        this.person = person;
-    }
+	public List<PersonItemOfArticleSearch> getPerson() {
+		return person;
+	}
 
-    public Object getOrganization() {
-        return organization;
-    }
+	public void setPerson(List<PersonItemOfArticleSearch> person) {
+		this.person = person;
+	}
 
-    public void setOrganization(Object organization) {
-        this.organization = organization;
-    }
+	public Object getOrganization() {
+		return organization;
+	}
 
-    @Override
-    public String toString() {
-        return "BylineOfArticleSearch{" + "original = '" + original + '\'' + ",person = '" + person + '\'' + ",organization = '" + organization + '\'' + "}";
-    }
+	public void setOrganization(Object organization) {
+		this.organization = organization;
+	}
+
+	@Override
+	public String toString() {
+		return "BylineOfArticleSearch{" + "original = '" + original + '\'' + ",person = '" + person + '\'' + ",organization = '" + organization + '\'' + "}";
+	}
 }

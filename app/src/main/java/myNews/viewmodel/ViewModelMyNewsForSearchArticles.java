@@ -22,16 +22,8 @@ public class ViewModelMyNewsForSearchArticles extends androidx.lifecycle.ViewMod
     private MutableLiveData<List<Articles>> mArticles;
 
 
-    public ViewModelMyNewsForSearchArticles() {
+    public ViewModelMyNewsForSearchArticles(String query, String beginDate, String endDate) {
 
-        mSearchActivity = SearchActivity.getInstance();
-
-        String query = SearchActivity.getInstance().getSearchButton().getText().toString();
-        // String filter = SearchActivity.getInstance().
-
-
-        String beginDate = SearchActivity.getInstance().getBeginbtndatepicker().getPrivateImeOptions();
-        String endDate = SearchActivity.getInstance().getEndbtndatepicker().getPrivateImeOptions();
 
         if (beginDate == null) {
             beginDate = "01012000";
@@ -43,7 +35,6 @@ public class ViewModelMyNewsForSearchArticles extends androidx.lifecycle.ViewMod
 
             beginDate = currentDate;
         }
-
 
         mArticles = mNytApiRepository.getSearchArticles(query, null, beginDate, endDate);
     }

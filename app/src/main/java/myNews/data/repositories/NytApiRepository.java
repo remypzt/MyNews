@@ -7,10 +7,8 @@ import java.util.List;
 import myNews.data.repositories.model.Articles;
 import myNews.data.service.realAPI.NytApiInterfaceService;
 import myNews.data.service.realAPI.RetrofitService;
-import myNews.data.service.realAPI.articleSearch.articleSearchPOJO.ResponseOfArticleSearch;
 import myNews.data.service.realAPI.mostPopular.mostPopularPOJO.ResponseOfMostPopular;
 import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResponseOfTopStories;
-import myNews.others.utils.UtilsForArticleSearch;
 import myNews.others.utils.UtilsForMostPopular;
 import myNews.others.utils.UtilsForTopStories;
 import retrofit2.Call;
@@ -75,7 +73,7 @@ public class NytApiRepository {
         return mostPopular;
     }
 
-    public MutableLiveData<List<Articles>> getSearchArticles(String query, String filter, String beginDate, String endDate) {
+    /*public MutableLiveData<List<Articles>> getSearchArticles(String query, String filter, String beginDate, String endDate) {
         MutableLiveData<List<Articles>> searchArticles = new MutableLiveData<>();
         mNytApiInterfaceService.getResponseOfArticleSearch(query, filter, beginDate, endDate).enqueue(new Callback<ResponseOfArticleSearch>() {
             @Override
@@ -93,7 +91,7 @@ public class NytApiRepository {
             }
         });
         return searchArticles;
-    }
+    }*/
 
 
 }
