@@ -5,14 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,11 +34,26 @@ public class SearchActivity extends AppCompatActivity {
     public Button endbtndatepicker;
     @BindView(R.id.toolbar)
     public Toolbar toolbar;
+    @BindView(R.id.checkBox)
+    CheckBox checkbox1;
+    @BindView(R.id.checkBox2)
+    CheckBox checkbox2;
+    @BindView(R.id.checkBox3)
+    CheckBox checkbox3;
+    @BindView(R.id.checkBox4)
+    CheckBox checkbox4;
+    @BindView(R.id.checkBox5)
+    CheckBox checkbox5;
+    @BindView(R.id.checkBox6)
+    CheckBox checkbox6;
 
     Calendar c = Calendar.getInstance();
     int year = c.get(Calendar.YEAR), month = c.get(Calendar.MONTH), day = c.get(Calendar.DAY_OF_MONTH);
     private static SearchActivity searchActivity;
+    int i = 0;
 
+    List<String> filter;
+    String stringFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +76,14 @@ public class SearchActivity extends AppCompatActivity {
         bundle.putString("endDate", endbtndatepicker.getText().toString());
         launchTheSearch();
         bundle.putString("query", getSearchButton().getText().toString());
+        searchFilter(checkbox1);
+        searchFilter(checkbox2);
+        searchFilter(checkbox3);
+        searchFilter(checkbox4);
+        searchFilter(checkbox5);
+        searchFilter(checkbox6);
+        stringFilter = StringUtils.join(filter, ",");
+        bundle.putString("filter", stringFilter);
         startActivity(intent);
     }
 
@@ -64,6 +91,11 @@ public class SearchActivity extends AppCompatActivity {
         return searchButton;
     }
 
+    public void searchFilter(CheckBox checkBox) {
+        if (checkBox.isChecked()) {
+            filter.add(checkBox.getText().toString());
+        }
+    }
 
     public void datepickerShort(Button button1, Button button2) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");

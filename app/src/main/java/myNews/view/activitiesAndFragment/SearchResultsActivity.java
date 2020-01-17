@@ -36,10 +36,12 @@ public class SearchResultsActivity extends AppCompatActivity {
     private ArticlesAdapter adapter;
     private ViewModelMyNewsForSearchArticles mViewModelMyNewsForSearchArticles;
 
-    /*Bundle bundle = getIntent().getExtras();
+    Bundle bundle = getIntent().getExtras();
     String query = bundle.getString("query");
+    String fiter = bundle.getString("filter");
     String beginDate = bundle.getString("beginDate");
-    String endDate = bundle.getString("endDate");*/
+    String endDate = bundle.getString("endDate");
+
 
 
     @Override
@@ -55,7 +57,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SearchActivity.class)));
 
-        mViewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles("world", "20101010", "20101010"/*query, beginDate, endDate*/);
+        mViewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles("world", "20101010", "20101010"/*query, filter, beginDate, endDate*/);
         mViewModelMyNewsForSearchArticles.getNews().observe(this, this::updateList);
     }
 
