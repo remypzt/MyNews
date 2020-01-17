@@ -22,7 +22,7 @@ public class ViewModelMyNewsForSearchArticles extends androidx.lifecycle.ViewMod
     private MutableLiveData<List<Articles>> mArticles;
 
 
-    public ViewModelMyNewsForSearchArticles(String query, String beginDate, String endDate) {
+    public ViewModelMyNewsForSearchArticles(String query, String filter, String beginDate, String endDate) {
 
 
         if (beginDate == null) {

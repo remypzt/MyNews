@@ -36,13 +36,10 @@ public class SearchResultsActivity extends AppCompatActivity {
     private ArticlesAdapter adapter;
     private ViewModelMyNewsForSearchArticles mViewModelMyNewsForSearchArticles;
 
-    Bundle bundle = getIntent().getExtras();
-    String query = bundle.getString("query");
-    String fiter = bundle.getString("filter");
-    String beginDate = bundle.getString("beginDate");
-    String endDate = bundle.getString("endDate");
-
-
+    String query;
+    String filter;
+    String beginDate;
+    String endDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +47,20 @@ public class SearchResultsActivity extends AppCompatActivity {
         setContentView(R.layout.search_results_activity);
         ButterKnife.bind(this);
 
+
         this.configureRecyclerView();
 
+        Bundle bundle = getIntent().getExtras();
+        query = bundle.getString("query");
+        filter = bundle.getString("filter");
+        beginDate = bundle.getString("beginDate");
+        endDate = bundle.getString("endDate");
 
         //Back arrow
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SearchActivity.class)));
 
-        mViewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles("world", "20101010", "20101010"/*query, filter, beginDate, endDate*/);
+        mViewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles("world", null, "20101010", "20101010"/*query, filter, beginDate, endDate*/);
         mViewModelMyNewsForSearchArticles.getNews().observe(this, this::updateList);
     }
 

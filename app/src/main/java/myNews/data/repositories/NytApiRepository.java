@@ -46,7 +46,6 @@ public class NytApiRepository {
                     topStories.setValue(null);
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseOfTopStories> call, Throwable t) {
                 topStories.setValue(null);
@@ -66,7 +65,6 @@ public class NytApiRepository {
                     mostPopular.setValue(null);
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseOfMostPopular> call, Throwable t) {
                 mostPopular.setValue(null);
@@ -74,7 +72,6 @@ public class NytApiRepository {
         });
         return mostPopular;
     }
-
 
     public MutableLiveData<List<Articles>> getSearchArticles(String query, String filter, String beginDate, String endDate) {
         MutableLiveData<List<Articles>> searchArticles = new MutableLiveData<>();
@@ -87,7 +84,6 @@ public class NytApiRepository {
                     searchArticles.setValue(null);
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseOfArticleSearch> call, Throwable t) {
                 searchArticles.setValue(null);

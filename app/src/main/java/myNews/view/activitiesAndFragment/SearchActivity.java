@@ -26,6 +26,7 @@ import myNews.myNews.R;
  * Created by Remy Pouzet on 28/12/2019.
  */
 public class SearchActivity extends AppCompatActivity {
+
     @BindView(R.id.search_button)
     public Button searchButton;
     @BindView(R.id.date_of_beginning)
@@ -49,8 +50,6 @@ public class SearchActivity extends AppCompatActivity {
 
     Calendar c = Calendar.getInstance();
     int year = c.get(Calendar.YEAR), month = c.get(Calendar.MONTH), day = c.get(Calendar.DAY_OF_MONTH);
-    private static SearchActivity searchActivity;
-    int i = 0;
 
     List<String> filter;
     String stringFilter;
