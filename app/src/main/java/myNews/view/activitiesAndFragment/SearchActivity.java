@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -60,8 +61,9 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.search);
         ButterKnife.bind(this);
 
-        Intent intent = new Intent(this, SearchResultsActivity.class);
-        Bundle bundle = new Bundle();
+        filter = new ArrayList<>();
+
+
 
 
         //Back arrow
@@ -70,20 +72,11 @@ public class SearchActivity extends AppCompatActivity {
 
 
         datepickerShort(beginbtndatepicker, endbtndatepicker);
-        bundle.putString("beginDate", beginbtndatepicker.getText().toString());
+
         datepickerShort(endbtndatepicker, beginbtndatepicker);
-        bundle.putString("endDate", endbtndatepicker.getText().toString());
+
         launchTheSearch();
-        bundle.putString("query", getSearchButton().getText().toString());
-        searchFilter(checkbox1);
-        searchFilter(checkbox2);
-        searchFilter(checkbox3);
-        searchFilter(checkbox4);
-        searchFilter(checkbox5);
-        searchFilter(checkbox6);
-        stringFilter = StringUtils.join(filter, ",");
-        bundle.putString("filter", stringFilter);
-        startActivity(intent);
+
     }
 
     public Button getSearchButton() {
@@ -133,8 +126,21 @@ public class SearchActivity extends AppCompatActivity {
          @Override
             public void onClick(final View v) {
 
-             Intent SearchResultsActivity = new Intent(SearchActivity.this, SearchResultsActivity.class);
-             startActivity(SearchResultsActivity);
+             Intent searchResultsActivity = new Intent(SearchActivity.this, SearchResultsActivity.class);
+             Bundle bundle = new Bundle();
+             bundle.putString("beginDate", beginbtndatepicker.getText().toString());
+             bundle.putString("endDate", endbtndatepicker.getText().toString());
+             bundle.putString("query", getSearchButton().getText().toString());
+             searchFilter(checkbox1);
+             searchFilter(checkbox2);
+             searchFilter(checkbox3);
+             searchFilter(checkbox4);
+             searchFilter(checkbox5);
+             searchFilter(checkbox6);
+             stringFilter = StringUtils.join(filter, " ");
+             bundle.putString("filter", stringFilter);
+             searchResultsActivity.putExtras(bundle);
+             startActivity(searchResultsActivity);
          }
         });
     }

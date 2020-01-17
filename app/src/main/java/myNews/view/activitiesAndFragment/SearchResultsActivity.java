@@ -51,16 +51,19 @@ public class SearchResultsActivity extends AppCompatActivity {
         this.configureRecyclerView();
 
         Bundle bundle = getIntent().getExtras();
-        query = bundle.getString("query");
-        filter = bundle.getString("filter");
-        beginDate = bundle.getString("beginDate");
-        endDate = bundle.getString("endDate");
+
+        if (bundle != null) {
+            query = bundle.getString("query");
+            filter = bundle.getString("filter");
+            beginDate = bundle.getString("beginDate");
+            endDate = bundle.getString("endDate");
+        }
 
         //Back arrow
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SearchActivity.class)));
 
-        mViewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles("world", null, "20101010", "20101010"/*query, filter, beginDate, endDate*/);
+        mViewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles(query, filter, beginDate, endDate);
         mViewModelMyNewsForSearchArticles.getNews().observe(this, this::updateList);
     }
 
@@ -83,7 +86,9 @@ public class SearchResultsActivity extends AppCompatActivity {
 
     public void updateList(List<Articles> articlesList) {
         articles.clear();
-        articles.addAll(articlesList);
+        if (articlesList != null) {
+            articles.addAll(articlesList);
+        }
         adapter.notifyDataSetChanged();
     }
 }

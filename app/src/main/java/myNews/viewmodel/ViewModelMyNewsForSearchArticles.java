@@ -10,7 +10,6 @@ import java.util.Locale;
 
 import myNews.data.repositories.NytApiRepository;
 import myNews.data.repositories.model.Articles;
-import myNews.view.activitiesAndFragment.SearchActivity;
 
 /**
  * Created by Remy Pouzet on 14/01/2020.
@@ -18,12 +17,12 @@ import myNews.view.activitiesAndFragment.SearchActivity;
 public class ViewModelMyNewsForSearchArticles extends androidx.lifecycle.ViewModel {
 
     private NytApiRepository mNytApiRepository;
-    private SearchActivity mSearchActivity;
     private MutableLiveData<List<Articles>> mArticles;
 
 
     public ViewModelMyNewsForSearchArticles(String query, String filter, String beginDate, String endDate) {
 
+        mNytApiRepository = NytApiRepository.getInstance();
 
         if (beginDate == null) {
             beginDate = "01012000";

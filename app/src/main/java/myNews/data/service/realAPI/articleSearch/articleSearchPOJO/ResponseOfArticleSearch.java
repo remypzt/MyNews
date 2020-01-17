@@ -1,71 +1,43 @@
+
 package myNews.data.service.realAPI.articleSearch.articleSearchPOJO;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 import javax.annotation.Generated;
 
-@Generated("com.robohorse.robopojogenerator")
+@Generated("net.hexar.json2pojo")
+@SuppressWarnings("unused")
 public class ResponseOfArticleSearch {
 
-	@SerializedName("copyright")
-	private String copyright;
+    @SerializedName("copyright")
+    private String mCopyright;
+    @SerializedName("response")
+    private Response mResponse;
+    @SerializedName("status")
+    private String mStatus;
 
-	@SerializedName("mResponseOfArticleSearch")
-	private ResponseOfArticleSearch mResponseOfArticleSearch;
+    public String getCopyright() {
+        return mCopyright;
+    }
 
-	@SerializedName("status")
-	private String status;
+    public void setCopyright(String copyright) {
+        mCopyright = copyright;
+    }
 
-	@SerializedName("docs")
-	private List<DocsItemOfArticleSearch> docs;
+    public Response getResponse() {
+        return mResponse;
+    }
 
-	@SerializedName("mMetaOfArticleSearch")
-	private MetaOfArticleSearch mMetaOfArticleSearch;
+    public void setResponse(Response response) {
+        mResponse = response;
+    }
 
-	public String getCopyright() {
-		return copyright;
-	}
+    public String getStatus() {
+        return mStatus;
+    }
 
-	public void setCopyright(String copyright) {
-		this.copyright = copyright;
-	}
+    public void setStatus(String status) {
+        mStatus = status;
+    }
 
-	public ResponseOfArticleSearch getResponseOfArticleSearch() {
-		return mResponseOfArticleSearch;
-	}
-
-	public void setResponseOfArticleSearch(ResponseOfArticleSearch responseOfArticleSearch) {
-		this.mResponseOfArticleSearch = responseOfArticleSearch;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public List<DocsItemOfArticleSearch> getDocs() {
-		return docs;
-	}
-
-	public void setDocs(List<DocsItemOfArticleSearch> docs) {
-		this.docs = docs;
-	}
-
-	public MetaOfArticleSearch getMetaOfArticleSearch() {
-		return mMetaOfArticleSearch;
-	}
-
-	public void setMetaOfArticleSearch(MetaOfArticleSearch metaOfArticleSearch) {
-		this.mMetaOfArticleSearch = metaOfArticleSearch;
-	}
-
-	@Override
-	public String toString() {
-		return "ResponseOfArticleSearch{" + "copyright = '" + copyright + '\'' + ",mResponseOfArticleSearch = '" + mResponseOfArticleSearch + '\'' + ",status = '" + status + '\'' + ",docs = '" + docs + '\'' + ",mMetaOfArticleSearch = '" + mMetaOfArticleSearch + '\'' + "}";
-	}
 }
