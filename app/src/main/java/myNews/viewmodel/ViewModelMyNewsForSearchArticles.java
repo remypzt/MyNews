@@ -3,10 +3,7 @@ package myNews.viewmodel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import myNews.data.repositories.NytApiRepository;
 import myNews.data.repositories.model.Articles;
@@ -24,18 +21,8 @@ public class ViewModelMyNewsForSearchArticles extends androidx.lifecycle.ViewMod
 
         mNytApiRepository = NytApiRepository.getInstance();
 
-        if (beginDate == null) {
-            beginDate = "01012000";
-        }
 
-        if (endDate == null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
-            String currentDate = sdf.format(new Date());
-
-            beginDate = currentDate;
-        }
-
-        mArticles = mNytApiRepository.getSearchArticles(query, null, beginDate, endDate);
+        mArticles = mNytApiRepository.getSearchArticles(query, filter, beginDate, endDate);
     }
 
     public LiveData<List<Articles>> getNews() {

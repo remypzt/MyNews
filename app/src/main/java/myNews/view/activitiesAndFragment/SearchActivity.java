@@ -11,13 +11,17 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 import org.apache.commons.lang3.StringUtils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +52,8 @@ public class SearchActivity extends AppCompatActivity {
     CheckBox checkbox5;
     @BindView(R.id.checkBox6)
     CheckBox checkbox6;
+    @BindView(R.id.input_search_content)
+    TextInputEditText inputSearchContent;
 
     Calendar c = Calendar.getInstance();
     int year = c.get(Calendar.YEAR), month = c.get(Calendar.MONTH), day = c.get(Calendar.DAY_OF_MONTH);
@@ -55,33 +61,27 @@ public class SearchActivity extends AppCompatActivity {
     List<String> filter;
     String stringFilter;
 
+    String beginDateInRightFormat;
+    String endDateInRightFormat;
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
         ButterKnife.bind(this);
-
         filter = new ArrayList<>();
-
-
-
-
         //Back arrow
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MainActivity.class)));
 
-
         datepickerShort(beginbtndatepicker, endbtndatepicker);
-
         datepickerShort(endbtndatepicker, beginbtndatepicker);
 
         launchTheSearch();
 
     }
 
-    public Button getSearchButton() {
-        return searchButton;
-    }
 
     public void searchFilter(CheckBox checkBox) {
         if (checkBox.isChecked()) {
@@ -90,19 +90,21 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void datepickerShort(Button button1, Button button2) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+        SimpleDateFormat formatter2 = new SimpleDateFormat("yyyyMMdd");
         button1.setOnClickListener(v -> {
             DatePickerDialog dd = new DatePickerDialog(SearchActivity.this, (view, year, monthOfYear, dayOfMonth) -> {
                 try {
                     String dateInString = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
                     Date date = formatter.parse(dateInString);
+
+                    String dateInString2 = year + "" + (monthOfYear + 1) + "" + dayOfMonth;
+                    Date date2 = formatter2.parse(dateInString2);
+
                     button1.setText(formatter.format(date));
 
-                    String dateInStringForData = year + "" + (monthOfYear + 1) + "" + dayOfMonth;
-                    button1.setPrivateImeOptions(dateInStringForData);
-
-
-                    if (button2.getText().length() > 1) {
+                    // check that dates cannot be paradoxal between them
+                    if (button1.getText().toString().length() > 0 && button2.getText().toString().length() > 0) {
                         Date dateOfBeginning = formatter.parse((String) button1.getText());
                         Date dateOfEnding = formatter.parse((String) button2.getText());
                         int comparison = dateOfBeginning.compareTo(dateOfEnding);
@@ -112,39 +114,70 @@ public class SearchActivity extends AppCompatActivity {
                         } else if (comparison < 0 && button2 != endbtndatepicker) {
                             Toast.makeText(SearchActivity.this, "la date fin doit être ultérieure à celle de début", Toast.LENGTH_LONG).show();
                             button1.setText(null);
+
                         }
+                    }
+
+                    if (button1 != endbtndatepicker) {
+                        Date dateOfBeginning = formatter.parse(dateInString);
+                        checkDateWithToday(dateOfBeginning, button1);
+
+                        beginDateInRightFormat = formatter2.format(date2);
+                    } else {
+                        Date dateOfEnding = formatter.parse(dateInString);
+                        checkDateWithToday(dateOfEnding, button1);
+
+                        endDateInRightFormat = formatter2.format(date2);
                     }
                 } catch (Exception ex) {
                 }
             }, year, month, day);
+
             dd.show();
         });
     }
 
+    // check dates cannot be place in the future
+    public void checkDateWithToday(Date date, Button button) {
+        Date today = new Date();
+        String resultOfToday = formatter.format(today);
+        Date dateOfToday = null;
+        try {
+            dateOfToday = formatter.parse(resultOfToday);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        int todayCompareWithDate = dateOfToday.compareTo(date);
+        if (todayCompareWithDate < 0) {
+            Toast.makeText(SearchActivity.this, "la date sélectionnée ne peut être ultérieur à celle d'aujourd'hui", Toast.LENGTH_LONG).show();
+            button.setText(null);
+        }
+    }
     private void launchTheSearch() {
-        searchButton.setOnClickListener(new View.OnClickListener(){
-         @Override
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(final View v) {
 
-             Intent searchResultsActivity = new Intent(SearchActivity.this, SearchResultsActivity.class);
-             Bundle bundle = new Bundle();
-             bundle.putString("beginDate", beginbtndatepicker.getText().toString());
-             bundle.putString("endDate", endbtndatepicker.getText().toString());
-             bundle.putString("query", getSearchButton().getText().toString());
-             searchFilter(checkbox1);
-             searchFilter(checkbox2);
-             searchFilter(checkbox3);
-             searchFilter(checkbox4);
-             searchFilter(checkbox5);
-             searchFilter(checkbox6);
-             stringFilter = StringUtils.join(filter, " ");
-             bundle.putString("filter", stringFilter);
-             searchResultsActivity.putExtras(bundle);
-             startActivity(searchResultsActivity);
-         }
+                Intent searchResultsActivity = new Intent(SearchActivity.this, SearchResultsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("beginDate", beginDateInRightFormat);
+                bundle.putString("endDate", endDateInRightFormat);
+                bundle.putString("query", Objects.requireNonNull(inputSearchContent.getText()).toString());
+                searchFilter(checkbox1);
+                searchFilter(checkbox2);
+                searchFilter(checkbox3);
+                searchFilter(checkbox4);
+                searchFilter(checkbox5);
+                searchFilter(checkbox6);
+                stringFilter = StringUtils.join(filter, " ");
+                bundle.putString("filter", stringFilter);
+                searchResultsActivity.putExtras(bundle);
+                startActivity(searchResultsActivity);
+            }
         });
     }
 }
+
 
 
 

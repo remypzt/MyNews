@@ -1,8 +1,6 @@
 package myNews.others.utils;
 
 
-import android.annotation.SuppressLint;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,6 +19,7 @@ import myNews.myNews.R;
  */
 public class UtilsForArticleSearch {
     private static String publishedDateAdaptedForArticlesFormat;
+    static Date publishedDateInDateFormat;
 
     public static List<Articles> generateArticlesFromArticleSearch(ResponseOfArticleSearch responseOfArticleSearch) {
         List<Articles> articleSearchArticles = new ArrayList<>();
@@ -35,18 +34,21 @@ public class UtilsForArticleSearch {
 
     private static Articles addArticleFromArticleSearch(Doc responseOfArticleSearch) {
         String multimediaUrl = responseOfArticleSearch.getMultimedia().size() != 0 ? responseOfArticleSearch.getMultimedia().get(0).getUrl() : "";
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat publishedDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
-        Date publishedDateInDateFormat;
+
+        SimpleDateFormat publishedDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+
+
         try {
             publishedDateInDateFormat = publishedDate.parse(responseOfArticleSearch.getPubDate());
-            @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            assert publishedDateInDateFormat != null;
-            publishedDateAdaptedForArticlesFormat = dateFormat.format(publishedDateInDateFormat);
-            System.out.println(publishedDateAdaptedForArticlesFormat);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return new Articles(R.drawable.test, multimediaUrl, responseOfArticleSearch.getSectionName(), null, responseOfArticleSearch.getHeadline().getMain(), publishedDateAdaptedForArticlesFormat);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        publishedDateAdaptedForArticlesFormat = dateFormat.format(publishedDateInDateFormat);
+
+
+        return new Articles(R.drawable.test, multimediaUrl, responseOfArticleSearch.getSectionName(), "", responseOfArticleSearch.getHeadline().getMain(), publishedDateAdaptedForArticlesFormat);
     }
 
 }
