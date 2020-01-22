@@ -60,6 +60,7 @@ public class SearchActivity extends AppCompatActivity {
 
     List<String> filter;
     String stringFilter;
+    Date date2;
 
     String beginDateInRightFormat;
     String endDateInRightFormat;
@@ -79,7 +80,6 @@ public class SearchActivity extends AppCompatActivity {
         datepickerShort(endbtndatepicker, beginbtndatepicker);
 
         launchTheSearch();
-
     }
 
 
@@ -99,37 +99,30 @@ public class SearchActivity extends AppCompatActivity {
                     Date date = formatter.parse(dateInString);
 
                     String dateInString2 = year + "" + (monthOfYear + 1) + "" + dayOfMonth;
-                    Date date2 = formatter2.parse(dateInString2);
+                    if (dayOfMonth > 9) {
+                        date2 = formatter2.parse(dateInString2);
+                    } else {
+                        String dateInString3 = year + "" + (monthOfYear + 1) + "0" + dayOfMonth;
+                        date2 = formatter2.parse(dateInString3);
+                    }
 
                     button1.setText(formatter.format(date));
 
                     // check that dates cannot be paradoxal between them
                     if (button1.getText().toString().length() > 0 && button2.getText().toString().length() > 0) {
-                        Date dateOfBeginning = formatter.parse((String) button1.getText());
-                        Date dateOfEnding = formatter.parse((String) button2.getText());
-                        int comparison = dateOfBeginning.compareTo(dateOfEnding);
-                        if (comparison > 0 && button1 == beginbtndatepicker) {
-                            Toast.makeText(SearchActivity.this, "la date de début doit être antérieure à celle de fin", Toast.LENGTH_LONG).show();
-                            button1.setText(null);
-                        } else if (comparison < 0 && button2 != endbtndatepicker) {
-                            Toast.makeText(SearchActivity.this, "la date fin doit être ultérieure à celle de début", Toast.LENGTH_LONG).show();
-                            button1.setText(null);
-
-                        }
+                        checkDateBetweenThem(button1, button2);
                     }
-
                     if (button1 != endbtndatepicker) {
                         Date dateOfBeginning = formatter.parse(dateInString);
                         checkDateWithToday(dateOfBeginning, button1);
-
                         beginDateInRightFormat = formatter2.format(date2);
                     } else {
                         Date dateOfEnding = formatter.parse(dateInString);
                         checkDateWithToday(dateOfEnding, button1);
-
                         endDateInRightFormat = formatter2.format(date2);
                     }
                 } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             }, year, month, day);
 
@@ -151,6 +144,30 @@ public class SearchActivity extends AppCompatActivity {
         if (todayCompareWithDate < 0) {
             Toast.makeText(SearchActivity.this, "la date sélectionnée ne peut être ultérieur à celle d'aujourd'hui", Toast.LENGTH_LONG).show();
             button.setText(null);
+        }
+    }
+
+    public void checkDateBetweenThem(Button button1, Button button2) {
+        Date dateOfBeginning = null;
+        try {
+            dateOfBeginning = formatter.parse((String) button1.getText());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Date dateOfEnding = null;
+        try {
+            dateOfEnding = formatter.parse((String) button2.getText());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        int comparison = dateOfBeginning.compareTo(dateOfEnding);
+        if (comparison > 0 && button1 == beginbtndatepicker) {
+            Toast.makeText(SearchActivity.this, "la date de début doit être antérieure à celle de fin", Toast.LENGTH_LONG).show();
+            button1.setText(null);
+        } else if (comparison < 0 && button2 != endbtndatepicker) {
+            Toast.makeText(SearchActivity.this, "la date fin doit être ultérieure à celle de début", Toast.LENGTH_LONG).show();
+            button1.setText(null);
+
         }
     }
     private void launchTheSearch() {
