@@ -123,6 +123,7 @@ public class SetNotificationsActivity extends AppCompatActivity {
 
 
     public void manageDates() {
+        // could be useless if endDate pass by SearchResultsActivity.configureSearchParameters
 
         SimpleDateFormat formatter2 = new SimpleDateFormat("yyyyMMdd");
         Date today = new Date();
