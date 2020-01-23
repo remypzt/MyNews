@@ -24,6 +24,7 @@ public class NytApiRepository {
     private static NytApiRepository nytApiRepository;
     private final NytApiInterfaceService mNytApiInterfaceService;
 
+
     private NytApiRepository() {
         mNytApiInterfaceService = RetrofitService.cteateService(NytApiInterfaceService.class);
     }

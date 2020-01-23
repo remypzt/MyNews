@@ -16,7 +16,7 @@ import static myNews.others.Constant.API_KEY;
  */
 public interface NytApiInterfaceService {
     @GET("topstories/v2/{section}.json?" + API_KEY)
-    Call<ResponseOfTopStories> getResponseOfTopStories(@Path("section") String section);
+    Call<ResponseOfTopStories> getResponseOfTopStories(@Path("section") String technology);
 
     @GET("mostpopular/v2/viewed/7.json?" + API_KEY)
     Call<ResponseOfMostPopular> getResponseOfMostPopular();

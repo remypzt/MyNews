@@ -98,9 +98,14 @@ public class SearchResultsActivity extends AppCompatActivity {
         if (articlesList != null) {
             articles.addAll(articlesList);
             if (articlesList.size() == 0) {
+                Intent searchActivity = new Intent(SearchResultsActivity.this, SearchActivity.class);
+                startActivity(searchActivity);
                 Toast.makeText(SearchResultsActivity.this, "Il n'y a aucuns résultats", Toast.LENGTH_LONG).show();
+
             }
         } else {
+            Intent searchActivity = new Intent(SearchResultsActivity.this, SearchActivity.class);
+            startActivity(searchActivity);
             Toast.makeText(SearchResultsActivity.this, "BAD_REQUEST", Toast.LENGTH_LONG).show();
         }
 

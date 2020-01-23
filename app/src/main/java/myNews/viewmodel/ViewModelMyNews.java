@@ -28,8 +28,10 @@ public class ViewModelMyNews extends androidx.lifecycle.ViewModel {
             case 1:
                 mArticles = mNytApiRepository.getMostPopular();
                 break;
-            default:
+            case 2:
                 mArticles = mNytApiRepository.getTopStories("technology");
+                break;
+
         }
     }
 

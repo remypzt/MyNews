@@ -98,8 +98,8 @@ public class SearchActivity extends AppCompatActivity {
                     String dateInString = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
                     Date date = formatter.parse(dateInString);
 
-                    String dateInString2 = year + "" + (monthOfYear + 1) + "" + dayOfMonth;
                     if (dayOfMonth > 9) {
+                        String dateInString2 = year + "" + (monthOfYear + 1) + "" + dayOfMonth;
                         date2 = formatter2.parse(dateInString2);
                     } else {
                         String dateInString3 = year + "" + (monthOfYear + 1) + "0" + dayOfMonth;
@@ -112,6 +112,8 @@ public class SearchActivity extends AppCompatActivity {
                     if (button1.getText().toString().length() > 0 && button2.getText().toString().length() > 0) {
                         checkDateBetweenThem(button1, button2);
                     }
+
+                    // check dates cannot be place in the future
                     if (button1 != endbtndatepicker) {
                         Date dateOfBeginning = formatter.parse(dateInString);
                         checkDateWithToday(dateOfBeginning, button1);
