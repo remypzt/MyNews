@@ -27,7 +27,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import myNews.data.repositories.model.Articles;
 import myNews.myNews.R;
-import myNews.view.adaptater.ArticlesAdapter;
 import myNews.viewmodel.ViewModelMyNewsForSearchArticles;
 
 /**
@@ -67,7 +66,7 @@ public class SetNotificationsActivity extends AppCompatActivity {
     ViewModelMyNewsForSearchArticles viewModelMyNewsForSearchArticles;
     //FOR DATA
     private List<Articles> articles;
-    private ArticlesAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +143,7 @@ public class SetNotificationsActivity extends AppCompatActivity {
         bundle.putString("endDate", endDateInRightFormat);
         bundle.putString("query", Objects.requireNonNull(inputSearchContent.getText()).toString());
         bundle.putString("filter", stringFilter);
+
         searchResultsActivity.putExtras(bundle);
         notifyTheUser();
     }
@@ -151,7 +151,10 @@ public class SetNotificationsActivity extends AppCompatActivity {
     public void notifyTheUser() {
         viewModelMyNewsForSearchArticles.getNews().observe(this, this::updateList);
 
-        //TODO notify user
+        //TODO program task for every days (use sharedpreferences ?)
+        // notify user (enable button, enable icon in menu, send notification to the device)
+        // userscan choose an hour of notification OR to be notify at every new results
+
         resultsDisplay();
 
 
