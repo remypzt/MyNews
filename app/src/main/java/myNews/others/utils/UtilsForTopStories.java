@@ -17,8 +17,10 @@ import myNews.myNews.R;
 /**
  * Created by Remy Pouzet on 09/12/2019.
  */
+
 public class UtilsForTopStories {
     private static String publishedDateAdaptedForArticlesFormat;
+    public static String multimediaUrl;
 
     public static List<Articles> generateArticlesFromTopStories(ResponseOfTopStories responseOfTopStories) {
         List<Articles> topStoriesArticles = new ArrayList<>();
@@ -31,7 +33,13 @@ public class UtilsForTopStories {
     }
 
     private static Articles addArticleFromTopStories(ResultsItemOfTopStories resultsItemOfTopStories) {
-        String multimediaUrl = resultsItemOfTopStories.getMultimedia().size() != 0 ? resultsItemOfTopStories.getMultimedia().get(0).getUrl() : "";
+
+        if (resultsItemOfTopStories.getMultimedia() != null) {
+            multimediaUrl = resultsItemOfTopStories.getMultimedia().size() != 0 ? resultsItemOfTopStories.getMultimedia().get(0).getUrl() : "";
+        } else {
+            multimediaUrl = "";
+        }
+
         @SuppressLint("SimpleDateFormat") SimpleDateFormat publishedDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
         Date publishedDateInDateFormat;
         try {
