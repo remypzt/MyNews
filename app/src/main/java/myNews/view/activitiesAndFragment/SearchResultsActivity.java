@@ -1,6 +1,7 @@
 package myNews.view.activitiesAndFragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -38,10 +39,9 @@ public class SearchResultsActivity extends AppCompatActivity {
     private List<Articles> articles;
     private ArticlesAdapter adapter;
 
-    String query;
-    String filter;
-    String beginDate;
-    String endDate;
+    public static final String PREFS = "PREFS", PREF_KEY_BEGIN_DATE = "PREF_KEY_BEGIN_DATE", PREF_KEY_FILTER = "PREF_KEY_FILTER", PREF_KEY_QUERY = "PREF_KEY_QUERY";
+    String query, filter, beginDate, endDate;
+    private SharedPreferences mPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +51,10 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         this.configureRecyclerView();
 
-        configureSearchParameters();
-
-        //Back arrow
+        mPreferences = getSharedPreferences(PREFS, MODE_PRIVATE);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
-        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SearchActivity.class)));
+
+        configureSearchParameters();
 
         ViewModelMyNewsForSearchArticles viewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles(query, filter, beginDate, endDate);
         viewModelMyNewsForSearchArticles.getNews().observe(this, this::updateList);
@@ -63,7 +62,6 @@ public class SearchResultsActivity extends AppCompatActivity {
 
 
     public void configureRecyclerView() {
-
         // 3.1 - Reset list
         this.articles = new ArrayList<>();
         // 3.2 - Create adapter passing the list of articles
@@ -79,17 +77,28 @@ public class SearchResultsActivity extends AppCompatActivity {
     }
 
     public void configureSearchParameters() {
-        Bundle bundle = getIntent().getExtras();
-
-        query = bundle.getString("query");
-        filter = bundle.getString("filter");
-        beginDate = bundle.getString("beginDate");
-        endDate = bundle.getString("endDate");
-
+        if (getIntent().getExtras() != null) {
+            Bundle bundle = getIntent().getExtras();
+            query = bundle.getString("query");
+            filter = bundle.getString("filter");
+            beginDate = bundle.getString("beginDate");
+            endDate = bundle.getString("endDate");
+            //Back arrow
+            toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SearchActivity.class)));
+        } else {
+            query = mPreferences.getString(PREF_KEY_QUERY, "");
+            filter = mPreferences.getString(PREF_KEY_FILTER, "");
+            beginDate = mPreferences.getString(PREF_KEY_BEGIN_DATE, null);
+            //Back arrow
+            toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SetNotificationsActivity.class)));
+        }
         if (endDate == null) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
             String currentDate = sdf.format(new Date());
             endDate = currentDate;
+        }
+        if (beginDate == null) {
+            beginDate = "19000101";
         }
     }
 
@@ -101,14 +110,12 @@ public class SearchResultsActivity extends AppCompatActivity {
                 Intent searchActivity = new Intent(SearchResultsActivity.this, SearchActivity.class);
                 startActivity(searchActivity);
                 Toast.makeText(SearchResultsActivity.this, "Il n'y a aucuns résultats", Toast.LENGTH_LONG).show();
-
             }
         } else {
             Intent searchActivity = new Intent(SearchResultsActivity.this, SearchActivity.class);
             startActivity(searchActivity);
             Toast.makeText(SearchResultsActivity.this, "BAD_REQUEST", Toast.LENGTH_LONG).show();
         }
-
         adapter.notifyDataSetChanged();
     }
 }

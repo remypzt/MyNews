@@ -60,11 +60,11 @@ public class SearchActivity extends AppCompatActivity {
 
     List<String> filter;
     String stringFilter;
-    Date date2;
+    Date dateBackEndFormat;
 
     String beginDateInRightFormat;
     String endDateInRightFormat;
-    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat formatterUIFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,22 +91,22 @@ public class SearchActivity extends AppCompatActivity {
 
     public void datepickerShort(Button button1, Button button2) {
 
-        SimpleDateFormat formatter2 = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat formatterBackEndFormat = new SimpleDateFormat("yyyyMMdd");
         button1.setOnClickListener(v -> {
             DatePickerDialog dd = new DatePickerDialog(SearchActivity.this, (view, year, monthOfYear, dayOfMonth) -> {
                 try {
-                    String dateInString = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                    Date date = formatter.parse(dateInString);
+                    String dateInStringUIFormat = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                    Date dateUIFormat = formatterUIFormat.parse(dateInStringUIFormat);
 
                     if (dayOfMonth > 9) {
-                        String dateInString2 = year + "" + (monthOfYear + 1) + "" + dayOfMonth;
-                        date2 = formatter2.parse(dateInString2);
+                        String dateInStringBackEndFormat = year + "" + (monthOfYear + 1) + "" + dayOfMonth;
+                        dateBackEndFormat = formatterBackEndFormat.parse(dateInStringBackEndFormat);
                     } else {
-                        String dateInString3 = year + "" + (monthOfYear + 1) + "0" + dayOfMonth;
-                        date2 = formatter2.parse(dateInString3);
+                        String dateInStringBackEndFormatException = year + "" + (monthOfYear + 1) + "0" + dayOfMonth;
+                        dateBackEndFormat = formatterBackEndFormat.parse(dateInStringBackEndFormatException);
                     }
 
-                    button1.setText(formatter.format(date));
+                    button1.setText(formatterUIFormat.format(dateUIFormat));
 
                     // check that dates cannot be paradoxal between them
                     if (button1.getText().toString().length() > 0 && button2.getText().toString().length() > 0) {
@@ -115,19 +115,18 @@ public class SearchActivity extends AppCompatActivity {
 
                     // check dates cannot be place in the future
                     if (button1 != endbtndatepicker) {
-                        Date dateOfBeginning = formatter.parse(dateInString);
+                        Date dateOfBeginning = formatterUIFormat.parse(dateInStringUIFormat);
                         checkDateWithToday(dateOfBeginning, button1);
-                        beginDateInRightFormat = formatter2.format(date2);
+                        beginDateInRightFormat = formatterBackEndFormat.format(dateBackEndFormat);
                     } else {
-                        Date dateOfEnding = formatter.parse(dateInString);
+                        Date dateOfEnding = formatterUIFormat.parse(dateInStringUIFormat);
                         checkDateWithToday(dateOfEnding, button1);
-                        endDateInRightFormat = formatter2.format(date2);
+                        endDateInRightFormat = formatterBackEndFormat.format(dateBackEndFormat);
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }, year, month, day);
-
             dd.show();
         });
     }
@@ -135,10 +134,10 @@ public class SearchActivity extends AppCompatActivity {
     // check dates cannot be place in the future
     public void checkDateWithToday(Date date, Button button) {
         Date today = new Date();
-        String resultOfToday = formatter.format(today);
+        String resultOfToday = formatterUIFormat.format(today);
         Date dateOfToday = null;
         try {
-            dateOfToday = formatter.parse(resultOfToday);
+            dateOfToday = formatterUIFormat.parse(resultOfToday);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -152,13 +151,13 @@ public class SearchActivity extends AppCompatActivity {
     public void checkDateBetweenThem(Button button1, Button button2) {
         Date dateOfBeginning = null;
         try {
-            dateOfBeginning = formatter.parse((String) button1.getText());
+            dateOfBeginning = formatterUIFormat.parse((String) button1.getText());
         } catch (ParseException e) {
             e.printStackTrace();
         }
         Date dateOfEnding = null;
         try {
-            dateOfEnding = formatter.parse((String) button2.getText());
+            dateOfEnding = formatterUIFormat.parse((String) button2.getText());
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -190,6 +189,7 @@ public class SearchActivity extends AppCompatActivity {
                 searchFilter(checkbox6);
                 stringFilter = StringUtils.join(filter, " ");
                 bundle.putString("filter", stringFilter);
+                // bundle.putString("origin", "fromSearchActivity.java");
                 searchResultsActivity.putExtras(bundle);
                 startActivity(searchResultsActivity);
             }

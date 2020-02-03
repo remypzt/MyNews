@@ -1,6 +1,7 @@
 package myNews.view.activitiesAndFragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,21 +12,25 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.work.Constraints;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import myNews.data.repositories.model.Articles;
+import myNews.data.service.UploadWorker;
 import myNews.myNews.R;
 import myNews.viewmodel.ViewModelMyNewsForSearchArticles;
 
@@ -33,8 +38,7 @@ import myNews.viewmodel.ViewModelMyNewsForSearchArticles;
  * Created by Remy Pouzet on 28/12/2019.
  */
 public class SetNotificationsActivity extends AppCompatActivity {
-    @BindView(R.id.toolbar)
-    public Toolbar toolbar;
+    public static final String PREFS = "PREFS", PREF_KEY_BEGIN_DATE = "PREF_KEY_BEGIN_DATE", PREF_KEY_FILTER = "PREF_KEY_FILTER", PREF_KEY_QUERY = "PREF_KEY_QUERY";
     @BindView(R.id.enable_notifications)
     Switch mSwitch;
     @BindView(R.id.checkBox)
@@ -53,20 +57,18 @@ public class SetNotificationsActivity extends AppCompatActivity {
     TextInputEditText inputSearchContent;
     @BindView(R.id.new_results)
     Button newResultsButton;
-    String query;
-    String filter;
-    String beginDate;
-    String endDate;
+    public SharedPreferences mPreferences;
+
     List<String> listFilters;
-    String stringFilter;
-    String alertQueryTerm;
-    String beginDateInRightFormat;
-    String endDateInRightFormat;
+
     Intent searchResultsActivity;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     ViewModelMyNewsForSearchArticles viewModelMyNewsForSearchArticles;
     //FOR DATA
     private List<Articles> articles;
-
+    String query, filter, beginDate, endDate, stringFilter, alertQueryTerm, beginDateInRightFormat;
+    Intent uploadWorkerActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +78,9 @@ public class SetNotificationsActivity extends AppCompatActivity {
 
         newResultsButton.setVisibility(View.INVISIBLE);
         this.articles = new ArrayList<>();
+        listFilters = new ArrayList<>();
 
+        mPreferences = getSharedPreferences(PREFS, MODE_PRIVATE);
 
         //Back arrow
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
@@ -123,49 +127,46 @@ public class SetNotificationsActivity extends AppCompatActivity {
 
 
     public void manageDates() {
-        // could be useless if endDate pass by SearchResultsActivity.configureSearchParameters
-
-        SimpleDateFormat formatter2 = new SimpleDateFormat("yyyyMMdd");
-        Date today = new Date();
-        String resultOfToday = formatter2.format(today);
-        Date dateOfToday = null;
-        try {
-            dateOfToday = formatter2.parse(resultOfToday);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        endDateInRightFormat = resultOfToday;
+        SimpleDateFormat formatterBackEndFormat = new SimpleDateFormat("yyyyMMdd");
+        //Initialisation du Calendar
+        Calendar cal = Calendar.getInstance();
+        //Recuperation de la date J-1
+        cal.add(Calendar.DAY_OF_MONTH, -1);
+        //Formattage de la date J-1
+        String resultOfYersterday = formatterBackEndFormat.format(cal.getTime());
+        beginDateInRightFormat = resultOfYersterday;
     }
 
     public void searchConfiguration() {
         searchResultsActivity = new Intent(SetNotificationsActivity.this, SearchResultsActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("beginDate", beginDateInRightFormat);
-        bundle.putString("endDate", endDateInRightFormat);
-        bundle.putString("query", Objects.requireNonNull(inputSearchContent.getText()).toString());
-        bundle.putString("filter", stringFilter);
-
-        searchResultsActivity.putExtras(bundle);
+        mPreferences.edit().putString(PREF_KEY_BEGIN_DATE, beginDateInRightFormat).apply();
+        mPreferences.edit().putString(PREF_KEY_FILTER, stringFilter).apply();
+        mPreferences.edit().putString(PREF_KEY_QUERY, alertQueryTerm).apply();
         notifyTheUser();
     }
 
     public void notifyTheUser() {
         viewModelMyNewsForSearchArticles.getNews().observe(this, this::updateList);
 
-        //TODO program task for every days (use sharedpreferences ?)
-        // notify user (enable button, enable icon in menu, send notification to the device)
+        //TODO
         // userscan choose an hour of notification OR to be notify at every new results
 
+        // uploadWorkerActivity = new Intent(SetNotificationsActivity.this, UploadWorker.class);
+
+        Constraints constraints = new Constraints.Builder().setRequiresCharging(true).build();
+
+        PeriodicWorkRequest saveRequest = new PeriodicWorkRequest.Builder(UploadWorker.class, 1, TimeUnit.DAYS).setConstraints(constraints).build();
+
+        WorkManager.getInstance(SetNotificationsActivity.this).enqueue(saveRequest);
+
+
         resultsDisplay();
-
-
     }
 
     public void resultsDisplay() {
         newResultsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchResultsActivity = new Intent(SetNotificationsActivity.this, SearchResultsActivity.class);
                 newResultsButton.setVisibility(View.INVISIBLE);
                 startActivity(searchResultsActivity);
             }
@@ -178,7 +179,7 @@ public class SetNotificationsActivity extends AppCompatActivity {
         if (articlesList != null) {
             articles.addAll(articlesList);
             if (articlesList.size() == 0) {
-                Toast.makeText(SetNotificationsActivity.this, "Il n'y a aucuns résultats", Toast.LENGTH_LONG).show();
+                Toast.makeText(SetNotificationsActivity.this, "Il n'y a aucuns nouveaux résultats depuis hier", Toast.LENGTH_LONG).show();
                 newResultsButton.setVisibility(View.INVISIBLE);
             } else {
                 newResultsButton.setVisibility(View.VISIBLE);

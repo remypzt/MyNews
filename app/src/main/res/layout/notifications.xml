@@ -93,7 +93,7 @@
 
             android:layout_marginTop="10dp"
             android:background="@drawable/button_background"
-            android:text="New Results"
+            android:text="New Results Since Yesterday"
             android:textColor="@android:color/white"
 
             app:layout_constraintLeft_toLeftOf="parent"
