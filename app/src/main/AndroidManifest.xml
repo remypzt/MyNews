@@ -18,6 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="myNews.data.service.UploadWorker"></activity>
     </application>
     <!-- internet permission required as images are loaded via Glide from an internet url -->
     <uses-permission android:name="android.permission.INTERNET" />

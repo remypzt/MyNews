@@ -153,12 +153,11 @@ public class SetNotificationsActivity extends AppCompatActivity {
 
         // uploadWorkerActivity = new Intent(SetNotificationsActivity.this, UploadWorker.class);
 
-        Constraints constraints = new Constraints.Builder().setRequiresCharging(true).build();
+        Constraints constraints = new Constraints.Builder().build();
 
-        PeriodicWorkRequest saveRequest = new PeriodicWorkRequest.Builder(UploadWorker.class, 1, TimeUnit.DAYS).setConstraints(constraints).build();
+        PeriodicWorkRequest saveRequest = new PeriodicWorkRequest.Builder(UploadWorker.class, 1, TimeUnit.MINUTES).setConstraints(constraints).build();
 
-        WorkManager.getInstance(SetNotificationsActivity.this).enqueue(saveRequest);
-
+        WorkManager.getInstance(this).enqueue(saveRequest);
 
         resultsDisplay();
     }
