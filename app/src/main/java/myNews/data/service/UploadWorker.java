@@ -24,6 +24,7 @@ public class UploadWorker extends Worker {
 
     static final String PREFS = "PREFS", PREF_KEY_BEGIN_DATE = "PREF_KEY_BEGIN_DATE", PREF_KEY_FILTER = "PREF_KEY_FILTER", PREF_KEY_QUERY = "PREF_KEY_QUERY";
     private static final int NOTIF_ID = 123;
+
     ViewModelMyNewsForSearchArticles viewModelMyNewsForSearchArticles;
     String query, filter, beginDate, endDate;
     Context context;
@@ -49,7 +50,8 @@ public class UploadWorker extends Worker {
 
         Resources res = context.getResources();
 
-        Notification notification = new Notification.Builder(context).setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.ic_launcher)).setWhen(System.currentTimeMillis()).setAutoCancel(true).setContentTitle("A notification title").setContentText("Full message").setVibrate(new long[]{0, 500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500}).setLights(Color.RED, 3000, 3000).getNotification();
+        Notification notification = new Notification.Builder(context).
+                setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.ic_launcher)).setWhen(System.currentTimeMillis()).setAutoCancel(true).setContentTitle("A notification title").setContentText("Full message").setVibrate(new long[]{0, 500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500}).setLights(Color.RED, 3000, 3000).build();
 
 
         NotificationManager notifManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
