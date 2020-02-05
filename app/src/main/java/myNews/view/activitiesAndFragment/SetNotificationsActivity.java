@@ -1,8 +1,16 @@
 package myNews.view.activitiesAndFragment;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -12,6 +20,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.work.Constraints;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
@@ -67,14 +77,19 @@ public class SetNotificationsActivity extends AppCompatActivity {
     ViewModelMyNewsForSearchArticles viewModelMyNewsForSearchArticles;
     //FOR DATA
     private List<Articles> articles;
-    String query, filter, beginDate, endDate, stringFilter, alertQueryTerm, beginDateInRightFormat;
+    private static final int NOTIF_ID2 = 1232;
     Intent uploadWorkerActivity;
+    String query, filter, beginDate, endDate, stringFilter, alertQueryTerm, beginDateInRightFormat, channelNumberOne = "channelNumberOne";
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notifications);
         ButterKnife.bind(this);
+
+        this.context = mSwitch.getContext();
+
 
         newResultsButton.setVisibility(View.INVISIBLE);
         this.articles = new ArrayList<>();
@@ -87,6 +102,7 @@ public class SetNotificationsActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MainActivity.class)));
 
         manageNotifications();
+        testingNotification();
 
         viewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles(query, filter, beginDate, endDate);
 
@@ -125,7 +141,36 @@ public class SetNotificationsActivity extends AppCompatActivity {
         }
     }
 
+    public void testingNotification() {
 
+
+        Resources res = context.getResources();
+
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(context, channelNumberOne).setSmallIcon(R.drawable.ic_launcher).setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.ic_launcher)).setWhen(System.currentTimeMillis()).setAutoCancel(true).setContentTitle("A notification title").setContentText("Full message").setVibrate(new long[]{0, 500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500}).setLights(Color.RED, 3000, 3000);
+
+        createNotificationChannel();
+
+
+        NotificationManagerCompat notifManager = NotificationManagerCompat.from(context);
+        notifManager.notify(NOTIF_ID2, notification.build());
+        Log.i("MainActivity", "Notification launched");
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "channel name";
+            String description = "channel description";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(channelNumberOne, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
     public void manageDates() {
         SimpleDateFormat formatterBackEndFormat = new SimpleDateFormat("yyyyMMdd");
         //Initialisation du Calendar
@@ -151,11 +196,10 @@ public class SetNotificationsActivity extends AppCompatActivity {
         //TODO
         // userscan choose an hour of notification OR to be notify at every new results
 
-        // uploadWorkerActivity = new Intent(SetNotificationsActivity.this, UploadWorker.class);
 
         Constraints constraints = new Constraints.Builder().build();
 
-        PeriodicWorkRequest saveRequest = new PeriodicWorkRequest.Builder(UploadWorker.class, 1, TimeUnit.MINUTES).setConstraints(constraints).build();
+        PeriodicWorkRequest saveRequest = new PeriodicWorkRequest.Builder(UploadWorker.class, 15, TimeUnit.MINUTES).setConstraints(constraints).build();
 
         WorkManager.getInstance(this).enqueue(saveRequest);
 

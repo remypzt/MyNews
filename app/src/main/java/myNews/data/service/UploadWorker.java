@@ -32,7 +32,7 @@ public class UploadWorker extends Worker {
 
     private String query, filter, beginDate, endDate, channelNumberOne = "channelNumberOne";
     private Context context;
-    private SharedPreferences mPreferences = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
+    private SharedPreferences mPreferences;
 
     public UploadWorker(@NonNull Context context, @NonNull WorkerParameters params) {
         super(context, params);
@@ -42,9 +42,10 @@ public class UploadWorker extends Worker {
 
     @Override
     public Result doWork() {
-
+        mPreferences = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
         query = mPreferences.getString(PREF_KEY_QUERY, "");
         filter = mPreferences.getString(PREF_KEY_FILTER, "");
+        //TODO begin date ???
         beginDate = mPreferences.getString(PREF_KEY_BEGIN_DATE, null);
 
         viewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles(query, filter, beginDate, endDate);
@@ -54,7 +55,7 @@ public class UploadWorker extends Worker {
 
         Resources res = context.getResources();
 
-        NotificationCompat.Builder notification = new NotificationCompat.Builder(context, channelNumberOne).setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.ic_launcher)).setWhen(System.currentTimeMillis()).setAutoCancel(true).setContentTitle("A notification title").setContentText("Full message").setVibrate(new long[]{0, 500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500}).setLights(Color.RED, 3000, 3000);
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(context, channelNumberOne).setSmallIcon(R.drawable.ic_launcher).setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.ic_launcher)).setWhen(System.currentTimeMillis()).setAutoCancel(true).setContentTitle("A notification title").setContentText("Full message").setVibrate(new long[]{0, 500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500}).setLights(Color.RED, 3000, 3000);
 
         createNotificationChannel();
 
@@ -64,13 +65,11 @@ public class UploadWorker extends Worker {
         Log.i("MainActivity", "Notification launched");
 
 
-        //TODO notify user with number of results(enable button, enable icon in menu, send notification to the device)
-        // cancel
+        //TODO notify user with number of results
+
 
         // Indicate whether the task finished successfully with the Result
         return Result.success();
-
-
     }
 
     private void createNotificationChannel() {
