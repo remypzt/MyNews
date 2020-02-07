@@ -8,6 +8,6 @@ import myNews.data.repositories.model.Articles;
  * Created by Remy Pouzet on 25/11/2019.
  */
 public interface FakeApiServiceInterface {
-    List<Articles> getArticles();
+	List<Articles> getArticles();
 }
 

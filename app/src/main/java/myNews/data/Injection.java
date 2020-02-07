@@ -9,11 +9,11 @@ import myNews.data.service.fakeAPI.FakeApiService;
  */
 
 public class Injection {
-    public static FakeApiRepository createFakeApiRepository() {
-        return new FakeApiRepository(new FakeApiService());
-    }
-
-    public static NytApiRepository createNytApiRepository() {
-        return NytApiRepository.getInstance();
-    }
+	public static FakeApiRepository createFakeApiRepository() {
+		return new FakeApiRepository(new FakeApiService());
+	}
+	
+	public static NytApiRepository createNytApiRepository() {
+		return NytApiRepository.getInstance();
+	}
 }
