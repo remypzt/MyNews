@@ -24,15 +24,24 @@ import myNews.viewmodel.ViewModelMyNewsForSearchArticles;
  */
 public class UploadWorker extends Worker {
 	
-	static final String PREFS = "PREFS", PREF_KEY_BEGIN_DATE = "PREF_KEY_BEGIN_DATE", PREF_KEY_FILTER = "PREF_KEY_FILTER", PREF_KEY_QUERY = "PREF_KEY_QUERY";
+	public static final String PREFS                         = "PREFS";
+	public static final String PREF_KEY_BEGIN_DATE           = "PREF_KEY_BEGIN_DATE";
+	public static final String PREF_KEY_FILTER               = "PREF_KEY_FILTER";
+	public static final String PREF_KEY_QUERY                = "PREF_KEY_QUERY";
+	public static final String PREF_KEY_HOUR_OF_NOTIFICATION = "PREF_KEY_HOUR_OF_NOTIFICATION";
+	public static final String PREF_KEY_NUMBER_OF_TIME_UNITY = "PREF_KEY_NUMBER_OF_TIME_UNITY";
+	public static final String PREF_KEY_TIME_UNITY           = "REF_KEY_TIME_UNITY";
 	
 	private static final int NOTIF_ID = 123;
 	
 	private ViewModelMyNewsForSearchArticles viewModelMyNewsForSearchArticles;
 	
 	private String query, filter, beginDate, endDate, channelNumberOne = "channelNumberOne";
+	String typeOfUnityFrequence;
 	private Context           context;
 	private SharedPreferences mPreferences;
+	int numberOfArticles;
+	int unityFrequence;
 	
 	public UploadWorker(@NonNull Context context,
 	                    @NonNull WorkerParameters params) {
@@ -42,10 +51,13 @@ public class UploadWorker extends Worker {
 	
 	@Override
 	public Result doWork() {
-		mPreferences = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
-		query        = mPreferences.getString(PREF_KEY_QUERY, "");
-		filter       = mPreferences.getString(PREF_KEY_FILTER, "");
-		beginDate    = mPreferences.getString(PREF_KEY_BEGIN_DATE, null);
+		mPreferences         = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
+		query                = mPreferences.getString(PREF_KEY_QUERY, "");
+		filter               = mPreferences.getString(PREF_KEY_FILTER, "");
+		beginDate            = mPreferences.getString(PREF_KEY_BEGIN_DATE, null);
+		unityFrequence       = mPreferences.getInt(PREF_KEY_NUMBER_OF_TIME_UNITY, 24);
+		typeOfUnityFrequence = mPreferences.getString(PREF_KEY_TIME_UNITY, "Heures");
+		
 		
 		viewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles(query, filter, beginDate, endDate);
 		if (viewModelMyNewsForSearchArticles
@@ -55,6 +67,11 @@ public class UploadWorker extends Worker {
 					.getNews()
 					.getValue()
 					.size();
+			numberOfArticles = viewModelMyNewsForSearchArticles
+					.getNews()
+					.getValue()
+					.size();
+			
 		}
 		
 		notifyTheUserByAndroidnotif();
@@ -71,7 +88,7 @@ public class UploadWorker extends Worker {
 				.setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.ic_launcher))
 				.setShowWhen(true)
 				.setAutoCancel(true)
-				.setContentTitle("15")
+				.setContentTitle("«" + query + "»" + ":" + numberOfArticles + "nouveaux articles depuis" + unityFrequence + typeOfUnityFrequence)
 				.setContentText("15")
 				.setVibrate(new long[]{0, 500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500})
 				.setLights(Color.RED, 3000, 3000);

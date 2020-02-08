@@ -85,44 +85,130 @@
 
             app:layout_constraintTop_toBottomOf="@id/divider" />
 
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+
+            android:layout_marginTop="10dp"
+
+
+            android:background="@android:color/darker_gray"
+
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/enable_notifications" />
+
+        <Switch
+            android:id="@+id/switchFrequencemode"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Fréquence programmée // instantanée"
+
+            app:layout_constraintTop_toBottomOf="@id/enable_notifications" />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+
+            android:layout_marginTop="10dp"
+
+
+            android:background="@android:color/darker_gray"
+
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/switchFrequencemode" />
+
         <TextView
-            android:id="@+id/time_setting_text_view"
+            android:id="@+id/timeSettingTextViewNotificationHour"
 
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="heure des notifications"
+            app:layout_constraintTop_toBottomOf="@id/divider3"
 
 
             android:layout_marginTop="10dp"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/enable_notifications" />
+            app:layout_constraintWidth_percent="0.3" />
 
         <NumberPicker
-            android:id="@+id/numberPicker"
+            android:id="@+id/numberPickerNotificationHour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
 
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/time_setting_text_view" />
+            app:layout_constraintEnd_toEndOf="@+id/timeSettingTextViewNotificationHour"
+            app:layout_constraintStart_toStartOf="@+id/timeSettingTextViewNotificationHour"
+            app:layout_constraintTop_toBottomOf="@+id/timeSettingTextViewNotificationHour" />
 
-        <!--
-        <Button
-            android:id="@+id/time_setting_button"
+        <TextView
+            android:id="@+id/timeSettingTextViewUnityFrequence"
 
-            style="?android:attr/spinnerStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Fréquence des nofications"
 
+
+            app:layout_constraintEnd_toStartOf="@id/timeSettingTextViewTypeFrequence"
+
+            app:layout_constraintStart_toEndOf="@id/timeSettingTextViewNotificationHour"
+            app:layout_constraintTop_toBottomOf="@id/divider3"
+            app:layout_constraintWidth_percent="0.3"
+
+            />
+
+        <NumberPicker
+            android:id="@+id/numberPickerUnityFrequence"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
 
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/time_setting_text_view"
-            />
-            -->
+            app:layout_constraintEnd_toEndOf="@id/timeSettingTextViewUnityFrequence"
+            app:layout_constraintStart_toStartOf="@id/timeSettingTextViewUnityFrequence"
+            app:layout_constraintTop_toBottomOf="@id/timeSettingTextViewUnityFrequence" />
+
+        <TextView
+            android:id="@+id/timeSettingTextViewTypeFrequence"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Unité de Fréquence"
+
+
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toEndOf="@id/timeSettingTextViewUnityFrequence"
+            app:layout_constraintTop_toBottomOf="@id/divider3"
+            app:layout_constraintWidth_percent="0.3" />
+
+        <NumberPicker
+            android:id="@+id/numberPickeTypeFrequence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+
+            app:layout_constraintEnd_toEndOf="@id/timeSettingTextViewTypeFrequence"
+            app:layout_constraintStart_toStartOf="@id/timeSettingTextViewTypeFrequence"
+            app:layout_constraintTop_toBottomOf="@id/timeSettingTextViewTypeFrequence" />
+
 
         <Button
             android:id="@+id/new_results"
@@ -137,7 +223,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
 
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/numberPicker">
+            app:layout_constraintTop_toBottomOf="@+id/numberPickerNotificationHour">
 
         </Button>
 

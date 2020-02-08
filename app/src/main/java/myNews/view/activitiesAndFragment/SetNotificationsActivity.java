@@ -48,46 +48,88 @@ import myNews.viewmodel.ViewModelMyNewsForSearchArticles;
  */
 public class SetNotificationsActivity extends AppCompatActivity implements View.OnClickListener {
 	
-	public static final                    String            PREFS                         = "PREFS";
-	public static final                    String            PREF_KEY_BEGIN_DATE           = "PREF_KEY_BEGIN_DATE";
-	public static final                    String            PREF_KEY_FILTER               = "PREF_KEY_FILTER";
-	public static final                    String            PREF_KEY_QUERY                = "PREF_KEY_QUERY";
-	public static final                    String            PREF_KEY_HOUR_OF_NOTIFICATION = "PREF_KEY_HOUR_OF_NOTIFICATION";
-	public                                 SharedPreferences mPreferences;
-	@BindView(R.id.enable_notifications)   Switch            mSwitch;
-	@BindView(R.id.checkBox)               CheckBox          checkbox1;
-	@BindView(R.id.checkBox2)              CheckBox          checkbox2;
-	@BindView(R.id.checkBox3)              CheckBox          checkbox3;
-	@BindView(R.id.checkBox4)              CheckBox          checkbox4;
-	@BindView(R.id.checkBox5)              CheckBox          checkbox5;
-	@BindView(R.id.checkBox6)              CheckBox          checkbox6;
-	@BindView(R.id.input_search_content)   TextInputEditText inputSearchContent;
-	@BindView(R.id.new_results)            Button            newResultsButton;
-	@BindView(R.id.toolbar)                Toolbar           toolbar;
-	@BindView(R.id.numberPicker)           NumberPicker      np;
-	@BindView(R.id.time_setting_text_view) TextView          timeSettingTextView;
+	public static final String PREFS                         = "PREFS";
+	public static final String PREF_KEY_BEGIN_DATE           = "PREF_KEY_BEGIN_DATE";
+	public static final String PREF_KEY_FILTER               = "PREF_KEY_FILTER";
+	public static final String PREF_KEY_QUERY                = "PREF_KEY_QUERY";
+	public static final String PREF_KEY_HOUR_OF_NOTIFICATION = "PREF_KEY_HOUR_OF_NOTIFICATION";
+	public static final String PREF_KEY_NUMBER_OF_TIME_UNITY = "PREF_KEY_NUMBER_OF_TIME_UNITY";
+	public static final String PREF_KEY_TIME_UNITY           = "REF_KEY_TIME_UNITY";
+	
+	public                                              SharedPreferences mPreferences;
+	@BindView(R.id.enable_notifications)                Switch            mSwitch;
+	@BindView(R.id.checkBox)                            CheckBox          checkbox1;
+	@BindView(R.id.checkBox2)                           CheckBox          checkbox2;
+	@BindView(R.id.checkBox3)                           CheckBox          checkbox3;
+	@BindView(R.id.checkBox4)                           CheckBox          checkbox4;
+	@BindView(R.id.checkBox5)                           CheckBox          checkbox5;
+	@BindView(R.id.checkBox6)                           CheckBox          checkbox6;
+	@BindView(R.id.input_search_content)                TextInputEditText inputSearchContent;
+	@BindView(R.id.new_results)                         Button            newResultsButton;
+	@BindView(R.id.toolbar)                             Toolbar           toolbar;
+	@BindView(R.id.numberPickerNotificationHour)        NumberPicker      npHour;
+	@BindView(R.id.timeSettingTextViewNotificationHour) TextView          timeSettingTextView;
+	@BindView(R.id.numberPickerUnityFrequence)          NumberPicker      npFrequenceUnity;
+	@BindView(R.id.timeSettingTextViewUnityFrequence)   TextView          frequenceUnityTextView;
+	@BindView(R.id.numberPickeTypeFrequence)            NumberPicker      npTypeUnity;
+	@BindView(R.id.timeSettingTextViewTypeFrequence)    TextView          typeUnityTextView;
 	
 	List<String> listFilters;
 	
 	Intent searchResultsActivity;
 	
-	ViewModelMyNewsForSearchArticles   viewModelMyNewsForSearchArticles;
-	String                             query;
-	String                             filter;
-	String                             beginDate;
-	String                             endDate;
-	String                             stringFilter;
-	String                             alertQueryTerm;
-	String                             beginDateInRightFormat;
-	int                                hourOfNotification;
-	int                                delay;
-	NumberPicker.OnValueChangeListener onValueChangeListener = new NumberPicker.OnValueChangeListener() {
+	ViewModelMyNewsForSearchArticles viewModelMyNewsForSearchArticles;
+	String                           query;
+	String                           filter;
+	String                           beginDate;
+	String                           endDate;
+	String                           stringFilter;
+	String                           alertQueryTerm;
+	String                           beginDateInRightFormat;
+	String                           typeOfUnityFrequence;
+	final NumberPicker.OnValueChangeListener onValueChangeListenerFrequenceType = new NumberPicker.OnValueChangeListener() {
+		@Override
+		public void onValueChange(NumberPicker numberPicker,
+		                          int oldVal,
+		                          int newVal) {
+			switch (newVal) {
+				case 0:
+					typeOfUnityFrequence = "Minutes";
+					break;
+				case 1:
+					typeOfUnityFrequence = "Heures";
+					break;
+				case 2:
+					typeOfUnityFrequence = "Jours";
+					break;
+				default:
+					typeOfUnityFrequence = "Mois";
+			}
+			
+			typeUnityTextView.setText("Type d'untié de temps sélectionnée : " + typeOfUnityFrequence);
+			
+			mSwitch.setChecked(false);
+			Toast
+					.makeText(SetNotificationsActivity.this, "Veuillez réactiver l'alerte pour prendre en compte les nouveaux paramètres", Toast.LENGTH_LONG)
+					.show();
+		}
+	};
+	String uiquery;
+	String uifilter;
+	int    hourOfNotification;
+	int    delay;
+	
+	//FOR DATA
+	private List<Articles> articles;
+	private Context        context;
+	int                                unityFrequence;
+	NumberPicker.OnValueChangeListener onValueChangeListenerSettingTime    = new NumberPicker.OnValueChangeListener() {
 		@Override
 		public void onValueChange(NumberPicker numberPicker,
 		                          int oldVal,
 		                          int newVal) {
 			
-			timeSettingTextView.setText("Selected Number : " + newVal);
+			timeSettingTextView.setText("heure de notification : " + newVal);
 			hourOfNotification = newVal;
 			mSwitch.setChecked(false);
 			Toast
@@ -95,9 +137,20 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 					.show();
 		}
 	};
-	//FOR DATA
-	private List<Articles> articles;
-	private Context        context;
+	NumberPicker.OnValueChangeListener onValueChangeListenerUnityFrequence = new NumberPicker.OnValueChangeListener() {
+		@Override
+		public void onValueChange(NumberPicker numberPicker,
+		                          int oldVal,
+		                          int newVal) {
+			
+			frequenceUnityTextView.setText("Nombre d'unité de temps sélectionnée : " + newVal);
+			unityFrequence = newVal;
+			mSwitch.setChecked(false);
+			Toast
+					.makeText(SetNotificationsActivity.this, "Veuillez réactiver l'alerte pour prendre en compte les nouveaux paramètres", Toast.LENGTH_LONG)
+					.show();
+		}
+	};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +172,9 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MainActivity.class)));
 		
 		settingTimeOfNotification();
+		settingUnityFrequence();
+		settingTypeOfUnityFrequence();
+		
 		manageNotifications();
 		
 		viewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles(query, filter, beginDate, endDate);
@@ -126,14 +182,49 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	
 	public void settingTimeOfNotification() {
 		//Set the minimum value of NumberPicker
-		np.setMinValue(0);
+		npHour.setMinValue(0);
 		//Specify the maximum value/number of NumberPicker
-		np.setMaxValue(23);
+		npHour.setMaxValue(23);
+		npHour.setValue(12);
+		hourOfNotification = 12;
 		
-		np.setOnValueChangedListener(onValueChangeListener);
+		npHour.setOnValueChangedListener(onValueChangeListenerSettingTime);
 		
-		timeSettingTextView.setText("Selected Number : ");
+		timeSettingTextView.setText("Heure de notification sélectionnée : " + hourOfNotification);
 		timeSettingTextView.setTextColor(Color.parseColor("#ffd32b3b"));
+		
+	}
+	
+	public void settingUnityFrequence() {
+		//Set the minimum value of NumberPicker
+		npFrequenceUnity.setMinValue(0);
+		//Specify the maximum value/number of NumberPicker
+		npFrequenceUnity.setMaxValue(100);
+		npFrequenceUnity.setValue(24);
+		unityFrequence = 24;
+		
+		npFrequenceUnity.setOnValueChangedListener(onValueChangeListenerUnityFrequence);
+		
+		frequenceUnityTextView.setText("Nombre d'unité de temps sélectionnée : " + unityFrequence);
+		frequenceUnityTextView.setTextColor(Color.parseColor("#ffd32b3b"));
+		
+	}
+	
+	public void settingTypeOfUnityFrequence() {
+		//Set the minimum value of NumberPicker
+		npTypeUnity.setMinValue(0);
+		//Specify the maximum value/number of NumberPicker
+		npTypeUnity.setMaxValue(3);
+		npTypeUnity.setValue(1);
+		
+		npTypeUnity.setDisplayedValues(new String[]{"Minutes", "Heures", "Jours", "Mois"});
+		
+		typeOfUnityFrequence = "Heures";
+		
+		npTypeUnity.setOnValueChangedListener(onValueChangeListenerFrequenceType);
+		
+		typeUnityTextView.setText("Type d'untié de temps sélectionnée :" + typeOfUnityFrequence);
+		typeUnityTextView.setTextColor(Color.parseColor("#ffd32b3b"));
 		
 	}
 	
@@ -148,6 +239,19 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 					manageFilter();
 					manageDates();
 					searchConfiguration();
+					if (query == null) {
+						uiquery = "";
+					} else {
+						uiquery = query;
+					}
+					
+					if (filter == null) {
+						uifilter = "";
+					} else {
+						uifilter = filter;
+					}
+					
+					mSwitch.setText("Alert activée avec les paramètres suivants = \n" + "" + "termes :" + uiquery + "\n" + "filtres :" + uifilter + "\n" + "heure de notification :" + hourOfNotification + "h" + "\n" + "fréquence :" + unityFrequence + " " + typeOfUnityFrequence);
 					Toast
 							.makeText(SetNotificationsActivity.this, "Votre alerte est activée", Toast.LENGTH_LONG)
 							.show();
@@ -155,6 +259,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 					Toast
 							.makeText(SetNotificationsActivity.this, "Votre alerte est désactivée", Toast.LENGTH_LONG)
 							.show();
+					mSwitch.setText("Alerte désactivée");
 				}
 			}
 		});
@@ -199,7 +304,14 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 				.edit()
 				.putInt(PREF_KEY_HOUR_OF_NOTIFICATION, hourOfNotification)
 				.apply();
-		
+		mPreferences
+				.edit()
+				.putInt(PREF_KEY_NUMBER_OF_TIME_UNITY, unityFrequence)
+				.apply();
+		mPreferences
+				.edit()
+				.putString(PREF_KEY_TIME_UNITY, typeOfUnityFrequence)
+				.apply();
 		notifyTheUser();
 	}
 	
@@ -254,19 +366,18 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 			articles.addAll(articlesList);
 			if (articlesList.size() == 0) {
 				Toast
-						.makeText(SetNotificationsActivity.this, "Il n'y a aucuns nouveaux " + "r" + "ésultats " + "depuis hier", Toast.LENGTH_LONG)
+						.makeText(SetNotificationsActivity.this, "Il n'y a aucuns nouveaux " + "résultats " + "depuis hier", Toast.LENGTH_LONG)
 						.show();
 				newResultsButton.setVisibility(View.INVISIBLE);
 			} else {
 				newResultsButton.setVisibility(View.VISIBLE);
-				mSwitch.setText("L'alerte est activée");
+				
 			}
 		} else {
 			Toast
 					.makeText(SetNotificationsActivity.this, "BAD_REQUEST", Toast.LENGTH_LONG)
 					.show();
 			newResultsButton.setVisibility(View.INVISIBLE);
-			mSwitch.setText("L'alerte est désactivée");
 			mSwitch.setChecked(false);
 		}
 	}
