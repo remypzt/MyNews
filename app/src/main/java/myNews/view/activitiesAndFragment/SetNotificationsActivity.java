@@ -1,5 +1,6 @@
 package myNews.view.activitiesAndFragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -87,6 +88,20 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	String                           alertQueryTerm;
 	String                           beginDateInRightFormat;
 	String                           typeOfUnityFrequence;
+	String uiquery;
+	String uifilter;
+	int    hourOfNotification;
+	int    delay;
+
+	private List<Articles> articles;
+	private Context        context;
+	int unityFrequence;
+	int unityFrequenceLogic;
+	
+	
+	/*unityFrequence       = mPreferences.getInt(PREF_KEY_NUMBER_OF_TIME_UNITY, 24);
+	typeOfUnityFrequence = mPreferences.getString(PREF_KEY_TIME_UNITY, "Heures");*/
+	
 	final NumberPicker.OnValueChangeListener onValueChangeListenerFrequenceType = new NumberPicker.OnValueChangeListener() {
 		@Override
 		public void onValueChange(NumberPicker numberPicker,
@@ -95,18 +110,23 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 			switch (newVal) {
 				case 0:
 					typeOfUnityFrequence = "Minutes";
+					unityFrequenceLogic = unityFrequence;
 					break;
 				case 1:
 					typeOfUnityFrequence = "Heures";
+					unityFrequenceLogic = unityFrequence * 60;
 					break;
 				case 2:
 					typeOfUnityFrequence = "Jours";
+					unityFrequenceLogic = unityFrequence * 60 * 24;
 					break;
 				default:
-					typeOfUnityFrequence = "Mois";
+					typeOfUnityFrequence = "Semaines";
+					unityFrequenceLogic = unityFrequenceLogic * 60 * 24 * 7;
+				
 			}
 			
-			typeUnityTextView.setText("Type d'untié de temps sélectionnée : " + typeOfUnityFrequence);
+			typeUnityTextView.setText("Unité de fréquence\n" + typeOfUnityFrequence);
 			
 			mSwitch.setChecked(false);
 			Toast
@@ -114,22 +134,14 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 					.show();
 		}
 	};
-	String uiquery;
-	String uifilter;
-	int    hourOfNotification;
-	int    delay;
 	
-	//FOR DATA
-	private List<Articles> articles;
-	private Context        context;
-	int                                unityFrequence;
 	NumberPicker.OnValueChangeListener onValueChangeListenerSettingTime    = new NumberPicker.OnValueChangeListener() {
 		@Override
 		public void onValueChange(NumberPicker numberPicker,
 		                          int oldVal,
 		                          int newVal) {
 			
-			timeSettingTextView.setText("heure de notification : " + newVal);
+			timeSettingTextView.setText("Heure de début\n" + newVal + "h");
 			hourOfNotification = newVal;
 			mSwitch.setChecked(false);
 			Toast
@@ -137,13 +149,14 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 					.show();
 		}
 	};
+	
 	NumberPicker.OnValueChangeListener onValueChangeListenerUnityFrequence = new NumberPicker.OnValueChangeListener() {
 		@Override
 		public void onValueChange(NumberPicker numberPicker,
 		                          int oldVal,
 		                          int newVal) {
 			
-			frequenceUnityTextView.setText("Nombre d'unité de temps sélectionnée : " + newVal);
+			frequenceUnityTextView.setText("Fréquence\n" + "> 15 minutes\n" + newVal);
 			unityFrequence = newVal;
 			mSwitch.setChecked(false);
 			Toast
@@ -161,7 +174,6 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		
 		this.context = mSwitch.getContext();
 		
-		newResultsButton.setVisibility(View.INVISIBLE);
 		this.articles = new ArrayList<>();
 		listFilters   = new ArrayList<>();
 		
@@ -190,7 +202,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		
 		npHour.setOnValueChangedListener(onValueChangeListenerSettingTime);
 		
-		timeSettingTextView.setText("Heure de notification sélectionnée : " + hourOfNotification);
+		timeSettingTextView.setText("Heure de début\n" + hourOfNotification + "h");
 		timeSettingTextView.setTextColor(Color.parseColor("#ffd32b3b"));
 		
 	}
@@ -205,7 +217,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		
 		npFrequenceUnity.setOnValueChangedListener(onValueChangeListenerUnityFrequence);
 		
-		frequenceUnityTextView.setText("Nombre d'unité de temps sélectionnée : " + unityFrequence);
+		frequenceUnityTextView.setText("Fréquence\n" + "> 15 minutes\n" + unityFrequence);
 		frequenceUnityTextView.setTextColor(Color.parseColor("#ffd32b3b"));
 		
 	}
@@ -217,19 +229,20 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		npTypeUnity.setMaxValue(3);
 		npTypeUnity.setValue(1);
 		
-		npTypeUnity.setDisplayedValues(new String[]{"Minutes", "Heures", "Jours", "Mois"});
+		npTypeUnity.setDisplayedValues(new String[]{"Minutes", "Heures", "Jours", "Semaines"});
 		
 		typeOfUnityFrequence = "Heures";
 		
 		npTypeUnity.setOnValueChangedListener(onValueChangeListenerFrequenceType);
 		
-		typeUnityTextView.setText("Type d'untié de temps sélectionnée :" + typeOfUnityFrequence);
+		typeUnityTextView.setText("Unité de fréquence\n" + typeOfUnityFrequence);
 		typeUnityTextView.setTextColor(Color.parseColor("#ffd32b3b"));
 		
 	}
 	
 	private void manageNotifications() {
 		mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@SuppressLint("SetTextI18n")
 			public void onCheckedChanged(CompoundButton buttonView,
 			                             boolean isChecked) {
 				if (isChecked) {
@@ -239,19 +252,21 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 					manageFilter();
 					manageDates();
 					searchConfiguration();
-					if (query == null) {
-						uiquery = "";
+					notifyTheUser();
+					
+					if (alertQueryTerm != null) {
+						uiquery = alertQueryTerm;
 					} else {
-						uiquery = query;
+						uiquery = "";
 					}
 					
-					if (filter == null) {
+					if (listFilters.size() < 1) {
 						uifilter = "";
 					} else {
-						uifilter = filter;
+						uifilter = listFilters.toString();
 					}
 					
-					mSwitch.setText("Alert activée avec les paramètres suivants = \n" + "" + "termes :" + uiquery + "\n" + "filtres :" + uifilter + "\n" + "heure de notification :" + hourOfNotification + "h" + "\n" + "fréquence :" + unityFrequence + " " + typeOfUnityFrequence);
+					mSwitch.setText("Alert activée avec les paramètres suivants = \n" + "" + "termes : " + uiquery + "\n" + "filtres : " + uifilter + "\n" + "heure de notification : " + hourOfNotification + "h" + "\n" + "fréquence : " + unityFrequence + " " + typeOfUnityFrequence);
 					Toast
 							.makeText(SetNotificationsActivity.this, "Votre alerte est activée", Toast.LENGTH_LONG)
 							.show();
@@ -259,6 +274,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 					Toast
 							.makeText(SetNotificationsActivity.this, "Votre alerte est désactivée", Toast.LENGTH_LONG)
 							.show();
+					listFilters.clear();
 					mSwitch.setText("Alerte désactivée");
 				}
 			}
@@ -312,7 +328,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 				.edit()
 				.putString(PREF_KEY_TIME_UNITY, typeOfUnityFrequence)
 				.apply();
-		notifyTheUser();
+		
 	}
 	
 	public void searchFilter(CheckBox checkBox) {
@@ -346,7 +362,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		
 		Constraints constraints = new Constraints.Builder().build();
 		
-		PeriodicWorkRequest saveRequest = new PeriodicWorkRequest.Builder(UploadWorker.class, 24, TimeUnit.HOURS, PeriodicWorkRequest.MIN_PERIODIC_FLEX_MILLIS, TimeUnit.MILLISECONDS)
+		PeriodicWorkRequest saveRequest = new PeriodicWorkRequest.Builder(UploadWorker.class, unityFrequenceLogic, TimeUnit.MINUTES, PeriodicWorkRequest.MIN_PERIODIC_FLEX_MILLIS, TimeUnit.MILLISECONDS)
 				.setInitialDelay(delay, TimeUnit.MINUTES)
 				.addTag("send_reminder_periodic")
 				.setConstraints(constraints)
@@ -371,6 +387,9 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 				newResultsButton.setVisibility(View.INVISIBLE);
 			} else {
 				newResultsButton.setVisibility(View.VISIBLE);
+				Toast
+						.makeText(SetNotificationsActivity.this, "Décalage visibility button", Toast.LENGTH_LONG)
+						.show();
 				
 			}
 		} else {
@@ -386,7 +405,6 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		newResultsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				newResultsButton.setVisibility(View.INVISIBLE);
 				startActivity(searchResultsActivity);
 			}
 		});

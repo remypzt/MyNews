@@ -28,7 +28,6 @@ public class UploadWorker extends Worker {
 	public static final String PREF_KEY_BEGIN_DATE           = "PREF_KEY_BEGIN_DATE";
 	public static final String PREF_KEY_FILTER               = "PREF_KEY_FILTER";
 	public static final String PREF_KEY_QUERY                = "PREF_KEY_QUERY";
-	public static final String PREF_KEY_HOUR_OF_NOTIFICATION = "PREF_KEY_HOUR_OF_NOTIFICATION";
 	public static final String PREF_KEY_NUMBER_OF_TIME_UNITY = "PREF_KEY_NUMBER_OF_TIME_UNITY";
 	public static final String PREF_KEY_TIME_UNITY           = "REF_KEY_TIME_UNITY";
 	
@@ -88,8 +87,8 @@ public class UploadWorker extends Worker {
 				.setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.ic_launcher))
 				.setShowWhen(true)
 				.setAutoCancel(true)
-				.setContentTitle("«" + query + "»" + ":" + numberOfArticles + "nouveaux articles depuis" + unityFrequence + typeOfUnityFrequence)
-				.setContentText("15")
+				.setContentTitle("« " + query + " »")
+				.setContentText(numberOfArticles + " nouveaux articles depuis " + unityFrequence + "" + typeOfUnityFrequence)
 				.setVibrate(new long[]{0, 500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500})
 				.setLights(Color.RED, 3000, 3000);
 		
