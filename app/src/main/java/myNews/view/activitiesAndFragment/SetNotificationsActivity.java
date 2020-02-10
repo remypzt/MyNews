@@ -56,6 +56,9 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	public static final String PREF_KEY_HOUR_OF_NOTIFICATION = "PREF_KEY_HOUR_OF_NOTIFICATION";
 	public static final String PREF_KEY_NUMBER_OF_TIME_UNITY = "PREF_KEY_NUMBER_OF_TIME_UNITY";
 	public static final String PREF_KEY_TIME_UNITY           = "REF_KEY_TIME_UNITY";
+	public static final String PREF_KEY_FREQUENCE_MODE       = "PREF_KEY_FREQUENCE_MODE";
+	public static final String PREF_KEY_ALERT_STATE          = "PREF_KEY_ALERT_STATE";
+	
 	
 	public                                              SharedPreferences mPreferences;
 	@BindView(R.id.enable_notifications)                Switch            mSwitch;
@@ -74,6 +77,11 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	@BindView(R.id.timeSettingTextViewUnityFrequence)   TextView          frequenceUnityTextView;
 	@BindView(R.id.numberPickeTypeFrequence)            NumberPicker      npTypeUnity;
 	@BindView(R.id.timeSettingTextViewTypeFrequence)    TextView          typeUnityTextView;
+	@BindView(R.id.switchFrequencemode)                 Switch            switchFrequeneceMode;
+	
+	
+	
+	
 	
 	List<String> listFilters;
 	
@@ -88,19 +96,18 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	String                           alertQueryTerm;
 	String                           beginDateInRightFormat;
 	String                           typeOfUnityFrequence;
-	String uiquery;
-	String uifilter;
-	int    hourOfNotification;
-	int    delay;
-
+	String                           uiquery;
+	String                           uifilter;
+	String                           frequenceMode;
+	String                           alertState;
+	int                              hourOfNotification;
+	int                              delay;
+	
 	private List<Articles> articles;
 	private Context        context;
 	int unityFrequence;
 	int unityFrequenceLogic;
 	
-	
-	/*unityFrequence       = mPreferences.getInt(PREF_KEY_NUMBER_OF_TIME_UNITY, 24);
-	typeOfUnityFrequence = mPreferences.getString(PREF_KEY_TIME_UNITY, "Heures");*/
 	
 	final NumberPicker.OnValueChangeListener onValueChangeListenerFrequenceType = new NumberPicker.OnValueChangeListener() {
 		@Override
@@ -135,7 +142,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		}
 	};
 	
-	NumberPicker.OnValueChangeListener onValueChangeListenerSettingTime    = new NumberPicker.OnValueChangeListener() {
+	NumberPicker.OnValueChangeListener onValueChangeListenerSettingTime = new NumberPicker.OnValueChangeListener() {
 		@Override
 		public void onValueChange(NumberPicker numberPicker,
 		                          int oldVal,
@@ -186,8 +193,9 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		settingTimeOfNotification();
 		settingUnityFrequence();
 		settingTypeOfUnityFrequence();
-		
 		manageNotifications();
+		// previousAlertmanagement();
+		
 		
 		viewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles(query, filter, beginDate, endDate);
 	}
@@ -241,171 +249,237 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	}
 	
 	private void manageNotifications() {
-		mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		
+		switchFrequeneceMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@SuppressLint("SetTextI18n")
 			public void onCheckedChanged(CompoundButton buttonView,
 			                             boolean isChecked) {
 				if (isChecked) {
-					alertQueryTerm = Objects
-							.requireNonNull(inputSearchContent.getText())
-							.toString();
-					manageFilter();
-					manageDates();
-					searchConfiguration();
-					notifyTheUser();
+					frequenceMode = "instantanée";
+					mPreferences
+							.edit()
+							.putString(PREF_KEY_FREQUENCE_MODE, frequenceMode)
+							.apply();
+					timeSettingTextView.setVisibility(View.GONE);
+					npFrequenceUnity.setVisibility(View.GONE);
+					frequenceUnityTextView.setVisibility(View.GONE);
+					npTypeUnity.setVisibility(View.GONE);
+					typeUnityTextView.setVisibility(View.GONE);
+					mSwitch.setChecked(false);
 					
-					if (alertQueryTerm != null) {
-						uiquery = alertQueryTerm;
-					} else {
-						uiquery = "";
-					}
+					hourOfNotification  = 0;
+					unityFrequenceLogic = 15;
 					
-					if (listFilters.size() < 1) {
-						uifilter = "";
-					} else {
-						uifilter = listFilters.toString();
-					}
-					
-					mSwitch.setText("Alert activée avec les paramètres suivants = \n" + "" + "termes : " + uiquery + "\n" + "filtres : " + uifilter + "\n" + "heure de notification : " + hourOfNotification + "h" + "\n" + "fréquence : " + unityFrequence + " " + typeOfUnityFrequence);
 					Toast
-							.makeText(SetNotificationsActivity.this, "Votre alerte est activée", Toast.LENGTH_LONG)
+							.makeText(SetNotificationsActivity.this, "Veuillez réactiver l'alerte pour prendre en compte les nouveaux paramètres", Toast.LENGTH_LONG)
 							.show();
+					
 				} else {
+					frequenceMode = "programmée";
+					mPreferences
+							.edit()
+							.putString(PREF_KEY_FREQUENCE_MODE, frequenceMode)
+							.apply();
+					
+					timeSettingTextView.setVisibility(View.VISIBLE);
+					npFrequenceUnity.setVisibility(View.VISIBLE);
+					frequenceUnityTextView.setVisibility(View.VISIBLE);
+					npTypeUnity.setVisibility(View.VISIBLE);
+					typeUnityTextView.setVisibility(View.VISIBLE);
+					
+					mSwitch.setChecked(false);
 					Toast
-							.makeText(SetNotificationsActivity.this, "Votre alerte est désactivée", Toast.LENGTH_LONG)
+							.makeText(SetNotificationsActivity.this, "Veuillez réactiver l'alerte pour prendre en compte les nouveaux paramètres", Toast.LENGTH_LONG)
 							.show();
-					listFilters.clear();
-					mSwitch.setText("Alerte désactivée");
+					
 				}
+				
+				mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+					@SuppressLint("SetTextI18n")
+					public void onCheckedChanged(CompoundButton buttonView,
+					                             boolean isChecked) {
+						if (isChecked) {
+							alertState     = "Actif";
+							alertQueryTerm = Objects
+									.requireNonNull(inputSearchContent.getText())
+									.toString();
+							manageFilter();
+							manageDates();
+							searchConfiguration();
+							notifyTheUser();
+							
+							if (alertQueryTerm != null) {
+								uiquery = alertQueryTerm;
+							} else {
+								uiquery = "";
+							}
+							
+							if (listFilters.size() < 1) {
+								uifilter = "";
+							} else {
+								uifilter = listFilters.toString();
+							}
+							
+							if (frequenceMode.equals("instanée")) {
+								mSwitch.setText("Alert activée avec les paramètres suivants = \n" + "" + "termes : " + uiquery + "\n" + "filtres : " + uifilter + "\n" + "heure de notification : " + hourOfNotification + "h" + "\n" + "fréquence : " + unityFrequence + " " + typeOfUnityFrequence);
+							} else {
+								mSwitch.setText("Alert activée avec les paramètres suivants = \n" + "" + "termes : " + uiquery + "\n" + "filtres : " + uifilter + "\n" + "notifications instanée");
+								
+							}
+							Toast
+									.makeText(SetNotificationsActivity.this, "Votre alerte est activée", Toast.LENGTH_LONG)
+									.show();
+							
+						} else {
+							alertState = "désactif";
+							Toast
+									.makeText(SetNotificationsActivity.this, "Votre alerte est désactivée", Toast.LENGTH_LONG)
+									.show();
+							listFilters.clear();
+							mSwitch.setText("Alerte désactivée");
+						}
+					}
+				});
 			}
-		});
-	}
-	
-	public void manageFilter() {
-		searchFilter(checkbox1);
-		searchFilter(checkbox2);
-		searchFilter(checkbox3);
-		searchFilter(checkbox4);
-		searchFilter(checkbox5);
-		searchFilter(checkbox6);
-		stringFilter = StringUtils.join(listFilters, " ");
-	}
-	
-	public void manageDates() {
-		SimpleDateFormat formatterBackEndFormat = new SimpleDateFormat("yyyyMMdd");
-		//Initialisation du Calendar
-		Calendar cal = Calendar.getInstance();
-		//Recuperation de la date J-1
-		cal.add(Calendar.DAY_OF_MONTH, -1);
-		//Formattage de la date J-1
-		String resultOfYersterday = formatterBackEndFormat.format(cal.getTime());
-		beginDateInRightFormat = resultOfYersterday;
-	}
-	
-	public void searchConfiguration() {
-		searchResultsActivity = new Intent(SetNotificationsActivity.this, SearchResultsActivity.class);
-		mPreferences
-				.edit()
-				.putString(PREF_KEY_BEGIN_DATE, beginDateInRightFormat)
-				.apply();
-		mPreferences
-				.edit()
-				.putString(PREF_KEY_FILTER, stringFilter)
-				.apply();
-		mPreferences
-				.edit()
-				.putString(PREF_KEY_QUERY, alertQueryTerm)
-				.apply();
-		mPreferences
-				.edit()
-				.putInt(PREF_KEY_HOUR_OF_NOTIFICATION, hourOfNotification)
-				.apply();
-		mPreferences
-				.edit()
-				.putInt(PREF_KEY_NUMBER_OF_TIME_UNITY, unityFrequence)
-				.apply();
-		mPreferences
-				.edit()
-				.putString(PREF_KEY_TIME_UNITY, typeOfUnityFrequence)
-				.apply();
-		
-	}
-	
-	public void searchFilter(CheckBox checkBox) {
-		if (checkBox.isChecked()) {
-			listFilters.add(checkBox
-					                .getText()
-					                .toString());
-		}
-	}
-	
-	public void notifyTheUser() {
-		
-		viewModelMyNewsForSearchArticles
-				.getNews()
-				.observe(this, this::updateList);
-		
-		if (DateTime
-				    .now()
-				    .getHourOfDay() < hourOfNotification) {
-			delay = (int) new Duration(DateTime.now(), DateTime
-					.now()
-					.withTimeAtStartOfDay()
-					.plusHours(hourOfNotification)).getStandardMinutes();
-		} else {
-			delay = (int) new Duration(DateTime.now(), DateTime
-					.now()
-					.withTimeAtStartOfDay()
-					.plusDays(1)
-					.plusHours(hourOfNotification)).getStandardMinutes();
-		}
-		
-		Constraints constraints = new Constraints.Builder().build();
-		
-		PeriodicWorkRequest saveRequest = new PeriodicWorkRequest.Builder(UploadWorker.class, unityFrequenceLogic, TimeUnit.MINUTES, PeriodicWorkRequest.MIN_PERIODIC_FLEX_MILLIS, TimeUnit.MILLISECONDS)
-				.setInitialDelay(delay, TimeUnit.MINUTES)
-				.addTag("send_reminder_periodic")
-				.setConstraints(constraints)
-				.build();
-		
-		WorkManager
-				.getInstance(this)
-				.enqueueUniquePeriodicWork("send_reminder_periodic", ExistingPeriodicWorkPolicy.REPLACE, saveRequest);
-		
-		resultsDisplay();
-		
-	}
-	
-	public void updateList(List<Articles> articlesList) {
-		articles.clear();
-		if (articlesList != null) {
-			articles.addAll(articlesList);
-			if (articlesList.size() == 0) {
-				Toast
-						.makeText(SetNotificationsActivity.this, "Il n'y a aucuns nouveaux " + "résultats " + "depuis hier", Toast.LENGTH_LONG)
-						.show();
-				newResultsButton.setVisibility(View.INVISIBLE);
-			} else {
-				newResultsButton.setVisibility(View.VISIBLE);
-				Toast
-						.makeText(SetNotificationsActivity.this, "Décalage visibility button", Toast.LENGTH_LONG)
-						.show();
+			
+			public void manageFilter() {
+				searchFilter(checkbox1);
+				searchFilter(checkbox2);
+				searchFilter(checkbox3);
+				searchFilter(checkbox4);
+				searchFilter(checkbox5);
+				searchFilter(checkbox6);
+				stringFilter = StringUtils.join(listFilters, " ");
+			}
+			
+			public void manageDates() {
+				SimpleDateFormat formatterBackEndFormat = new SimpleDateFormat("yyyyMMdd");
+				//Initialisation du Calendar
+				Calendar cal = Calendar.getInstance();
+				//Recuperation de la date J-1
+				cal.add(Calendar.DAY_OF_MONTH, -1);
+				//Formattage de la date J-1
+				String resultOfYersterday = formatterBackEndFormat.format(cal.getTime());
+				beginDateInRightFormat = resultOfYersterday;
+			}
+			
+			public void searchConfiguration() {
+				searchResultsActivity = new Intent(SetNotificationsActivity.this, SearchResultsActivity.class);
+				mPreferences
+						.edit()
+						.putString(PREF_KEY_BEGIN_DATE, beginDateInRightFormat)
+						.apply();
+				mPreferences
+						.edit()
+						.putString(PREF_KEY_FILTER, stringFilter)
+						.apply();
+				mPreferences
+						.edit()
+						.putString(PREF_KEY_QUERY, alertQueryTerm)
+						.apply();
+				mPreferences
+						.edit()
+						.putInt(PREF_KEY_HOUR_OF_NOTIFICATION, hourOfNotification)
+						.apply();
+				mPreferences
+						.edit()
+						.putInt(PREF_KEY_NUMBER_OF_TIME_UNITY, unityFrequence)
+						.apply();
+				mPreferences
+						.edit()
+						.putString(PREF_KEY_TIME_UNITY, typeOfUnityFrequence)
+						.apply();
+				mPreferences
+						.edit()
+						.putString(PREF_KEY_ALERT_STATE, alertState)
+						.apply();
 				
 			}
-		} else {
-			Toast
-					.makeText(SetNotificationsActivity.this, "BAD_REQUEST", Toast.LENGTH_LONG)
-					.show();
-			newResultsButton.setVisibility(View.INVISIBLE);
-			mSwitch.setChecked(false);
-		}
-	}
-	
-	public void resultsDisplay() {
-		newResultsButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				startActivity(searchResultsActivity);
+			
+			public void notifyTheUser() {
+				
+				viewModelMyNewsForSearchArticles
+						.getNews()
+						.observe(SetNotificationsActivity.this, this::updateList);
+				
+				if (DateTime
+						    .now()
+						    .getHourOfDay() < hourOfNotification) {
+					delay = (int) new Duration(DateTime.now(), DateTime
+							.now()
+							.withTimeAtStartOfDay()
+							.plusHours(hourOfNotification)).getStandardMinutes();
+				} else {
+					delay = (int) new Duration(DateTime.now(), DateTime
+							.now()
+							.withTimeAtStartOfDay()
+							.plusDays(1)
+							.plusHours(hourOfNotification)).getStandardMinutes();
+				}
+				
+				Constraints constraints = new Constraints.Builder().build();
+				
+				PeriodicWorkRequest saveRequest = new PeriodicWorkRequest.Builder(UploadWorker.class, unityFrequenceLogic, TimeUnit.MINUTES, PeriodicWorkRequest.MIN_PERIODIC_FLEX_MILLIS, TimeUnit.MILLISECONDS)
+						.setInitialDelay(delay, TimeUnit.MINUTES)
+						.addTag("send_reminder_periodic")
+						.setConstraints(constraints)
+						.build();
+				
+				WorkManager
+						.getInstance(SetNotificationsActivity.this)
+						.enqueueUniquePeriodicWork("send_reminder_periodic", ExistingPeriodicWorkPolicy.REPLACE, saveRequest);
+				
+				resultsDisplay();
+				
+			}
+			
+			public void searchFilter(CheckBox checkBox) {
+				if (checkBox.isChecked()) {
+					listFilters.add(checkBox
+							                .getText()
+							                .toString());
+				}
+			}
+			
+			public void updateList(List<Articles> articlesList) {
+				articles.clear();
+				if (articlesList != null) {
+					articles.addAll(articlesList);
+					if (articlesList.size() == 0) {
+						Toast
+								.makeText(SetNotificationsActivity.this, "Il n'y a aucuns nouveaux " + "résultats " + "depuis hier", Toast.LENGTH_LONG)
+								.show();
+						newResultsButton.setVisibility(View.INVISIBLE);
+					} else {
+						newResultsButton.setVisibility(View.VISIBLE);
+						Toast
+								.makeText(SetNotificationsActivity.this, "Décalage visibility button", Toast.LENGTH_LONG)
+								.show();
+						
+					}
+				} else {
+					Toast
+							.makeText(SetNotificationsActivity.this, "BAD_REQUEST", Toast.LENGTH_LONG)
+							.show();
+					newResultsButton.setVisibility(View.INVISIBLE);
+					mSwitch.setChecked(false);
+				}
+			}
+			
+			public void resultsDisplay() {
+				newResultsButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						startActivity(searchResultsActivity);
+					}
+				});
+			}
+			
+			public void previousAlertmanagement() {
+				alertState = mPreferences.getString(PREF_KEY_ALERT_STATE, "désactif");
+				if (alertState.equals("actif")) {
+				
+				}
 			}
 		});
 	}
@@ -415,5 +489,3 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	
 	}
 }
-
-

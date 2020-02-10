@@ -30,6 +30,7 @@ public class UploadWorker extends Worker {
 	public static final String PREF_KEY_QUERY                = "PREF_KEY_QUERY";
 	public static final String PREF_KEY_NUMBER_OF_TIME_UNITY = "PREF_KEY_NUMBER_OF_TIME_UNITY";
 	public static final String PREF_KEY_TIME_UNITY           = "REF_KEY_TIME_UNITY";
+	public static final String PREF_KEY_FREQUENCE_MODE       = "PREF_KEY_FREQUENCE_MODE";
 	
 	private static final int NOTIF_ID = 123;
 	
@@ -39,8 +40,9 @@ public class UploadWorker extends Worker {
 	String typeOfUnityFrequence;
 	private Context           context;
 	private SharedPreferences mPreferences;
-	int numberOfArticles;
-	int unityFrequence;
+	int    numberOfArticles;
+	int    unityFrequence;
+	String frequenceMode;
 	
 	public UploadWorker(@NonNull Context context,
 	                    @NonNull WorkerParameters params) {
@@ -57,7 +59,6 @@ public class UploadWorker extends Worker {
 		unityFrequence       = mPreferences.getInt(PREF_KEY_NUMBER_OF_TIME_UNITY, 24);
 		typeOfUnityFrequence = mPreferences.getString(PREF_KEY_TIME_UNITY, "Heures");
 		
-		
 		viewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles(query, filter, beginDate, endDate);
 		if (viewModelMyNewsForSearchArticles
 				    .getNews()
@@ -73,7 +74,13 @@ public class UploadWorker extends Worker {
 			
 		}
 		
-		notifyTheUserByAndroidnotif();
+		if (frequenceMode.equals("instantanée")) {
+			if (numberOfArticles > 0) {
+				notifyTheUserByAndroidnotif();
+			}
+		} else {
+			notifyTheUserByAndroidnotif();
+		}
 		
 		// Indicate whether the task finished successfully with the Result
 		return Result.success();
