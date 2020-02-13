@@ -194,17 +194,6 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		
 		viewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles(query, filter, beginDate, endDate);
 		
-		
-		/*Constraints constraints = new Constraints.Builder().build();
-		saveRequest = new PeriodicWorkRequest.Builder(UploadWorker.class, unityFrequenceLogic, TimeUnit.MINUTES)
-				.addTag("send_reminder_periodic")
-				.setConstraints(constraints)
-				.build();
-		WorkManager
-				.getInstance(SetNotificationsActivity.this)
-				.enqueueUniquePeriodicWork("send_reminder_periodic", ExistingPeriodicWorkPolicy.REPLACE, saveRequest);
-		*/
-		
 	}
 	
 	public boolean previousAlertmanagement() {
@@ -300,9 +289,6 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		
 		if (switchFrequeneceMode.isChecked()) {
 			instantAlertFrequenceMode();
-			
-		} else {
-			programmAlertFrequenceMode();
 		}
 		switchFrequeneceMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@SuppressLint("SetTextI18n")
@@ -318,6 +304,11 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 				} else {
 					mSwitch.setChecked(false);
 					programmAlertFrequenceMode();
+					
+					//TODO
+					WorkManager
+							.getInstance(SetNotificationsActivity.this)
+							.cancelAllWork();
 					Toast
 							.makeText(SetNotificationsActivity.this, "Veuillez réactiver l'alerte pour prendre en compte les nouveaux paramètres", Toast.LENGTH_LONG)
 							.show();
@@ -327,13 +318,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	}
 	
 	private void manageNotifications() {
-		if (mSwitch.isChecked()) {
-			activateAlert();
-		} else {
-			alertState = "Désactif";
-			listFilters.clear();
-			mSwitch.setText("Alerte désactivée");
-		}
+		
 		mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@SuppressLint("SetTextI18n")
 			public void onCheckedChanged(CompoundButton buttonView,
