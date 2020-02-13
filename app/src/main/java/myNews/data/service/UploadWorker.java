@@ -2,7 +2,9 @@ package myNews.data.service;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
@@ -17,6 +19,7 @@ import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import myNews.myNews.R;
+import myNews.view.activitiesAndFragment.SearchResultsActivity;
 import myNews.viewmodel.ViewModelMyNewsForSearchArticles;
 
 /**
@@ -58,6 +61,7 @@ public class UploadWorker extends Worker {
 		beginDate            = mPreferences.getString(PREF_KEY_BEGIN_DATE, null);
 		unityFrequence       = mPreferences.getInt(PREF_KEY_NUMBER_OF_TIME_UNITY, 24);
 		typeOfUnityFrequence = mPreferences.getString(PREF_KEY_TIME_UNITY, "Heures");
+		frequenceMode        = mPreferences.getString(PREF_KEY_FREQUENCE_MODE, "");
 		
 		viewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles(query, filter, beginDate, endDate);
 		if (viewModelMyNewsForSearchArticles
@@ -89,6 +93,11 @@ public class UploadWorker extends Worker {
 	public void notifyTheUserByAndroidnotif() {
 		Resources res = context.getResources();
 		
+		// Create an explicit intent for an Activity in your app
+		Intent intent = new Intent(getApplicationContext(), SearchResultsActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
+		
 		NotificationCompat.Builder notification = new NotificationCompat.Builder(context, channelNumberOne)
 				.setSmallIcon(R.drawable.ic_launcher)
 				.setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.ic_launcher))
@@ -97,7 +106,10 @@ public class UploadWorker extends Worker {
 				.setContentTitle("« " + query + " »")
 				.setContentText(numberOfArticles + " nouveaux articles depuis " + unityFrequence + "" + typeOfUnityFrequence)
 				.setVibrate(new long[]{0, 500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500})
-				.setLights(Color.RED, 3000, 3000);
+				.setLights(Color.RED, 3000, 3000)
+				.setPriority(NotificationCompat.PRIORITY_DEFAULT)
+				// Set the intent that will fire when the user taps the notification
+				.setContentIntent(pendingIntent);
 		
 		createNotificationChannel();
 		

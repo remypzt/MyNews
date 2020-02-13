@@ -69,10 +69,13 @@ public class FragmentArticles extends Fragment {
 	
 	// UPDATE UI
 	//updateListOfArticles still in Fragments cause I must call the adapter and I cannot do it in viewmodel
+
 	public void updateList(List<Articles> articlesList) {
 		articles.clear();
-		articles.addAll(articlesList);
-		adapter.notifyDataSetChanged();
+		if (articlesList != null) {
+			articles.addAll(articlesList);
+			adapter.notifyDataSetChanged();
+		}
 	}
 	
 	// CONFIGURATION
