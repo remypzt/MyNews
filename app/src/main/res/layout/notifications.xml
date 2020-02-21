@@ -129,7 +129,7 @@
 
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="heure des notifications"
+            android:text="heure                   des notifications"
             app:layout_constraintTop_toBottomOf="@id/divider3"
 
 
@@ -157,7 +157,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Fréquence des nofications"
+            android:text="Fréquence                                des                       nofications"
 
 
             app:layout_constraintEnd_toStartOf="@id/timeSettingTextViewTypeFrequence"
@@ -187,7 +187,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Unité de Fréquence"
+            android:text="Unité                           de                 Fréquence"
 
 
             app:layout_constraintEnd_toEndOf="parent"

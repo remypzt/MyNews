@@ -84,23 +84,19 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	String                           query;
 	String                           filter;
 	String                           beginDate;
-	String              endDate;
-	String              stringFilter;
-	String              alertQueryTerm;
-	String              beginDateInRightFormat;
-	String              typeOfUnityFrequence;
-	String              uiquery;
-	String              uifilter;
-	String              frequenceMode;
-	String              alertState;
-	int                 hourOfNotification;
-	int                 delay;
-	int                 unityFrequence;
-	int                 unityFrequenceLogic;
-	PeriodicWorkRequest saveRequest;
-	
-	private List<Articles> articles;
-	private Context        context;
+	String                           endDate;
+	String                           stringFilter;
+	String                           alertQueryTerm;
+	String                           beginDateInRightFormat;
+	String                           typeOfUnityFrequence;
+	String                           uiquery;
+	String                           uifilter;
+	String                           frequenceMode;
+	String                           alertState;
+	int                              hourOfNotification;
+	int                              delay;
+	int                              unityFrequence;
+	int                              unityFrequenceLogic;
 	
 	final NumberPicker.OnValueChangeListener onValueChangeListenerFrequenceType = new NumberPicker.OnValueChangeListener() {
 		@Override
@@ -122,18 +118,17 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 					break;
 				default:
 					typeOfUnityFrequence = "Semaines";
-					unityFrequenceLogic = unityFrequenceLogic * 60 * 24 * 7;
+					unityFrequenceLogic = unityFrequence * 60 * 24 * 7;
 				
 			}
 			
 			typeUnityTextView.setText("Unité de fréquence\n" + typeOfUnityFrequence);
 			
-			mSwitch.setChecked(false);
-			Toast
-					.makeText(SetNotificationsActivity.this, "Veuillez réactiver l'alerte pour prendre en compte les nouveaux paramètres", Toast.LENGTH_LONG)
-					.show();
+			desactivateAlert();
 		}
 	};
+	
+	PeriodicWorkRequest saveRequest;
 	
 	NumberPicker.OnValueChangeListener onValueChangeListenerSettingTime = new NumberPicker.OnValueChangeListener() {
 		@Override
@@ -143,10 +138,8 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 			
 			timeSettingTextView.setText("Heure \n de début\n" + newVal + "h");
 			hourOfNotification = newVal;
-			mSwitch.setChecked(false);
-			Toast
-					.makeText(SetNotificationsActivity.this, "Veuillez réactiver l'alerte pour prendre en compte les nouveaux paramètres", Toast.LENGTH_LONG)
-					.show();
+			
+			desactivateAlert();
 		}
 	};
 	
@@ -158,12 +151,13 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 			
 			frequenceUnityTextView.setText("Fréquence\n" + "> 15 minutes\n" + newVal);
 			unityFrequence = newVal;
-			mSwitch.setChecked(false);
-			Toast
-					.makeText(SetNotificationsActivity.this, "Veuillez réactiver l'alerte pour prendre en compte les nouveaux paramètres", Toast.LENGTH_LONG)
-					.show();
+			
+			desactivateAlert();
 		}
 	};
+	
+	private List<Articles> articles;
+	private Context        context;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -196,12 +190,13 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		
 	}
 	
-	public boolean previousAlertmanagement() {
+	public void previousAlertmanagement() {
 		alertState = mPreferences.getString(PREF_KEY_ALERT_STATE, "Désactif");
 		if (alertState.equals("Actif")) {
+			getBackNotificationsConfig();
 			
 			frequenceMode = mPreferences.getString(PREF_KEY_FREQUENCE_MODE, "Programmée");
-			if (frequenceMode == "Instantanée") {
+			if (frequenceMode.equals("Instantanée")) {
 				switchFrequeneceMode.setChecked(true);
 				//TODO
 				
@@ -211,17 +206,18 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 				hourOfNotification = mPreferences.getInt(PREF_KEY_HOUR_OF_NOTIFICATION, 25);
 				npHour.setValue(hourOfNotification);
 				
-				typeOfUnityFrequence = mPreferences.getString(PREF_KEY_TIME_UNITY, "Heures");
+				typeOfUnityFrequenceManagement();
+				
 				
 				unityFrequence = mPreferences.getInt(PREF_KEY_NUMBER_OF_TIME_UNITY, 24);
 				npFrequenceUnity.setValue(unityFrequence);
 				
 			}
 			inputSearchContent.setText(mPreferences.getString(PREF_KEY_QUERY, ""));
-			mSwitch.setChecked(true);
-			filter = mPreferences.getString(PREF_KEY_FILTER, "");
 			
-			return true;
+			mSwitch.setChecked(true);
+			mSwitchSettingText();
+			filter = mPreferences.getString(PREF_KEY_FILTER, "");
 			
 		} else {
 			
@@ -231,13 +227,119 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 			npFrequenceUnity.setValue(24);
 			unityFrequence = 24;
 			
-			npTypeUnity.setValue(1);
+			//	npTypeUnity.setValue(3);
 			
-			mSwitch.setChecked(false);
+			desactivateAlert();
 			switchFrequeneceMode.setChecked(false);
 			
-			return false;
 		}
+	}
+	
+	public void getBackNotificationsConfig() {
+		
+		alertQueryTerm = Objects
+				.requireNonNull(inputSearchContent.getText())
+				.toString();
+		
+		if (mPreferences.getString(PREF_KEY_QUERY, null) != null) {
+			uiquery = mPreferences.getString(PREF_KEY_QUERY, null);
+		} else {
+			if (alertQueryTerm != null) {
+				uiquery = alertQueryTerm;
+			} else {
+				uiquery = "";
+			}
+		}
+		
+		if (mPreferences.getString(PREF_KEY_FILTER, null) != null) {
+			uifilter = mPreferences.getString(PREF_KEY_FILTER, null);
+		} else {
+			if (listFilters.size() < 1) {
+				uifilter = "";
+			} else {
+				uifilter = listFilters.toString();
+			}
+		}
+		
+	}
+	
+	public void typeOfUnityFrequenceManagement() {
+		typeOfUnityFrequence = mPreferences.getString(PREF_KEY_TIME_UNITY, "Heures");
+		switch (typeOfUnityFrequence) {
+			case "Minutes":
+				npTypeUnity.setValue(0);
+				unityFrequenceLogic = unityFrequence;
+				break;
+			case "Heures":
+				npTypeUnity.setValue(1);
+				unityFrequenceLogic = unityFrequence * 60;
+				break;
+			case "Jours":
+				npTypeUnity.setValue(2);
+				unityFrequenceLogic = unityFrequence * 60 * 24;
+				break;
+			default:
+				npTypeUnity.setValue(3);
+				unityFrequenceLogic = unityFrequence * 60 * 24 * 7;
+		}
+	}
+	
+	@SuppressLint("SetTextI18n")
+	public void mSwitchSettingText() {
+		if (frequenceMode.equals("Programmée")) {
+			if (hourOfNotification != 25) {
+				mSwitch.setText("Alert activée avec les paramètres suivants = \n" + "" + "termes : " + uiquery + "\n" + "filtres : " + uifilter + "\n" + "Heure de départ des notifications : " + hourOfNotification + "h" + "\n" + "fréquence : " + unityFrequence + " " + typeOfUnityFrequence);
+			} else {
+				mSwitch.setText("Alert activée avec les paramètres suivants = \n" + "" + "termes : " + uiquery + "\n" + "filtres : " + uifilter + "\n" + "Heure de départ des notifications : " + DateTime
+						.now()
+						.getHourOfDay() + "h" + "\n" + "fréquence : " + unityFrequence + " " + typeOfUnityFrequence);
+				
+			}
+		} else {
+			mSwitch.setText("Alert activée avec les paramètres suivants = \n" + "" + "termes : " + uiquery + "\n" + "filtres : " + uifilter + "\n" + "notifications instantanée");
+			
+		}
+	}
+	
+	public void desactivateAlert() {
+		mSwitch.setChecked(false);
+		mSwitch.setText("Alerte désactivée");
+		alertState = "Désactif";
+		
+		mPreferences
+				.edit()
+				.clear()
+				.apply();
+		
+		Toast
+				.makeText(SetNotificationsActivity.this, "Votre alerte est désactivée", Toast.LENGTH_LONG)
+				.show();
+		WorkManager
+				.getInstance(SetNotificationsActivity.this)
+				.cancelAllWork();
+		
+	}
+	
+	public void settingTimeOfNotification() {
+		//Set the minimum value of NumberPicker
+		npHour.setMinValue(0);
+		//Specify the maximum value/number of NumberPicker
+		npHour.setMaxValue(23);
+		
+		if (mPreferences.getInt(PREF_KEY_HOUR_OF_NOTIFICATION, 26) != 26) {
+			npHour.setValue(mPreferences.getInt(PREF_KEY_HOUR_OF_NOTIFICATION, 12));
+		}
+		
+		npHour.setOnValueChangedListener(onValueChangeListenerSettingTime);
+		
+		if (hourOfNotification != 25) {
+			timeSettingTextView.setText("Heure \n de début\n" + hourOfNotification + "h");
+			
+		} else {
+			timeSettingTextView.setText("Heure \n de début\n" + "maintenant");
+		}
+		timeSettingTextView.setTextColor(Color.parseColor("#ffd32b3b"));
+		
 	}
 	
 	public void settingUnityFrequence() {
@@ -245,6 +347,14 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		npFrequenceUnity.setMinValue(0);
 		//Specify the maximum value/number of NumberPicker
 		npFrequenceUnity.setMaxValue(100);
+		
+		if (mPreferences.getInt(PREF_KEY_NUMBER_OF_TIME_UNITY, 101) != 101) {
+			npFrequenceUnity.setValue(mPreferences.getInt(PREF_KEY_NUMBER_OF_TIME_UNITY, 24));
+			
+		} else {
+			unityFrequence = 24;
+			npFrequenceUnity.setValue(24);
+		}
 		
 		npFrequenceUnity.setOnValueChangedListener(onValueChangeListenerUnityFrequence);
 		
@@ -261,6 +371,14 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		
 		npTypeUnity.setDisplayedValues(new String[]{"Minutes", "Heures", "Jours", "Semaines"});
 		
+		if (mPreferences.getString(PREF_KEY_TIME_UNITY, null) != null) {
+			typeOfUnityFrequenceManagement();
+			
+		} else {
+			typeOfUnityFrequence = "Heures";
+			unityFrequenceLogic  = unityFrequence * 60;
+			npTypeUnity.setValue(1);
+		}
 		npTypeUnity.setOnValueChangedListener(onValueChangeListenerFrequenceType);
 		
 		typeUnityTextView.setText("Unité de fréquence\n" + typeOfUnityFrequence);
@@ -268,27 +386,12 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		
 	}
 	
-	public void settingTimeOfNotification() {
-		//Set the minimum value of NumberPicker
-		npHour.setMinValue(0);
-		//Specify the maximum value/number of NumberPicker
-		npHour.setMaxValue(23);
-		
-		npHour.setOnValueChangedListener(onValueChangeListenerSettingTime);
-		
-		if (hourOfNotification != 25) {
-			timeSettingTextView.setText("Heure \n de début\n" + hourOfNotification + "h");
-		} else {
-			timeSettingTextView.setText("Heure \n de début\n" + "maintenant");
-		}
-		timeSettingTextView.setTextColor(Color.parseColor("#ffd32b3b"));
-		
-	}
-	
 	private void manageFrequenceMode() {
 		
 		if (switchFrequeneceMode.isChecked()) {
 			instantAlertFrequenceMode();
+		} else {
+			programmAlertFrequenceMode();
 		}
 		switchFrequeneceMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@SuppressLint("SetTextI18n")
@@ -296,43 +399,10 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 			                             boolean isChecked) {
 				if (isChecked) {
 					instantAlertFrequenceMode();
-					mSwitch.setChecked(false);
-					Toast
-							.makeText(SetNotificationsActivity.this, "Veuillez réactiver l'alerte pour prendre en compte les nouveaux paramètres", Toast.LENGTH_LONG)
-							.show();
-					
+					desactivateAlert();
 				} else {
-					mSwitch.setChecked(false);
 					programmAlertFrequenceMode();
-					
-					//TODO
-					WorkManager
-							.getInstance(SetNotificationsActivity.this)
-							.cancelAllWork();
-					Toast
-							.makeText(SetNotificationsActivity.this, "Veuillez réactiver l'alerte pour prendre en compte les nouveaux paramètres", Toast.LENGTH_LONG)
-							.show();
-				}
-			}
-		});
-	}
-	
-	private void manageNotifications() {
-		
-		mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			@SuppressLint("SetTextI18n")
-			public void onCheckedChanged(CompoundButton buttonView,
-			                             boolean isChecked) {
-				if (isChecked) {
-					activateAlert();
-				} else {
-					alertState = "Désactif";
-					Toast
-							.makeText(SetNotificationsActivity.this, "Votre alerte est désactivée", Toast.LENGTH_LONG)
-							.show();
-					listFilters.clear();
-					mSwitch.setText("Alerte désactivée");
-					
+					desactivateAlert();
 				}
 			}
 		});
@@ -340,10 +410,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	
 	private void instantAlertFrequenceMode() {
 		frequenceMode = "Instantanée";
-		mPreferences
-				.edit()
-				.putString(PREF_KEY_FREQUENCE_MODE, frequenceMode)
-				.apply();
+		
 		npHour.setVisibility(View.GONE);
 		timeSettingTextView.setVisibility(View.GONE);
 		npFrequenceUnity.setVisibility(View.GONE);
@@ -359,10 +426,6 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	
 	private void programmAlertFrequenceMode() {
 		frequenceMode = "Programmée";
-		mPreferences
-				.edit()
-				.putString(PREF_KEY_FREQUENCE_MODE, frequenceMode)
-				.apply();
 		
 		timeSettingTextView.setVisibility(View.VISIBLE);
 		npHour.setVisibility(View.VISIBLE);
@@ -373,42 +436,33 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		
 	}
 	
-	public void activateAlert() {
-		alertState     = "Actif";
-		alertQueryTerm = Objects
-				.requireNonNull(inputSearchContent.getText())
-				.toString();
+	private void manageNotifications() {
 		
+		mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@SuppressLint("SetTextI18n")
+			public void onCheckedChanged(CompoundButton buttonView,
+			                             boolean isChecked) {
+				if (isChecked) {
+					activateAlert();
+				} else {
+					
+					listFilters.clear();
+					desactivateAlert();
+				}
+			}
+		});
+	}
+	
+	public void activateAlert() {
+		alertState = "Actif";
+		
+		getBackNotificationsConfig();
 		manageFilter();
 		manageDates();
 		searchConfiguration();
 		notifyTheUser();
+		mSwitchSettingText();
 		
-		if (alertQueryTerm != null) {
-			uiquery = alertQueryTerm;
-		} else {
-			uiquery = "";
-		}
-		
-		if (listFilters.size() < 1) {
-			uifilter = "";
-		} else {
-			uifilter = listFilters.toString();
-		}
-		
-		if (frequenceMode.equals("Instantanée")) {
-			if (hourOfNotification != 25) {
-				mSwitch.setText("Alert activée avec les paramètres suivants = \n" + "" + "termes : " + uiquery + "\n" + "filtres : " + uifilter + "\n" + "heure de notification : " + hourOfNotification + "h" + "\n" + "fréquence : " + unityFrequence + " " + typeOfUnityFrequence);
-			} else {
-				mSwitch.setText("Alert activée avec les paramètres suivants = \n" + "" + "termes : " + uiquery + "\n" + "filtres : " + uifilter + "\n" + "heure de notification : " + DateTime
-						.now()
-						.getHourOfDay() + "\n" + "fréquence : " + unityFrequence + " " + typeOfUnityFrequence);
-				
-			}
-		} else {
-			mSwitch.setText("Alert activée avec les paramètres suivants = \n" + "" + "termes : " + uiquery + "\n" + "filtres : " + uifilter + "\n" + "notifications instanée");
-			
-		}
 		Toast
 				.makeText(SetNotificationsActivity.this, "Votre alerte est activée", Toast.LENGTH_LONG)
 				.show();
@@ -466,7 +520,10 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 				.edit()
 				.putString(PREF_KEY_ALERT_STATE, alertState)
 				.apply();
-		
+		mPreferences
+				.edit()
+				.putString(PREF_KEY_FREQUENCE_MODE, frequenceMode)
+				.apply();
 	}
 	
 	public void notifyTheUser() {
@@ -545,8 +602,6 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 			mSwitch.setChecked(false);
 		}
 	}
-	
-	
 	
 	@Override
 	public void onClick(View parameterView) {

@@ -17,7 +17,7 @@ public interface NytApiInterfaceService {
 	@GET("topstories/v2/{section}.json?" + API_KEY)
 	Call<ResponseOfTopStories> getResponseOfTopStories(@Path("section") String technology);
 	
-	@GET("mostpopular/v2/viewed/7.json?" + API_KEY)
+	@GET("mostpopular/v2/viewed/1.json?" + API_KEY)
 	Call<ResponseOfMostPopular> getResponseOfMostPopular();
 	
 	@GET("search/v2/articlesearch.json?" + API_KEY)

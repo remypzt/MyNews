@@ -79,6 +79,7 @@ public class SearchActivity extends AppCompatActivity {
 			DatePickerDialog dd = new DatePickerDialog(SearchActivity.this, (view, year, monthOfYear, dayOfMonth) -> {
 				try {
 					String dateInStringUIFormat = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+					//créer une méthode qui a dans les paramètres
 					Date   dateUIFormat         = formatterUIFormat.parse(dateInStringUIFormat);
 					
 					if (dayOfMonth > 9) {
