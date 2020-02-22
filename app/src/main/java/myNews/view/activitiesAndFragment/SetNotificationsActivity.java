@@ -253,12 +253,29 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		
 		if (mPreferences.getString(PREF_KEY_FILTER, null) != null) {
 			uifilter = mPreferences.getString(PREF_KEY_FILTER, null);
-		} else {
-			if (listFilters.size() < 1) {
-				uifilter = "";
-			} else {
-				uifilter = listFilters.toString();
+			if (uifilter != null) {
+				if (uifilter.contains("Arts")) {
+					checkbox1.setChecked(true);
+				}
+				if (uifilter.contains("Business")) {
+					checkbox2.setChecked(true);
+				}
+				if (uifilter.contains("Technology")) {
+					checkbox3.setChecked(true);
+				}
+				if (uifilter.contains("Politics")) {
+					checkbox4.setChecked(true);
+				}
+				
+				if (uifilter.contains("Sports")) {
+					checkbox5.setChecked(true);
+				}
+				
+				if (uifilter.contains("Travel")) {
+					checkbox6.setChecked(true);
+				}
 			}
+			
 		}
 		
 	}
@@ -305,6 +322,13 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		mSwitch.setChecked(false);
 		mSwitch.setText("Alerte désactivée");
 		alertState = "Désactif";
+		
+		/*checkbox1.setChecked(false);
+		checkbox2.setChecked(false);
+		checkbox3.setChecked(false);
+		checkbox4.setChecked(false);
+		checkbox5.setChecked(false);
+		checkbox6.setChecked(false);*/
 		
 		mPreferences
 				.edit()
@@ -476,7 +500,12 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		searchFilter(checkbox4);
 		searchFilter(checkbox5);
 		searchFilter(checkbox6);
+		
 		stringFilter = StringUtils.join(listFilters, " ");
+		uifilter     = stringFilter;
+		
+		
+		
 	}
 	
 	public void manageDates() {
@@ -572,6 +601,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	
 	public void searchFilter(CheckBox checkBox) {
 		if (checkBox.isChecked()) {
+			
 			listFilters.add(checkBox
 					                .getText()
 					                .toString());

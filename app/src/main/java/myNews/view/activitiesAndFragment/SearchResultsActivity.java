@@ -82,8 +82,8 @@ public class SearchResultsActivity extends AppCompatActivity {
 			//Back arrow
 			toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SearchActivity.class)));
 		} else {
-			query     = mPreferences.getString(PREF_KEY_QUERY, "");
-			filter    = mPreferences.getString(PREF_KEY_FILTER, "");
+			query     = mPreferences.getString(PREF_KEY_QUERY, null);
+			filter    = mPreferences.getString(PREF_KEY_FILTER, null);
 			beginDate = mPreferences.getString(PREF_KEY_BEGIN_DATE, null);
 			//Back arrow
 			toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SetNotificationsActivity.class)));
