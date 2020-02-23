@@ -3,7 +3,9 @@ package myNews.view.adaptater;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,8 +27,11 @@ class ArticlesViewHolder extends RecyclerView.ViewHolder {
 	@BindView(R.id.Article_underCategory) TextView  mUnderCategory;
 	@BindView(R.id.Article_title)         TextView  mTitle;
 	@BindView(R.id.Article_date)          TextView  mDate;
-	
-	private Context mContext;
+	@BindView(R.id.Articles_layout) RelativeLayout mRelativeLayout;
+	@BindView(R.id.webView1)        WebView        mWebView;
+	@BindView(R.id.back_arrow) TextView mBack;
+	private                    Context  mContext;
+	private                    WebView  webView;
 	
 	ArticlesViewHolder(View itemView) {
 		super(itemView);
@@ -54,5 +59,26 @@ class ArticlesViewHolder extends RecyclerView.ViewHolder {
 		}
 		this.mDate.setText(articles.getDate());
 		this.mTitle.setText(articles.getTitle());
+		this.mWebView
+				.getSettings()
+				.setJavaScriptEnabled(true);
+		this.mWebView.loadUrl(articles.getUrl());
+		this.mRelativeLayout.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mWebView.setVisibility(View.VISIBLE);
+				mBack.setVisibility(View.VISIBLE);
+			}
+		});
+		this.mBack.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mWebView.setVisibility(View.GONE);
+				mBack.setVisibility(View.GONE);
+			}
+		});
+		
+		
+		
 	}
 }

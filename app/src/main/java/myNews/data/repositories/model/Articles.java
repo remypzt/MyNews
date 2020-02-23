@@ -10,19 +10,24 @@ public class Articles {
 	private String mUnderCategory;
 	private String mTitle;
 	private String mDate;
+	private String mUrl;
+
+	
 	
 	public Articles(int drawableImage,
 	                String urlImage,
 	                String category,
 	                String underCategory,
 	                String title,
-	                String date) {
+	                String date,
+	                String url) {
 		mDrawableImage = drawableImage;
 		mUrlImage      = urlImage;
 		mCategory      = category;
 		mUnderCategory = underCategory;
 		mTitle         = title;
 		mDate          = date;
+		mUrl           = url;
 	}
 	
 	public int getDrawableImage() {
@@ -48,5 +53,11 @@ public class Articles {
 	public String getTitle() {
 		return mTitle;
 	}
+	
+	public String getUrl() {
+		return mUrl;
+	}
+	
+	
 	
 }

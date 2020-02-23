@@ -58,6 +58,6 @@ public class UtilsForMostPopular {
 			e.printStackTrace();
 		}
 		
-		return new Articles(R.drawable.test, multimediaUrl, resultsItemOfMostPopular.getSection(), ""/*there isn't subsection object for MostPopular*/, resultsItemOfMostPopular.getTitle(), publishedDateAdaptedForArticlesFormat);
+		return new Articles(R.drawable.test, multimediaUrl, resultsItemOfMostPopular.getSection(), ""/*there isn't subsection object for MostPopular*/, resultsItemOfMostPopular.getTitle(), publishedDateAdaptedForArticlesFormat, resultsItemOfMostPopular.getUrl());
 	}
 }

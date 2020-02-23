@@ -62,7 +62,8 @@ public class UtilsForTopStories {
 		catch (ParseException e) {
 			e.printStackTrace();
 		}
-		return new Articles(R.drawable.test, multimediaUrl, resultsItemOfTopStories.getSection(), resultsItemOfTopStories.getSubsection(), resultsItemOfTopStories.getTitle(), publishedDateAdaptedForArticlesFormat);
+		
+		return new Articles(R.drawable.test, multimediaUrl, resultsItemOfTopStories.getSection(), resultsItemOfTopStories.getSubsection(), resultsItemOfTopStories.getTitle(), publishedDateAdaptedForArticlesFormat, resultsItemOfTopStories.getUrl());
 	}
 }
 

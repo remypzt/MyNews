@@ -62,7 +62,7 @@ public class UtilsForArticleSearch {
 		
 		return new Articles(R.drawable.test, multimediaUrl, responseOfArticleSearch.getSectionName(), "", responseOfArticleSearch
 				.getHeadline()
-				.getMain(), publishedDateAdaptedForArticlesFormat);
+				.getMain(), publishedDateAdaptedForArticlesFormat, responseOfArticleSearch.getWebUrl());
 	}
 	
 }
