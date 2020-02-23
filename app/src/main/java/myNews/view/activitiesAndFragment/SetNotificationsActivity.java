@@ -86,17 +86,18 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	String                           beginDate;
 	String                           endDate;
 	String                           stringFilter;
-	String                           alertQueryTerm;
-	String                           beginDateInRightFormat;
-	String                           typeOfUnityFrequence;
-	String                           uiquery;
-	String                           uifilter;
-	String                           frequenceMode;
-	String                           alertState;
-	int                              hourOfNotification;
-	int                              delay;
-	int                              unityFrequence;
-	int                              unityFrequenceLogic;
+	String alertQueryTerm;
+	String beginDateInRightFormat;
+	String typeOfUnityFrequence;
+	String uiquery;
+	String uifilter;
+	String frequenceMode;
+	String alertState;
+	int    hourOfNotification;
+	int    delay;
+	int    unityFrequence;
+	int    unityFrequenceLogic;
+	Toast  toast;
 	
 	final NumberPicker.OnValueChangeListener onValueChangeListenerFrequenceType = new NumberPicker.OnValueChangeListener() {
 		@Override
@@ -185,7 +186,6 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		manageFrequenceMode();
 		manageNotifications();
 		
-		
 		viewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles(query, filter, beginDate, endDate);
 		
 	}
@@ -227,12 +227,28 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 			npFrequenceUnity.setValue(24);
 			unityFrequence = 24;
 			
-			//	npTypeUnity.setValue(3);
-			
 			desactivateAlert();
 			switchFrequeneceMode.setChecked(false);
 			
 		}
+	}
+	
+	public void desactivateAlert() {
+		mSwitch.setChecked(false);
+		mSwitch.setText("Alerte désactivée");
+		alertState = "Désactif";
+		
+		mPreferences
+				.edit()
+				.clear()
+				.apply();
+		
+		showToast("Votre alerte est désactivée");
+		
+		WorkManager
+				.getInstance(SetNotificationsActivity.this)
+				.cancelAllWork();
+		
 	}
 	
 	public void getBackNotificationsConfig() {
@@ -318,30 +334,12 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		}
 	}
 	
-	public void desactivateAlert() {
-		mSwitch.setChecked(false);
-		mSwitch.setText("Alerte désactivée");
-		alertState = "Désactif";
-		
-		/*checkbox1.setChecked(false);
-		checkbox2.setChecked(false);
-		checkbox3.setChecked(false);
-		checkbox4.setChecked(false);
-		checkbox5.setChecked(false);
-		checkbox6.setChecked(false);*/
-		
-		mPreferences
-				.edit()
-				.clear()
-				.apply();
-		
-		Toast
-				.makeText(SetNotificationsActivity.this, "Votre alerte est désactivée", Toast.LENGTH_LONG)
-				.show();
-		WorkManager
-				.getInstance(SetNotificationsActivity.this)
-				.cancelAllWork();
-		
+	public void showToast(String message) {
+		if (toast != null) {
+			toast.cancel();
+		}
+		toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+		toast.show();
 	}
 	
 	public void settingTimeOfNotification() {
@@ -487,9 +485,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		notifyTheUser();
 		mSwitchSettingText();
 		
-		Toast
-				.makeText(SetNotificationsActivity.this, "Votre alerte est activée", Toast.LENGTH_LONG)
-				.show();
+		showToast("Votre alerte est activée");
 		
 	}
 	
@@ -613,21 +609,15 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		if (articlesList != null) {
 			articles.addAll(articlesList);
 			if (articlesList.size() == 0) {
-				Toast
-						.makeText(SetNotificationsActivity.this, "Il n'y a aucuns nouveaux " + "résultats " + "depuis hier", Toast.LENGTH_LONG)
-						.show();
 				
+				showToast("Il n'y a aucuns nouveaux \" + \"résultats \" + \"depuis hier");
 			} else {
 				
-				Toast
-						.makeText(SetNotificationsActivity.this, "Il y a des nouveaux résultats depuis hier", Toast.LENGTH_LONG)
-						.show();
-				
+				showToast("Il y a des nouveaux résultats depuis hier");
 			}
 		} else {
-			Toast
-					.makeText(SetNotificationsActivity.this, "BAD_REQUEST", Toast.LENGTH_LONG)
-					.show();
+			
+			showToast("BAD_REQUEST");
 			
 			mSwitch.setChecked(false);
 		}
