@@ -26,6 +26,7 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import myNews.myNews.R;
+import myNews.others.utils.Utils;
 
 /**
  * Created by Remy Pouzet on 28/12/2019.
@@ -78,8 +79,8 @@ public class SearchActivity extends AppCompatActivity {
 		button1.setOnClickListener(v -> {
 			DatePickerDialog dd = new DatePickerDialog(SearchActivity.this, (view, year, monthOfYear, dayOfMonth) -> {
 				try {
-					String dateInStringUIFormat = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-					//créer une méthode qui a dans les paramètres
+					String dateInStringUIFormat = Utils.UIformat(dayOfMonth, monthOfYear, year);
+					
 					Date   dateUIFormat         = formatterUIFormat.parse(dateInStringUIFormat);
 					
 					if (dayOfMonth > 9) {
@@ -107,6 +108,7 @@ public class SearchActivity extends AppCompatActivity {
 					if (button1 != endbtndatepicker) {
 						Date dateOfBeginning = formatterUIFormat.parse(dateInStringUIFormat);
 						checkDateWithToday(dateOfBeginning, button1);
+						
 						beginDateInRightFormat = formatterBackEndFormat.format(dateBackEndFormat);
 					} else {
 						Date dateOfEnding = formatterUIFormat.parse(dateInStringUIFormat);
