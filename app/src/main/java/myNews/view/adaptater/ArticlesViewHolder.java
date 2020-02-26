@@ -2,8 +2,9 @@ package myNews.view.adaptater;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import myNews.data.repositories.model.Articles;
 import myNews.myNews.R;
+import myNews.view.activitiesAndFragment.ArticlesWebview;
 
 /**
  * Created by Remy Pouzet on 21/11/2019.
@@ -28,10 +30,8 @@ class ArticlesViewHolder extends RecyclerView.ViewHolder {
 	@BindView(R.id.Article_title)         TextView  mTitle;
 	@BindView(R.id.Article_date)          TextView  mDate;
 	@BindView(R.id.Articles_layout) RelativeLayout mRelativeLayout;
-	@BindView(R.id.webView1)        WebView        mWebView;
-	@BindView(R.id.back_arrow) TextView mBack;
+	
 	private                    Context  mContext;
-	private                    WebView  webView;
 	
 	ArticlesViewHolder(View itemView) {
 		super(itemView);
@@ -59,26 +59,19 @@ class ArticlesViewHolder extends RecyclerView.ViewHolder {
 		}
 		this.mDate.setText(articles.getDate());
 		this.mTitle.setText(articles.getTitle());
-		this.mWebView
-				.getSettings()
-				.setJavaScriptEnabled(true);
-		this.mWebView.loadUrl(articles.getUrl());
+		
 		this.mRelativeLayout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mWebView.setVisibility(View.VISIBLE);
-				mBack.setVisibility(View.VISIBLE);
+				
+				Intent articlesWebview = new Intent(mRelativeLayout.getContext(), ArticlesWebview.class);
+				Bundle bundle          = new Bundle();
+				bundle.putString("url", articles.getUrl());
+				
+				articlesWebview.putExtras(bundle);
+				
 			}
 		});
-		this.mBack.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mWebView.setVisibility(View.GONE);
-				mBack.setVisibility(View.GONE);
-			}
-		});
-		
-		
-		
 	}
 }
+
