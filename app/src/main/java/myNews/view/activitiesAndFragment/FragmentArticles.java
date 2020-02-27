@@ -28,7 +28,6 @@ public class FragmentArticles extends Fragment {
 	//FOR DATA
 	private List<Articles>  articles;
 	private ArticlesAdapter adapter;
-	private ViewModelMyNews viewModelMyNews;
 	private int             position;
 	
 	public static FragmentArticles newInstance(int position) {
@@ -56,8 +55,8 @@ public class FragmentArticles extends Fragment {
 	public void onViewCreated(@NonNull View view,
 	                          @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		viewModelMyNews = new ViewModelMyNews(position);
-		viewModelMyNews
+		ViewModelMyNews localViewModelMyNews = new ViewModelMyNews(position);
+		localViewModelMyNews
 				.getNews()
 				.observe(this, this::updateList);
 	}

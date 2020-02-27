@@ -18,7 +18,6 @@ import myNews.myNews.R;
  */
 public class UtilsForArticleSearch {
 	static         Date   publishedDateInDateFormat;
-	private static String publishedDateAdaptedForArticlesFormat;
 	
 	public static List<Articles> generateArticlesFromArticleSearch(ResponseOfArticleSearch responseOfArticleSearch) {
 		List<Articles> articleSearchArticles = new ArrayList<>();
@@ -58,11 +57,11 @@ public class UtilsForArticleSearch {
 		}
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		
-		publishedDateAdaptedForArticlesFormat = dateFormat.format(publishedDateInDateFormat);
+		String localPublishedDateAdaptedForArticlesFormat = dateFormat.format(publishedDateInDateFormat);
 		
 		return new Articles(R.drawable.test, multimediaUrl, responseOfArticleSearch.getSectionName(), "", responseOfArticleSearch
 				.getHeadline()
-				.getMain(), publishedDateAdaptedForArticlesFormat, responseOfArticleSearch.getWebUrl());
+				.getMain(), localPublishedDateAdaptedForArticlesFormat, responseOfArticleSearch.getWebUrl());
 	}
 	
 }

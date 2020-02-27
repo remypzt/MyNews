@@ -158,7 +158,6 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	};
 	
 	private List<Articles> articles;
-	private Context        context;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -167,7 +166,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		setContentView(R.layout.notifications);
 		ButterKnife.bind(this);
 		
-		this.context = mSwitch.getContext();
+		Context localContext = mSwitch.getContext();
 		
 		this.articles = new ArrayList<>();
 		listFilters   = new ArrayList<>();

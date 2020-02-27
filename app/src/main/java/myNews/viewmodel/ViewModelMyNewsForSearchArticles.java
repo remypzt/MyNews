@@ -13,7 +13,6 @@ import myNews.data.repositories.model.Articles;
  */
 public class ViewModelMyNewsForSearchArticles extends androidx.lifecycle.ViewModel {
 	
-	private NytApiRepository                mNytApiRepository;
 	private MutableLiveData<List<Articles>> mArticles;
 	
 	public ViewModelMyNewsForSearchArticles(String query,
@@ -21,9 +20,9 @@ public class ViewModelMyNewsForSearchArticles extends androidx.lifecycle.ViewMod
 	                                        String beginDate,
 	                                        String endDate) {
 		
-		mNytApiRepository = NytApiRepository.getInstance();
+		NytApiRepository localNytApiRepository = NytApiRepository.getInstance();
 		
-		mArticles = mNytApiRepository.getSearchArticles(query, filter, beginDate, endDate);
+		mArticles = localNytApiRepository.getSearchArticles(query, filter, beginDate, endDate);
 	}
 	
 	public LiveData<List<Articles>> getNews() {

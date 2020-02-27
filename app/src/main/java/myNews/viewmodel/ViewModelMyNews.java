@@ -13,23 +13,20 @@ import myNews.data.repositories.model.Articles;
  */
 
 public class ViewModelMyNews extends androidx.lifecycle.ViewModel {
-	private NytApiRepository                mNytApiRepository;
 	private MutableLiveData<List<Articles>> mArticles;
-	private int                             IdOfSelectedTab;
 	
 	public ViewModelMyNews(int position) {
-		IdOfSelectedTab   = position;
-		mNytApiRepository = NytApiRepository.getInstance();
+		NytApiRepository localNytApiRepository = NytApiRepository.getInstance();
 		
-		switch (IdOfSelectedTab) {
+		switch (position) {
 			case 0:
-				mArticles = mNytApiRepository.getTopStories("home");
+				mArticles = localNytApiRepository.getTopStories("home");
 				break;
 			case 1:
-				mArticles = mNytApiRepository.getMostPopular();
+				mArticles = localNytApiRepository.getMostPopular();
 				break;
 			case 2:
-				mArticles = mNytApiRepository.getTopStories("technology");
+				mArticles = localNytApiRepository.getTopStories("technology");
 				break;
 			
 		}

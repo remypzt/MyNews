@@ -37,12 +37,11 @@ public class UploadWorker extends Worker {
 	
 	private static final int NOTIF_ID = 123;
 	
-	private ViewModelMyNewsForSearchArticles viewModelMyNewsForSearchArticles;
-	
-	private String query, filter, beginDate, endDate, channelNumberOne = "channelNumberOne";
+	private String query;
+	private String endDate;
+	private String channelNumberOne = "channelNumberOne";
 	String typeOfUnityFrequence;
 	private Context           context;
-	private SharedPreferences mPreferences;
 	int    numberOfArticles;
 	int    unityFrequence;
 	String frequenceMode;
@@ -55,23 +54,23 @@ public class UploadWorker extends Worker {
 	
 	@Override
 	public Result doWork() {
-		mPreferences         = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
-		query                = mPreferences.getString(PREF_KEY_QUERY, "");
-		filter               = mPreferences.getString(PREF_KEY_FILTER, "");
-		beginDate            = mPreferences.getString(PREF_KEY_BEGIN_DATE, null);
-		unityFrequence       = mPreferences.getInt(PREF_KEY_NUMBER_OF_TIME_UNITY, 24);
-		typeOfUnityFrequence = mPreferences.getString(PREF_KEY_TIME_UNITY, "Heures");
-		frequenceMode        = mPreferences.getString(PREF_KEY_FREQUENCE_MODE, "");
+		SharedPreferences localPreferences = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
+		query = localPreferences.getString(PREF_KEY_QUERY, "");
+		String localFilter    = localPreferences.getString(PREF_KEY_FILTER, "");
+		String localBeginDate = localPreferences.getString(PREF_KEY_BEGIN_DATE, null);
+		unityFrequence       = localPreferences.getInt(PREF_KEY_NUMBER_OF_TIME_UNITY, 24);
+		typeOfUnityFrequence = localPreferences.getString(PREF_KEY_TIME_UNITY, "Heures");
+		frequenceMode        = localPreferences.getString(PREF_KEY_FREQUENCE_MODE, "");
 		
-		viewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles(query, filter, beginDate, endDate);
-		if (viewModelMyNewsForSearchArticles
+		ViewModelMyNewsForSearchArticles localViewModelMyNewsForSearchArticles = new ViewModelMyNewsForSearchArticles(query, localFilter, localBeginDate, endDate);
+		if (localViewModelMyNewsForSearchArticles
 				    .getNews()
 				    .getValue() != null) {
-			viewModelMyNewsForSearchArticles
+			localViewModelMyNewsForSearchArticles
 					.getNews()
 					.getValue()
 					.size();
-			numberOfArticles = viewModelMyNewsForSearchArticles
+			numberOfArticles = localViewModelMyNewsForSearchArticles
 					.getNews()
 					.getValue()
 					.size();

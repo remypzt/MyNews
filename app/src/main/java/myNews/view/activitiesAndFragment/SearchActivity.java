@@ -84,11 +84,11 @@ public class SearchActivity extends AppCompatActivity {
 					Date   dateUIFormat         = formatterUIFormat.parse(dateInStringUIFormat);
 					
 					if (dayOfMonth > 9) {
-						String dateInStringBackEndFormat = year + "" + (monthOfYear + 1) + "" + dayOfMonth;
-						dateBackEndFormat = formatterBackEndFormat.parse(dateInStringBackEndFormat);
+						String dateInStringBEformat = Utils.BEformat(dayOfMonth, monthOfYear, year);
+						dateBackEndFormat = formatterBackEndFormat.parse(dateInStringBEformat);
 					} else {
-						String dateInStringBackEndFormatException = year + "" + (monthOfYear + 1) + "0" + dayOfMonth;
-						dateBackEndFormat = formatterBackEndFormat.parse(dateInStringBackEndFormatException);
+						String dateInStringBEformatException = Utils.BEformatException(dayOfMonth, monthOfYear, year);
+						dateBackEndFormat = formatterBackEndFormat.parse(dateInStringBEformatException);
 					}
 					
 					button1.setText(formatterUIFormat.format(dateUIFormat));
@@ -105,7 +105,7 @@ public class SearchActivity extends AppCompatActivity {
 					}
 					
 					// check dates cannot be place in the future
-					if (button1 != endbtndatepicker) {
+					if (button1 == beginbtndatepicker) {
 						Date dateOfBeginning = formatterUIFormat.parse(dateInStringUIFormat);
 						checkDateWithToday(dateOfBeginning, button1);
 						

@@ -31,12 +31,10 @@ class ArticlesViewHolder extends RecyclerView.ViewHolder {
 	@BindView(R.id.Article_date)          TextView  mDate;
 	@BindView(R.id.Articles_layout) RelativeLayout mRelativeLayout;
 	
-	private                    Context  mContext;
-	
 	ArticlesViewHolder(View itemView) {
 		super(itemView);
 		ButterKnife.bind(this, itemView);
-		mContext = itemView.getContext();
+		Context localContext = itemView.getContext();
 	}
 	
 	@SuppressLint("SetTextI18n")
@@ -60,17 +58,17 @@ class ArticlesViewHolder extends RecyclerView.ViewHolder {
 		this.mDate.setText(articles.getDate());
 		this.mTitle.setText(articles.getTitle());
 		
-		this.mRelativeLayout.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				
-				Intent articlesWebview = new Intent(mRelativeLayout.getContext(), ArticlesWebview.class);
-				Bundle bundle          = new Bundle();
-				bundle.putString("url", articles.getUrl());
-				
-				articlesWebview.putExtras(bundle);
-				
-			}
+		this.mRelativeLayout.setOnClickListener(v -> {
+			
+			Intent articlesWebview = new Intent(mRelativeLayout.getContext(), ArticlesWebview.class);
+			Bundle bundle          = new Bundle();
+			bundle.putString("url", articles.getUrl());
+			
+			articlesWebview.putExtras(bundle);
+			mRelativeLayout
+					.getContext()
+					.startActivity(articlesWebview);
+			
 		});
 	}
 }

@@ -1,11 +1,10 @@
 package myNews.view.activitiesAndFragment;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.webkit.WebView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,11 +15,10 @@ import myNews.myNews.R;
  */
 public class ArticlesWebview extends AppCompatActivity {
 	
-	@BindView(R.id.toolbar) public Toolbar toolbar;
 	@BindView(R.id.webView1)       WebView mWebView;
 	private                        WebView webView;
-	private                        String  url;
 	
+	@SuppressLint("SetJavaScriptEnabled")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,16 +26,13 @@ public class ArticlesWebview extends AppCompatActivity {
 		ButterKnife.bind(this);
 		
 		Bundle bundle = getIntent().getExtras();
-		url = bundle.getString("url");
-		
-		//Back arrow
-		toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
-		toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MainActivity.class)));
+		assert bundle != null;
+		String localUrl = bundle.getString("url");
 		
 		this.mWebView
 				.getSettings()
 				.setJavaScriptEnabled(true);
-		this.mWebView.loadUrl(url);
+		this.mWebView.loadUrl(localUrl);
 		
 	}
 }
