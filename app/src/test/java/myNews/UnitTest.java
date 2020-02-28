@@ -28,6 +28,7 @@ public class UnitTest {
 	
 	@Test
 	public void testingGenerateArticlesFromArticlesSearch() {
+		
 		//assertEquals("images/2020/02/29/multimedia/29sp-tefaflede-inyt1/29sp-tefaflede-inyt1-articleLarge.jpg",
 		            
 		             
