@@ -44,15 +44,11 @@ public class InstrumentedTest {
     @Test
     public void testingSearchButtonDisplaying() {
         onView(withId(R.id.action_search)) // withId(R.id.my_button) is a ViewMatcher
-                                           .perform(click()) // click() is a ViewAction
+                                           .perform(click());// click() is a ViewAction
+	    onView(withId(R.id.constraintLayoutSearch))
                                            .check(matches(isDisplayed())); // matches(isDisplayed()) is a ViewAssertion
     }
-    
-    @Test
-    public void testingSearchButton() {
-        onView(withId(R.id.action_search)) // withId(R.id.my_button) is a ViewMatcher
-                                           .perform(click()) // click() is a ViewAction
-                                           .check(matches(isDisplayed())); // matches(isDisplayed()) is a ViewAssertion
-    }
-    
+	
 }
+    
+

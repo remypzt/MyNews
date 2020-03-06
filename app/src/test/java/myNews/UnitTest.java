@@ -4,7 +4,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import myNews.data.repositories.model.Articles;
+import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResponseOfTopStories;
+import myNews.data.service.realAPI.topStories.topStoriesPOJO.ResultsItemOfTopStories;
 import myNews.others.utils.Utils;
+import myNews.others.utils.UtilsForTopStories;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -27,45 +34,26 @@ public class UnitTest {
 	}
 	
 	@Test
-	public void testingGenerateArticlesFromArticlesSearch() {
-		
-		//assertEquals("images/2020/02/29/multimedia/29sp-tefaflede-inyt1/29sp-tefaflede-inyt1-articleLarge.jpg",
-		            
-		             
-		             /* new ViewModelMyNewsForSearchArticles("banana", "Arts", "20200227", "20200227")
-				             .getNews()
-				             .getValue()
-				             .get(0)
-				             .getUrlImage());
-		             
-		          /*   NytApiRepository
-				.getInstance()
-				.getSearchArticles("banana", "Business", "20200227", "20200227")
-				.getValue()
-				.get(1)
-				.getUrlImage());
-		*/
+	public void testingGenerateArticlesFromTopStories() {
+		ResponseOfTopStories    localResponseOfTopStories    = new ResponseOfTopStories();
+		ResultsItemOfTopStories localResultsItemOfTopStories = new ResultsItemOfTopStories();
+		//localResultsItemOfTopStories.getMultimedia().get(0).setUrl("multimediaUrl");
+		localResultsItemOfTopStories.setSection("Test");
+		localResultsItemOfTopStories.setSubsection("subsection");
+		localResultsItemOfTopStories.setTitle("Title");
+		localResultsItemOfTopStories.setPublishedDate("1999-03-22T05:06:07+01:00");
+		localResultsItemOfTopStories.setUrl("url");
+		List<ResultsItemOfTopStories> localListResultsTopStories = new ArrayList<>();
+		localListResultsTopStories.add(localResultsItemOfTopStories);
+		localResponseOfTopStories.setResults(localListResultsTopStories);
+		List<Articles> localListFromTopStoriesArticles = UtilsForTopStories.generateArticlesFromTopStories(localResponseOfTopStories);
+		assertEquals("Test", localListFromTopStoriesArticles
+				.get(0)
+				.getCategory());
+		assertEquals(1, localListFromTopStoriesArticles.size());
+		assertEquals("subsection", localListFromTopStoriesArticles
+				.get(0)
+				.getUnderCategory());
 	}
-	
-	  /* @Test
-    public void testingGenerateArticlesFromArticlesSearch (){
-        assertEquals((R.drawable.test,
-                     "images/2020/02/29/multimedia/29sp-tefaflede-inyt1/29sp-tefaflede-inyt1-articleLarge.jpg",
-                     "Arts",
-                     "",
-                     "For TEFAF, a New Year Brings a New Approach",
-                     27/02/2020,
-                     "https://www.nytimes.com/2020/02/27/arts/tefaf-maastricht.html"),
-                     UtilsForArticleSearch.generateArticlesFromArticleSearch("banana", "business", 20200227, 20200227));
-                     
-                                     getResponseOfTopStories(section)
-                                                                                                                                      .enqueue(new Callback<ResponseOfTopStories>() {
-                                                                                                                                          @Override
-                                                                                                                                          public void onResponse(Call<ResponseOfTopStories> call,
-                                                                                                                                                                 Response<ResponseOfTopStories> response) {
-                                                                                                                                              if (response.isSuccessful()) {
-                                                                                                                                                  topStories.setValue(UtilsForTopStories.generateArticlesFromTopStories(response.body()));
-                UtilsForArticleSearch.generateArticlesFromArticleSearch().get(0).getUrlImage());
-    }*/
 }
 

@@ -81,7 +81,7 @@ public class SearchActivity extends AppCompatActivity {
 				try {
 					String dateInStringUIFormat = Utils.UIformat(dayOfMonth, monthOfYear, year);
 					
-					Date   dateUIFormat         = formatterUIFormat.parse(dateInStringUIFormat);
+					Date dateUIFormat = formatterUIFormat.parse(dateInStringUIFormat);
 					
 					if (dayOfMonth > 9) {
 						String dateInStringBEformat = Utils.BEformat(dayOfMonth, monthOfYear, year);
