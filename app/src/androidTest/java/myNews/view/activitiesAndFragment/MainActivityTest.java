@@ -1,5 +1,6 @@
 package myNews.view.activitiesAndFragment;
 
+import android.content.pm.ActivityInfo;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -22,9 +23,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
@@ -36,14 +35,17 @@ public class MainActivityTest {
 	@Test
 	public void mainActivityTest() {
 		mActivityTestRule.getActivity()
-		//.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+		                 .setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
 		;
 		
-		ViewInteraction overflowMenuButton = onView(allOf(withContentDescription("More options"), childAtPosition(childAtPosition(withId(R.id.toolbar), 0), 1), isDisplayed()));
+		onView(withId(R.id.menuNotifications)).perform(click());
+		
+		/*ViewInteraction overflowMenuButton = onView(allOf(withContentDescription("More options"), childAtPosition(childAtPosition(withId(R.id.toolbar), 0), 1), isDisplayed()));
 		overflowMenuButton.perform(click());
 		
 		ViewInteraction appCompatTextView = onView(allOf(withId(R.id.title), withText("Notification"), childAtPosition(childAtPosition(withId(R.id.content), 0), 0), isDisplayed()));
-		appCompatTextView.perform(click());
+		appCompatTextView.perform(click());*/
+		
 		
 		ViewInteraction viewGroup = onView(allOf(withId(R.id.parentConstraintLayoutOfNotifications), childAtPosition(allOf(withId(R.id.constraintLayout), childAtPosition(withId(android.R.id.content), 0)), 1), isDisplayed()));
 		viewGroup.check(matches(isDisplayed()));
