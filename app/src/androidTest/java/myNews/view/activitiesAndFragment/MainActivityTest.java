@@ -1,31 +1,6 @@
 package myNews.view.activitiesAndFragment;
 
-import android.content.pm.ActivityInfo;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
-
-import androidx.test.espresso.ViewInteraction;
-import androidx.test.filters.LargeTest;
-import androidx.test.rule.ActivityTestRule;
-import androidx.test.runner.AndroidJUnit4;
-
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import myNews.myNews.R;
-
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static org.hamcrest.Matchers.allOf;
-
+/*
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
@@ -38,13 +13,13 @@ public class MainActivityTest {
 		                 .setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
 		;
 		
-		onView(withId(R.id.menuNotifications)).perform(click());
+		//onView(withId(R.id.menuNotifications)).perform(click());
 		
-		/*ViewInteraction overflowMenuButton = onView(allOf(withContentDescription("More options"), childAtPosition(childAtPosition(withId(R.id.toolbar), 0), 1), isDisplayed()));
+		ViewInteraction overflowMenuButton = onView(allOf(withContentDescription("More options"), childAtPosition(childAtPosition(withId(R.id.toolbar), 0), 1), isDisplayed()));
 		overflowMenuButton.perform(click());
 		
 		ViewInteraction appCompatTextView = onView(allOf(withId(R.id.title), withText("Notification"), childAtPosition(childAtPosition(withId(R.id.content), 0), 0), isDisplayed()));
-		appCompatTextView.perform(click());*/
+		appCompatTextView.perform(click());
 		
 		
 		ViewInteraction viewGroup = onView(allOf(withId(R.id.parentConstraintLayoutOfNotifications), childAtPosition(allOf(withId(R.id.constraintLayout), childAtPosition(withId(android.R.id.content), 0)), 1), isDisplayed()));
@@ -69,4 +44,4 @@ public class MainActivityTest {
 		};
 	}
 	
-}
+}*/
