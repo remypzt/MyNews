@@ -35,7 +35,9 @@ public class MainActivityTest {
 	
 	@Test
 	public void mainActivityTest() {
-		//	mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		mActivityTestRule.getActivity()
+		//.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+		;
 		
 		ViewInteraction overflowMenuButton = onView(allOf(withContentDescription("More options"), isDisplayed()));
 		overflowMenuButton.perform(click());
