@@ -1,6 +1,5 @@
 package myNews.view.activitiesAndFragment;
 
-import android.content.pm.ActivityInfo;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -36,9 +35,7 @@ public class MainActivityTest {
 	
 	@Test
 	public void mainActivityTest() {
-		mActivityTestRule
-				.getActivity()
-				.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		//	mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		
 		ViewInteraction overflowMenuButton = onView(allOf(withContentDescription("More options"), childAtPosition(childAtPosition(withId(R.id.toolbar), 0), 1), isDisplayed()));
 		overflowMenuButton.perform(click());

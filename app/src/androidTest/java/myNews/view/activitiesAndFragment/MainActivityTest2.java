@@ -17,6 +17,7 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
@@ -32,6 +33,17 @@ public class MainActivityTest2 {
 		textView.check(matches(withText("MOST POPULAR")));
 		
 		ViewInteraction swipe = onView(withId(R.id.view_pager)).perform(swipeLeft());
+		
+		int i;
+		i = mActivityTestRule.getActivity().viewPager.getCurrentItem();
+		
+		assertEquals("MOST POPULAR", mActivityTestRule.getActivity().viewPager
+				.getAdapter()
+				.getPageTitle(i)
+				.toString());
+		
+	
+	
 		
 	}
 	
