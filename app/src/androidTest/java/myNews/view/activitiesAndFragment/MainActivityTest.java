@@ -37,7 +37,7 @@ public class MainActivityTest {
 	public void mainActivityTest() {
 		//	mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		
-		ViewInteraction overflowMenuButton = onView(allOf(withContentDescription("More options"), childAtPosition(childAtPosition(withId(R.id.toolbar), 0), 1), isDisplayed()));
+		ViewInteraction overflowMenuButton = onView(allOf(withContentDescription("More options"), isDisplayed()));
 		overflowMenuButton.perform(click());
 		
 		ViewInteraction appCompatTextView = onView(allOf(withId(R.id.title), withText("Notification"), childAtPosition(childAtPosition(withId(R.id.content), 0), 0), isDisplayed()));
