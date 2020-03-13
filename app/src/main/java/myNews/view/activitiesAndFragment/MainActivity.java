@@ -2,6 +2,7 @@ package myNews.view.activitiesAndFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,6 +14,10 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.security.ProviderInstaller;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
@@ -37,6 +42,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		setContentView(R.layout.activity_main);
 		ButterKnife.bind(this);
 		setSupportActionBar(toolbar);
+		
+		//For compatibility api16 to api22
+		try {
+			ProviderInstaller.installIfNeeded(getApplicationContext());
+		}
+		catch (GooglePlayServicesRepairableException e) {
+			//Indicates that Google Play services is out of date, disabled, etc
+			Log.e("api", Log.getStackTraceString(e));
+			//Prompt the user to install/update/enable Google play services
+			GoogleApiAvailability
+					.getInstance()
+					.showErrorNotification(getApplicationContext(), e.getConnectionStatusCode());
+			
+		}
+		catch (GooglePlayServicesNotAvailableException e) {
+			//Indicates a non recoverable error; the ProviderInstaller is not able to install an up to date Provide
+			Log.e("api", Log.getStackTraceString(e));
+			
+		}
 		
 		//create default navigation drawer toggle
 		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -85,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			
 			}
 		});
+		
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu) {

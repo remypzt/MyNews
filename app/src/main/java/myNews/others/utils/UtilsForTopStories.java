@@ -50,7 +50,7 @@ public class UtilsForTopStories {
 			multimediaUrl = "";
 		}
 		
-		@SuppressLint("SimpleDateFormat") SimpleDateFormat publishedDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
+		@SuppressLint("SimpleDateFormat") SimpleDateFormat publishedDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		Date                                               publishedDateInDateFormat;
 		try {
 			publishedDateInDateFormat = publishedDate.parse(resultsItemOfTopStories.getPublishedDate());
