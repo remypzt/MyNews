@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">My News</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
@@ -8,7 +8,7 @@
     <string name="textview">TextView</string>
     <string name="articles_picture_description">Picture illustrating the article</string>
     <string name="picture_illustrating_the_article">Picture illustrating the article</string>
-    <string name="checkbox">CheckBox</string>
+    <string name="checkbox" tools:ignore="UnusedResources">CheckBox</string>
 
     <string-array name="my_items">
         <item>Dummy Item 1</item>

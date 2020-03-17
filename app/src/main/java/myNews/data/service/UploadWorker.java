@@ -89,7 +89,7 @@ public class UploadWorker extends Worker {
 		return Result.success();
 	}
 	
-	public void notifyTheUserByAndroidnotif() {
+	private void notifyTheUserByAndroidnotif() {
 		Resources res = context.getResources();
 		
 		// Create an explicit intent for an Activity in your app
@@ -129,6 +129,7 @@ public class UploadWorker extends Worker {
 			// Register the channel with the system; you can't change the importance
 			// or other notification behaviors after this
 			NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+			assert notificationManager != null;
 			notificationManager.createNotificationChannel(channel);
 		}
 	}

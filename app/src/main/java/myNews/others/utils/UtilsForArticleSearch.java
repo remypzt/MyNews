@@ -1,5 +1,7 @@
 package myNews.others.utils;
 
+import android.annotation.SuppressLint;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -47,7 +49,7 @@ public class UtilsForArticleSearch {
 				                       .getUrl()
 		                       : "";
 		
-		SimpleDateFormat publishedDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+		@SuppressLint("SimpleDateFormat") SimpleDateFormat publishedDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 		
 		try {
 			publishedDateInDateFormat = publishedDate.parse(responseOfArticleSearch.getPubDate());
@@ -55,7 +57,7 @@ public class UtilsForArticleSearch {
 		catch (ParseException e) {
 			e.printStackTrace();
 		}
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		@SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		
 		String localPublishedDateAdaptedForArticlesFormat = dateFormat.format(publishedDateInDateFormat);
 		

@@ -74,7 +74,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	@BindView(R.id.timeSettingTextViewUnityFrequence)   TextView          frequenceUnityTextView;
 	@BindView(R.id.numberPickeTypeFrequence)            NumberPicker      npTypeUnity;
 	@BindView(R.id.timeSettingTextViewTypeFrequence)    TextView          typeUnityTextView;
-	@BindView(R.id.switchFrequencemode)                 Switch            switchFrequeneceMode;
+	@BindView(R.id.switchFrequencemode)                 Switch            switchFrequenceMode;
 	
 	List<String> listFilters;
 	
@@ -145,6 +145,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	};
 	
 	NumberPicker.OnValueChangeListener onValueChangeListenerUnityFrequence = new NumberPicker.OnValueChangeListener() {
+		@SuppressLint("SetTextI18n")
 		@Override
 		public void onValueChange(NumberPicker numberPicker,
 		                          int oldVal,
@@ -196,11 +197,13 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 			
 			frequenceMode = mPreferences.getString(PREF_KEY_FREQUENCE_MODE, "Programmée");
 			if (frequenceMode.equals("Instantanée")) {
-				switchFrequeneceMode.setChecked(true);
+				switchFrequenceMode.setChecked(true);
+				switchFrequenceMode.setText("Mode de fréquence : instantanée");
 				//TODO
 				
 			} else {
-				switchFrequeneceMode.setChecked(false);
+				switchFrequenceMode.setChecked(false);
+				switchFrequenceMode.setText("Mode de fréquence : programmée");
 				
 				hourOfNotification = mPreferences.getInt(PREF_KEY_HOUR_OF_NOTIFICATION, 25);
 				npHour.setValue(hourOfNotification);
@@ -227,7 +230,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 			unityFrequence = 24;
 			
 			desactivateAlert();
-			switchFrequeneceMode.setChecked(false);
+			switchFrequenceMode.setChecked(false);
 			
 		}
 	}
@@ -321,11 +324,6 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		if (frequenceMode.equals("Programmée")) {
 			if (hourOfNotification != 25) {
 				mSwitch.setText("Alert activée avec les paramètres suivants = \n" + "" + "termes : " + uiquery + "\n" + "filtres : " + uifilter + "\n" + "Heure de départ des notifications : " + hourOfNotification + "h" + "\n" + "fréquence : " + unityFrequence + " " + typeOfUnityFrequence);
-			} else {
-				mSwitch.setText("Alert activée avec les paramètres suivants = \n" + "" + "termes : " + uiquery + "\n" + "filtres : " + uifilter + "\n" + "Heure de départ des notifications : " + DateTime
-						.now()
-						.getHourOfDay() + "h" + "\n" + "fréquence : " + unityFrequence + " " + typeOfUnityFrequence);
-				
 			}
 		} else {
 			mSwitch.setText("Alert activée avec les paramètres suivants = \n" + "" + "termes : " + uiquery + "\n" + "filtres : " + uifilter + "\n" + "notifications instantanée");
@@ -349,6 +347,11 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		
 		if (mPreferences.getInt(PREF_KEY_HOUR_OF_NOTIFICATION, 26) != 26) {
 			npHour.setValue(mPreferences.getInt(PREF_KEY_HOUR_OF_NOTIFICATION, 12));
+		} else {
+			npHour.setValue(DateTime
+					                .now()
+					                .getHourOfDay());
+			hourOfNotification = npHour.getValue();
 		}
 		
 		npHour.setOnValueChangedListener(onValueChangeListenerSettingTime);
@@ -358,6 +361,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 			
 		} else {
 			timeSettingTextView.setText("Heure \n de début\n" + "maintenant");
+			
 		}
 		timeSettingTextView.setTextColor(Color.parseColor("#ffd32b3b"));
 		
@@ -409,12 +413,12 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	
 	private void manageFrequenceMode() {
 		
-		if (switchFrequeneceMode.isChecked()) {
+		if (switchFrequenceMode.isChecked()) {
 			instantAlertFrequenceMode();
 		} else {
 			programmAlertFrequenceMode();
 		}
-		switchFrequeneceMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		switchFrequenceMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@SuppressLint("SetTextI18n")
 			public void onCheckedChanged(CompoundButton buttonView,
 			                             boolean isChecked) {
@@ -432,6 +436,8 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	private void instantAlertFrequenceMode() {
 		frequenceMode = "Instantanée";
 		
+		switchFrequenceMode.setText("Mode de fréquence : instantanée");
+		
 		npHour.setVisibility(View.GONE);
 		timeSettingTextView.setVisibility(View.GONE);
 		npFrequenceUnity.setVisibility(View.GONE);
@@ -447,6 +453,8 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	
 	private void programmAlertFrequenceMode() {
 		frequenceMode = "Programmée";
+		
+		switchFrequenceMode.setText("Mode de fréquence : programmée");
 		
 		timeSettingTextView.setVisibility(View.VISIBLE);
 		npHour.setVisibility(View.VISIBLE);
@@ -504,7 +512,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	}
 	
 	public void manageDates() {
-		SimpleDateFormat formatterBackEndFormat = new SimpleDateFormat("yyyyMMdd");
+		@SuppressLint("SimpleDateFormat") SimpleDateFormat formatterBackEndFormat = new SimpleDateFormat("yyyyMMdd");
 		//Initialisation du Calendar
 		Calendar cal = Calendar.getInstance();
 		//Recuperation de la date J-1

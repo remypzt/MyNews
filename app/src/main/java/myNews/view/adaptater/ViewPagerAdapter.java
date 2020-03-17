@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import myNews.view.activitiesAndFragment.FragmentArticles;
 
+@SuppressWarnings("ALL")
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 	public ViewPagerAdapter(FragmentManager fm) {
 		super(fm);

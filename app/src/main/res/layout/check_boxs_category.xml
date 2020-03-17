@@ -18,21 +18,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/checkBox"
-        android:text="Business" />
+        android:text="Business"
+        tools:ignore="HardcodedText" />
 
     <CheckBox
         android:id="@+id/checkBox3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/checkBox2"
-        android:text="Technology" />
+        android:text="Technology"
+        tools:ignore="HardcodedText" />
 
     <CheckBox
         android:id="@+id/checkBox4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/midle"
-        android:text="Politics" />
+        android:text="Politics"
+        tools:ignore="HardcodedText" />
 
     <CheckBox
         android:id="@+id/checkBox5"
@@ -40,7 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/checkBox"
         android:layout_toEndOf="@id/midle"
-        android:text="Sports" />
+        android:text="Sports"
+        tools:ignore="HardcodedText" />
 
     <CheckBox
         android:id="@+id/checkBox6"
@@ -48,14 +52,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/checkBox2"
         android:layout_toEndOf="@id/midle"
-        android:text="Travel" />
+        android:text="Travel"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/midle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_centerHorizontal="true"
-        android:text="midle" />
+        android:text="midle"
+        tools:ignore="HardcodedText" />
 
 
 </RelativeLayout>

@@ -25,5 +25,7 @@
 
     </application>
     <!-- internet permission required as images are loaded via Glide from an internet url -->
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.INTERNET"
+        tools:ignore="ManifestOrder" />
 </manifest>

@@ -1,5 +1,6 @@
 package myNews.view.activitiesAndFragment;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -54,7 +55,7 @@ public class SearchActivity extends AppCompatActivity {
 	
 	String           beginDateInRightFormat;
 	String           endDateInRightFormat;
-	SimpleDateFormat formatterUIFormat = new SimpleDateFormat("dd/MM/yyyy");
+	@SuppressLint("SimpleDateFormat") SimpleDateFormat formatterUIFormat = new SimpleDateFormat("dd/MM/yyyy");
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +76,7 @@ public class SearchActivity extends AppCompatActivity {
 	public void datepickerShort(Button button1,
 	                            Button button2) {
 		
-		SimpleDateFormat formatterBackEndFormat = new SimpleDateFormat("yyyyMMdd");
+		@SuppressLint("SimpleDateFormat") SimpleDateFormat formatterBackEndFormat = new SimpleDateFormat("yyyyMMdd");
 		button1.setOnClickListener(v -> {
 			DatePickerDialog dd = new DatePickerDialog(SearchActivity.this, (view, year, monthOfYear, dayOfMonth) -> {
 				try {
