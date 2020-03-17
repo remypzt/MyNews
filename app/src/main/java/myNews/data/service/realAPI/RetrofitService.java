@@ -64,8 +64,6 @@ public class RetrofitService {
 		return client;
 	}
 	
-	
-	
 	public static <S> S cteateService(Class<S> serviceClass) {
 		return retrofit.create(serviceClass);
 	}

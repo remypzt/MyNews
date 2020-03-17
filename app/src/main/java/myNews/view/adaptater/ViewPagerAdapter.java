@@ -27,6 +27,12 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 		}
 	}
 	
+	//= there is 3 tabs
+	@Override
+	public int getCount() {
+		return 3;
+	}
+	
 	@Nullable
 	@Override
 	public CharSequence getPageTitle(int position) {
@@ -43,12 +49,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 			return title;
 		}
 		
-	}
-	
-	//= there is 3 tabs
-	@Override
-	public int getCount() {
-		return 3;
 	}
 	
 }

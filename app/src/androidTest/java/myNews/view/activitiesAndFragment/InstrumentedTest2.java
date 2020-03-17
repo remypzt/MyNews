@@ -43,9 +43,6 @@ public class InstrumentedTest2 {
 				.getPageTitle(i)
 				.toString());
 		
-	
-	
-		
 	}
 	
 	@Test

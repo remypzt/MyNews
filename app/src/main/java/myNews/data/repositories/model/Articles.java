@@ -11,8 +11,6 @@ public class Articles {
 	private String mTitle;
 	private String mDate;
 	private String mUrl;
-
-	
 	
 	public Articles(int drawableImage,
 	                String urlImage,
@@ -57,7 +55,5 @@ public class Articles {
 	public String getUrl() {
 		return mUrl;
 	}
-	
-	
 	
 }

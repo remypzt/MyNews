@@ -19,7 +19,7 @@ import myNews.myNews.R;
  * Created by Remy Pouzet on 16/12/2019.
  */
 public class UtilsForArticleSearch {
-	static         Date   publishedDateInDateFormat;
+	static Date publishedDateInDateFormat;
 	
 	public static List<Articles> generateArticlesFromArticleSearch(ResponseOfArticleSearch responseOfArticleSearch) {
 		List<Articles> articleSearchArticles = new ArrayList<>();

@@ -53,8 +53,8 @@ public class SearchActivity extends AppCompatActivity {
 	String       stringFilter;
 	Date         dateBackEndFormat;
 	
-	String           beginDateInRightFormat;
-	String           endDateInRightFormat;
+	String beginDateInRightFormat;
+	String endDateInRightFormat;
 	@SuppressLint("SimpleDateFormat") SimpleDateFormat formatterUIFormat = new SimpleDateFormat("dd/MM/yyyy");
 	
 	@Override

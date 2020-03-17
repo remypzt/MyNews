@@ -15,8 +15,8 @@ import myNews.myNews.R;
  */
 public class ArticlesWebview extends AppCompatActivity {
 	
-	@BindView(R.id.webView1)       WebView mWebView;
-	private                        WebView webView;
+	@BindView(R.id.webView1) WebView mWebView;
+	private                  WebView webView;
 	
 	@SuppressLint("SetJavaScriptEnabled")
 	@Override
