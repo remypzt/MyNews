@@ -3,11 +3,13 @@ package myNews.data.service.realAPI;
 import android.os.Build;
 import android.util.Log;
 
+import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.X509TrustManager;
 
 import myNews.data.service.Tls12SocketFactory;
 import okhttp3.ConnectionSpec;
@@ -43,7 +45,7 @@ public class RetrofitService {
 			try {
 				SSLContext sc = SSLContext.getInstance("TLSv1.2");
 				sc.init(null, null, null);
-				client.sslSocketFactory(new Tls12SocketFactory(sc.getSocketFactory()));
+				client.sslSocketFactory(new Tls12SocketFactory(sc.getSocketFactory()), getX509Certificate());
 				
 				ConnectionSpec cs = new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS)
 						.tlsVersions(TlsVersion.TLS_1_2)
@@ -67,4 +69,38 @@ public class RetrofitService {
 	public static <S> S cteateService(Class<S> serviceClass) {
 		return retrofit.create(serviceClass);
 	}
+	
+	private static X509TrustManager getX509Certificate() {
+		return new X509TrustManager() {
+			@Override
+			public void checkClientTrusted(java.security.cert.X509Certificate[] chain,
+			                               String authType) throws
+			                                                CertificateException {
+				try {
+					chain[0].checkValidity();
+				}
+				catch (Exception e) {
+					throw new CertificateException("Certificate not valid or trusted.");
+				}
+			}
+			
+			@Override
+			public void checkServerTrusted(java.security.cert.X509Certificate[] chain,
+			                               String authType) throws
+			                                                CertificateException {
+				try {
+					chain[0].checkValidity();
+				}
+				catch (Exception e) {
+					throw new CertificateException("Certificate not valid or trusted.");
+				}
+			}
+			
+			@Override
+			public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+				return new java.security.cert.X509Certificate[]{};
+			}
+		};
+	}
+	
 }
