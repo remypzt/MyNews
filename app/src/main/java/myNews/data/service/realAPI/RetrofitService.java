@@ -22,11 +22,10 @@ public class RetrofitService {
 	private static Retrofit retrofit = new Retrofit.Builder()
 			.baseUrl("https://api.nytimes.com/svc/")
 			.addConverterFactory(GsonConverterFactory.create())
-			//.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+			
 			.client(getNewHttpClient())
 			.build();
 	
-	//all this part is for make application compatible with API 19 (+addcalladapterfactory + .client + tls12socket... package
 	private static OkHttpClient getNewHttpClient() {
 		OkHttpClient.Builder client = new OkHttpClient.Builder()
 				.followRedirects(true)

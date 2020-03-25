@@ -82,10 +82,6 @@ public class FragmentArticles extends Fragment {
 	private void configureRecyclerView() {
 		// 3.1 - Reset list
 		this.articles = new ArrayList<>();
-
-        /* this part of code (commented) was for testing by plain text way the recyclerView
-        Articles test = new Articles("test");
-        this.articles.add(test);*/
 		
 		// 3.2 - Create adapter passing the list of articles
 		this.adapter = new ArticlesAdapter(this.articles);

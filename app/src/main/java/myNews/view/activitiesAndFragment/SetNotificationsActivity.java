@@ -56,7 +56,9 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	public static final                                 String            PREF_KEY_TIME_UNITY           = "REF_KEY_TIME_UNITY";
 	public static final                                 String            PREF_KEY_FREQUENCE_MODE       = "PREF_KEY_FREQUENCE_MODE";
 	public static final                                 String            PREF_KEY_ALERT_STATE          = "PREF_KEY_ALERT_STATE";
+	
 	public                                              SharedPreferences mPreferences;
+	
 	@BindView(R.id.enable_notifications)                Switch            mSwitch;
 	@BindView(R.id.checkBox)                            CheckBox          checkbox1;
 	@BindView(R.id.checkBox2)                           CheckBox          checkbox2;
@@ -93,6 +95,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 	int                              unityFrequence;
 	int                              unityFrequenceLogic;
 	Toast                            toast;
+	
 	final NumberPicker.OnValueChangeListener onValueChangeListenerFrequenceType = new NumberPicker.OnValueChangeListener() {
 		@Override
 		public void onValueChange(NumberPicker numberPicker,
@@ -156,6 +159,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		//Back arrow
 		toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
 		toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MainActivity.class)));
+		
 		previousAlertmanagement();
 		settingTimeOfNotification();
 		settingUnityFrequence();
@@ -279,7 +283,6 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 			}
 		} else {
 			mSwitch.setText("Alert activée avec les paramètres suivants = \n" + "" + "termes : " + uiquery + "\n" + "filtres : " + uifilter + "\n" + "notifications instantanée");
-			
 		}
 	}
 	
@@ -406,7 +409,6 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 				if (isChecked) {
 					activateAlert();
 				} else {
-					
 					listFilters.clear();
 					desactivateAlert();
 				}
@@ -443,8 +445,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 		//Recuperation de la date J-1
 		cal.add(Calendar.DAY_OF_MONTH, -1);
 		//Formattage de la date J-1
-		String resultOfYersterday = formatterBackEndFormat.format(cal.getTime());
-		beginDateInRightFormat = resultOfYersterday;
+		beginDateInRightFormat = formatterBackEndFormat.format(cal.getTime());
 	}
 	
 	public void searchConfiguration() {
@@ -503,6 +504,7 @@ public class SetNotificationsActivity extends AppCompatActivity implements View.
 						.plusHours(hourOfNotification)).getStandardMinutes();
 			}
 		}
+		
 		Constraints constraints = new Constraints.Builder().build();
 		if (hourOfNotification == 25) {
 			saveRequest = new PeriodicWorkRequest.Builder(UploadWorker.class, unityFrequenceLogic, TimeUnit.MINUTES)

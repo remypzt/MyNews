@@ -73,7 +73,6 @@ public class UploadWorker extends Worker {
 					.getNews()
 					.getValue()
 					.size();
-			
 		}
 		
 		if (frequenceMode.equals("Instantanée")) {

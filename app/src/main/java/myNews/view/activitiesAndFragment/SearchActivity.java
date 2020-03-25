@@ -145,7 +145,6 @@ public class SearchActivity extends AppCompatActivity {
 				searchFilter(checkbox6);
 				stringFilter = StringUtils.join(filter, " ");
 				bundle.putString("filter", stringFilter);
-				// bundle.putString("origin", "fromSearchActivity.java");
 				searchResultsActivity.putExtras(bundle);
 				startActivity(searchResultsActivity);
 			}
