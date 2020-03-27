@@ -35,15 +35,15 @@ public class UploadWorker extends Worker {
 	public static final String PREF_KEY_TIME_UNITY           = "REF_KEY_TIME_UNITY";
 	public static final String PREF_KEY_FREQUENCE_MODE       = "PREF_KEY_FREQUENCE_MODE";
 	
-	private static final int NOTIF_ID = 123;
-	String typeOfUnityFrequence;
-	int    numberOfArticles;
-	int    unityFrequence;
-	String frequenceMode;
-	private String  query;
-	private String  endDate;
-	private String  channelNumberOne = "channelNumberOne";
-	private Context context;
+	private static final int     NOTIF_ID         = 123;
+	private              String  typeOfUnityFrequence;
+	private              int     numberOfArticles;
+	private              int     unityFrequence;
+	private              String  frequenceMode;
+	private              String  query;
+	private              String  endDate;
+	private              String  channelNumberOne = "channelNumberOne";
+	private              Context context;
 	
 	public UploadWorker(@NonNull Context context,
 	                    @NonNull WorkerParameters params) {

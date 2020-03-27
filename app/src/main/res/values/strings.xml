@@ -9,6 +9,7 @@
     <string name="articles_picture_description">Picture illustrating the article</string>
     <string name="picture_illustrating_the_article">Picture illustrating the article</string>
     <string name="checkbox" tools:ignore="UnusedResources">CheckBox</string>
+    <string name="test">Test</string>
 
     <string-array name="my_items" tools:ignore="UnusedResources">
         <item>Dummy Item 1</item>

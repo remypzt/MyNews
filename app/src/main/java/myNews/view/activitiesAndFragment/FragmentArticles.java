@@ -23,7 +23,7 @@ import myNews.viewmodel.ViewModelMyNews;
 
 public class FragmentArticles extends Fragment {
 	// FOR DESIGN
-	@BindView(R.id.fragment_main_recycler_view) RecyclerView recyclerView;
+	@BindView(R.id.fragment_main_recycler_view) public RecyclerView recyclerView;
 	
 	//FOR DATA
 	private List<Articles>  articles;

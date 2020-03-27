@@ -26,6 +26,7 @@ android {
 
 
 dependencies {
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
     implementation 'com.github.yalantis:jellytoolbar:v1.0'
@@ -60,6 +61,7 @@ dependencies {
     //noinspection GradleDependency
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'org.apache.commons:commons-lang3:3.9'
+
 
 
 }

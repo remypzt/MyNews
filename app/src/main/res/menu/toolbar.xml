@@ -17,12 +17,5 @@
         android:title="Notification"
         tools:ignore="HardcodedText" />
 
-    <item
-        android:id="@+id/menuSettings"
-        android:title="Help"
-        tools:ignore="HardcodedText" />
 
-    <item
-        android:id="@+id/menuLogout"
-        android:title="About" />
 </menu>

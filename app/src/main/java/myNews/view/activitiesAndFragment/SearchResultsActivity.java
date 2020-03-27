@@ -1,9 +1,10 @@
 package myNews.view.activitiesAndFragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -30,9 +31,13 @@ import myNews.viewmodel.ViewModelMyNewsForSearchArticles;
 public class SearchResultsActivity extends AppCompatActivity {
 	
 	public static final String PREFS = "PREFS", PREF_KEY_BEGIN_DATE = "PREF_KEY_BEGIN_DATE", PREF_KEY_FILTER = "PREF_KEY_FILTER", PREF_KEY_QUERY = "PREF_KEY_QUERY";
-	@BindView(R.id.toolbar) public              Toolbar      toolbar;
-	@BindView(R.id.fragment_main_recycler_view) RecyclerView recyclerView;
-	String query, filter, beginDate, endDate;
+	@BindView(R.id.toolbar) public                     Toolbar      toolbar;
+	@BindView(R.id.fragment_main_recycler_view) public RecyclerView recyclerView;
+	public                                             String       query, filter, beginDate, endDate;
+	
+	
+	
+	
 	//FOR DATA
 	private List<Articles>    articles;
 	private ArticlesAdapter   adapter;
@@ -103,18 +108,43 @@ public class SearchResultsActivity extends AppCompatActivity {
 		if (articlesList != null) {
 			articles.addAll(articlesList);
 			if (articlesList.size() == 0) {
-				Intent searchActivity = new Intent(SearchResultsActivity.this, SearchActivity.class);
-				startActivity(searchActivity);
-				Toast
-						.makeText(SearchResultsActivity.this, "Il n'y a aucuns résultats", Toast.LENGTH_LONG)
-						.show();
+				
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setCancelable(true);
+				builder.setTitle("Information");
+				builder.setMessage("Il n'y a aucuns résultats");
+				
+				builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog,
+					                    int which) {
+						onBackPressed();
+					}
+				});
+				
+				AlertDialog dialog = builder.create();
+				dialog.show();
+				
+				
 			}
 		} else {
-			Intent searchActivity = new Intent(SearchResultsActivity.this, SearchActivity.class);
-			startActivity(searchActivity);
-			Toast
-					.makeText(SearchResultsActivity.this, "BAD_REQUEST", Toast.LENGTH_LONG)
-					.show();
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setCancelable(true);
+			builder.setTitle("Information");
+			builder.setMessage("BAD_REQUEST");
+			
+			builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog,
+				                    int which) {
+					onBackPressed();
+				}
+			});
+			
+			AlertDialog dialog = builder.create();
+			dialog.show();
+			
+			
 		}
 		adapter.notifyDataSetChanged();
 	}

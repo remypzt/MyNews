@@ -24,12 +24,12 @@ import myNews.view.activitiesAndFragment.ArticlesWebview;
  */
 
 class ArticlesViewHolder extends RecyclerView.ViewHolder {
-	@BindView(R.id.Article_picture)       ImageView      mPicture;
-	@BindView(R.id.Article_category)      TextView       mCategory;
-	@BindView(R.id.Article_underCategory) TextView       mUnderCategory;
-	@BindView(R.id.Article_title)         TextView       mTitle;
-	@BindView(R.id.Article_date)          TextView       mDate;
-	@BindView(R.id.Articles_layout)       RelativeLayout mRelativeLayout;
+	@BindView(R.id.Article_picture) public       ImageView      mPicture;
+	@BindView(R.id.Article_category) public      TextView       mCategory;
+	@BindView(R.id.Article_underCategory) public TextView       mUnderCategory;
+	@BindView(R.id.Article_title) public         TextView       mTitle;
+	@BindView(R.id.Article_date) public          TextView       mDate;
+	@BindView(R.id.Articles_layout) public       RelativeLayout mRelativeLayout;
 	
 	ArticlesViewHolder(View itemView) {
 		super(itemView);

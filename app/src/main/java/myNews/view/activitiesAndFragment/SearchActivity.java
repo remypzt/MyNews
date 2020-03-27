@@ -34,17 +34,17 @@ import myNews.others.utils.Utils;
  */
 public class SearchActivity extends AppCompatActivity {
 	
-	@BindView(R.id.search_button) public     Button            searchButton;
-	@BindView(R.id.date_of_beginning) public Button            beginbtndatepicker;
-	@BindView(R.id.date_of_ending) public    Button            endbtndatepicker;
-	@BindView(R.id.toolbar) public           Toolbar           toolbar;
-	@BindView(R.id.checkBox)                 CheckBox          checkbox1;
-	@BindView(R.id.checkBox2)                CheckBox          checkbox2;
-	@BindView(R.id.checkBox3)                CheckBox          checkbox3;
-	@BindView(R.id.checkBox4)                CheckBox          checkbox4;
-	@BindView(R.id.checkBox5)                CheckBox          checkbox5;
-	@BindView(R.id.checkBox6)                CheckBox          checkbox6;
-	@BindView(R.id.input_search_content)     TextInputEditText inputSearchContent;
+	@BindView(R.id.search_button) public        Button            searchButton;
+	@BindView(R.id.date_of_beginning) public    Button            beginbtndatepicker;
+	@BindView(R.id.date_of_ending) public       Button            endbtndatepicker;
+	@BindView(R.id.toolbar) public              Toolbar           toolbar;
+	@BindView(R.id.checkBox) public             CheckBox          checkbox1;
+	@BindView(R.id.checkBox2) public            CheckBox          checkbox2;
+	@BindView(R.id.checkBox3) public            CheckBox          checkbox3;
+	@BindView(R.id.checkBox4) public            CheckBox          checkbox4;
+	@BindView(R.id.checkBox5) public            CheckBox          checkbox5;
+	@BindView(R.id.checkBox6) public            CheckBox          checkbox6;
+	@BindView(R.id.input_search_content) public TextInputEditText inputSearchContent;
 	
 	Calendar c    = Calendar.getInstance();
 	int      year = c.get(Calendar.YEAR), month = c.get(Calendar.MONTH), day = c.get(Calendar.DAY_OF_MONTH);

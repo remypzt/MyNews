@@ -147,7 +147,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 				viewPager.setCurrentItem(2);
 				break;
 			case R.id.close:
-				finish();
+				Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+				homeIntent.addCategory(Intent.CATEGORY_HOME);
+				homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(homeIntent);
 				break;
 		}
 		drawer.closeDrawer(GravityCompat.START);
